@@ -3,7 +3,7 @@
   <entry>
     <title>My New Post</title>
     <url>/2020/11/30/My-New-Post/</url>
-    <content><![CDATA[<h1 id="新的开始"><a href="#新的开始" class="headerlink" title="新的开始"></a>新的开始</h1><p>大概会分享一些经验……</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="新的开始"><a href="#新的开始" class="headerlink" title="新的开始"></a>新的开始</h1><p>大概会分享一些经验……</p>
 <a id="more"></a>
 <script type="math/tex; mode=display">
 \begin{array}{l}  
@@ -22,8 +22,10 @@
   <entry>
     <title>乔布斯演讲</title>
     <url>/2020/12/01/%E4%B9%94%E5%B8%83%E6%96%AF%E6%BC%94%E8%AE%B2/</url>
-    <content><![CDATA[<p>乔布斯一生的经历非常传奇，今天，我们一起就来回顾一下，乔老爷在斯坦福大学上的演讲吧。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>乔布斯一生的经历非常传奇，今天，我们一起就来回顾一下，乔老爷在斯坦福大学上的演讲吧。</p>
 <a id="more"></a>
+<iframe src="//player.bilibili.com/player.html?aid=4832217&bvid=BV1Us411i7Ym&cid=7843376&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
 <blockquote>
 <p>Stanford Report, June 14, 2005</p>
 <p>‘You’ve got to find what you love,’ Jobs says</p>
@@ -61,6 +63,39 @@
       </categories>
       <tags>
         <tag>technology</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>清华集训 跳跳棋</title>
+    <url>/2020/12/01/%E6%B8%85%E5%8D%8E%E9%9B%86%E8%AE%AD-%E8%B7%B3%E8%B7%B3%E6%A3%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个一维坐标轴上，给定三个初始点，每次对任意一点：对一中间点跳动。跳动后两点距离不变。一次只允许跳过1点。在给定三个目标点，求是否能完成，若能输出最少跳动步数。</p>
+<a id="more"></a>
+<p><img src="https://cdn.luogu.com.cn/upload/pic/13129.png" alt=""></p>
+<h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2><p>LCA?二分？表示看了标签也不会</p>
+<p>这题简直神建模……，本蒟蒻表示做不到哇。</p>
+<hr>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h4 id="首先一个观察：每次操作只有两种——两边向中间跳或中间向两边跳且路径可逆。"><a href="#首先一个观察：每次操作只有两种——两边向中间跳或中间向两边跳且路径可逆。" class="headerlink" title="首先一个观察：每次操作只有两种——两边向中间跳或中间向两边跳且路径可逆。"></a>首先一个观察：每次操作只有两种——两边向中间跳或中间向两边跳且路径可逆。</h4><p><del>但是好像状态有亿点多……</del></p>
+<p>对于一种状态$(x,y,z)$，不妨设$x&lt;y&lt;z$,进一步令$d_1=y-x,d_2=z-y$</p>
+<p>有如下观察：</p>
+<blockquote>
+<ol>
+<li>若$d_1=d_2$,这种状态下只能有中间向两边，我们惊喜地发现，如果一种状态(两边走向中间)转移到了这种状态，只能返回，是不是有点像根呢？</li>
+<li>若$d_1&gt;d_2$,可能$x+=d_1,y不变&lt;=&gt;x+=d_1,y+=d_1$(我们维护的是一个相对顺序，和具体是谁无关)</li>
+<li>同理，若$d_1&lt;d_2$,则$y-=d_2,z-=d_2$.</li>
+</ol>
+</blockquote>
+<h4 id="那么我们不妨分别从起始点和目标点出发，看看它们的root分别是啥，若相等有解，否则无解。"><a href="#那么我们不妨分别从起始点和目标点出发，看看它们的root分别是啥，若相等有解，否则无解。" class="headerlink" title="那么我们不妨分别从起始点和目标点出发，看看它们的root分别是啥，若相等有解，否则无解。"></a>那么我们不妨分别从起始点和目标点出发，看看它们的root分别是啥，若相等有解，否则无解。</h4><p>再回顾一下，如果我们求出两点之间的root，答案是不是就是它们分别到root的距离和？</p>
+<p>想到什么？LCA!</p>
+<p>但是，这么大的数据范围我们不可能去建一棵树出来，怎么办呢？</p>
+<h4 id="可以二分求到root的步数，具体见代码"><a href="#可以二分求到root的步数，具体见代码" class="headerlink" title="可以二分求到root的步数，具体见代码"></a>可以二分求到root的步数，具体见代码</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> step;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>,f = <span class="number">1</span>;<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span>(ch&lt;<span class="string">&#x27;0&#x27;</span>||ch&gt;<span class="string">&#x27;9&#x27;</span>)&#123;<span class="keyword">if</span>(ch==<span class="string">&#x27;-&#x27;</span>)f=<span class="number">-1</span>;ch=getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(ch&gt;=<span class="string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="string">&#x27;9&#x27;</span>)&#123;x = (x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(ch^<span class="number">48</span>);ch = getchar();&#125;</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,y,z;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        x=read();y=read();z=read();</span><br><span class="line">        <span class="keyword">if</span>(x&gt;y)swap(x,y);</span><br><span class="line">        <span class="keyword">if</span>(x&gt;z)swap(x,z);</span><br><span class="line">        <span class="keyword">if</span>(y&gt;z)swap(y,z);    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;a,ra,b,rb;</span><br><span class="line"></span><br><span class="line"><span class="function">node <span class="title">get</span><span class="params">(node t,<span class="keyword">int</span> s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>,d1,d2;</span><br><span class="line">    <span class="keyword">for</span>(step=<span class="number">0</span>;s;step+=k)&#123;</span><br><span class="line">        d1=t.y-t.x;</span><br><span class="line">        d2=t.z-t.y;</span><br><span class="line">        <span class="keyword">if</span>(d1==d2)<span class="keyword">return</span> t;</span><br><span class="line">        <span class="keyword">if</span>(d1&lt;d2)&#123;</span><br><span class="line">            k=min((d2<span class="number">-1</span>)/d1,s);</span><br><span class="line">            t.x+=k*d1;t.y+=k*d1;</span><br><span class="line">            s-=k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            k=min((d1<span class="number">-1</span>)/d2,s);</span><br><span class="line">            t.y-=k*d2;t.z-=k*d2;</span><br><span class="line">            s-=k;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(node a1,node a2)</span></span>&#123;<span class="keyword">return</span> a1.x==a2.x&amp;&amp;a1.y==a2.y&amp;&amp;a1.z==a2.z;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    a.init();b.init();</span><br><span class="line">    ra=get(a,inf);</span><br><span class="line">    <span class="keyword">int</span> s1=step;</span><br><span class="line">    rb=get(b,inf);</span><br><span class="line">    <span class="keyword">int</span> s2=step;</span><br><span class="line">    <span class="keyword">if</span>(!check(ra,rb))&#123;<span class="built_in">printf</span>(<span class="string">&quot;NO&quot;</span>);<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(s2&lt;s1)swap(s1,s2),swap(a,b);</span><br><span class="line">    b=get(b,s2-s1);</span><br><span class="line">    <span class="keyword">int</span> mid,l=<span class="number">0</span>,r=s1;</span><br><span class="line">    <span class="keyword">while</span>(l&lt;r)&#123;</span><br><span class="line">        mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(check(get(a,mid),get(b,mid)))r=mid;</span><br><span class="line">        <span class="keyword">else</span> l=mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;YES\n%d&quot;</span>,l*<span class="number">2</span>+s2-s1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>二分</tag>
+        <tag>LCA</tag>
       </tags>
   </entry>
 </search>
