@@ -1,198 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="LSP-2$CAM$与$C_4$植物CAMCAM植物是具景天酸代谢途径的植物,在夜间通过开放的孔吸收CO2，然后借助PEP羧化酶与磷酸烯醇式丙酮酸结合，形成草酰乙酸，然后在苹果酸脱氢酶（NADPH）作用下还原成苹果酸，进入液泡并累计变酸（从pH5-3）；第二天光照后苹果酸从液泡中转运回细胞质和叶绿体中脱羧，释放CO2被RuBP吸收形成碳水化合物.苹果酸从细胞质通过液泡膜进入液泡是主动过程，而从液泡">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/2022/09/03/LSP-2/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="LSP-2$CAM$与$C_4$植物CAMCAM植物是具景天酸代谢途径的植物,在夜间通过开放的孔吸收CO2，然后借助PEP羧化酶与磷酸烯醇式丙酮酸结合，形成草酰乙酸，然后在苹果酸脱氢酶（NADPH）作用下还原成苹果酸，进入液泡并累计变酸（从pH5-3）；第二天光照后苹果酸从液泡中转运回细胞质和叶绿体中脱羧，释放CO2被RuBP吸收形成碳水化合物.苹果酸从细胞质通过液泡膜进入液泡是主动过程，而从液泡">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-09-03T14:09:41.940Z">
-<meta property="article:modified_time" content="2022-09-03T14:07:40.624Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-LSP-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/09/03/LSP-2/" class="article-date">
-  <time datetime="2022-09-03T14:09:41.940Z" itemprop="datePublished">2022-09-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="LSP-2"><a href="#LSP-2" class="headerlink" title="LSP-2"></a>LSP-2</h1><h2 id="CAM-与-C-4-植物"><a href="#CAM-与-C-4-植物" class="headerlink" title="$CAM$与$C_4$植物"></a>$CAM$与$C_4$植物</h2><h3 id="CAM"><a href="#CAM" class="headerlink" title="CAM"></a>CAM</h3><p>CAM植物是具景天酸代谢途径的植物,在夜间通过开放的孔吸收CO2，然后借助PEP羧化酶与磷酸烯醇式丙酮酸结合，形成草酰乙酸，然后在<strong>苹果酸脱氢酶（NADPH）</strong>作用下还原成苹果酸，进入液泡并累计变酸（从pH5-3）；第二天光照后苹果酸从液泡中转运回细胞质和叶绿体中脱羧，释放CO2被RuBP吸收形成碳水化合物.苹果酸从细胞质通过液泡膜进入液泡是主动过程，而从液泡回到细胞质中则是被动过程。</p>
-<h3 id="碳四"><a href="#碳四" class="headerlink" title="碳四"></a>碳四</h3><p>碳四植物常写作$C_4$植物。生长过程中从空气中吸收二氧化碳首先合成苹果酸或天门冬氨酸等含四个碳原子化合物的植物，如玉米、甘蔗等。</p>
-<p>二氧化碳首先在叶肉细胞内经PEP羧化酶的作用，与<strong>磷酸烯醇式丙酮酸（PEP）</strong>形成苹果酸或天门冬氨酸，然后被运输到<strong>维管束鞘细胞</strong>中脱羧，放出二氧化碳和一分子丙酮酸，二氧化碳被 Rubisco催化的羧化反应再次固定；而丙酮酸再次合成PEP（消耗ATP）。该途径实际上是在二氧化碳同化的基础上增加了一个四碳双羧酸循环，这个循环像一个二氧化碳泵,使 Rubisco羧化部位的二氧化碳浓度比碳3植物的高很多，从而减少光呼吸，因而碳4植物在强光下具有比碳3植物更高的光合效率。</p>
-<h5 id="C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"><a href="#C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。" class="headerlink" title="C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"></a>C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。</h5><p>在C4植物叶片维管束的周围，有维管束鞘围绕，这些维管束鞘细胞里有叶绿体，但里面<strong>并无基粒或基粒发育不良</strong>。在这里，主要进行卡尔文循环。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>C3途径是光合途径同化的基本途径，C4和CAM植物形成碳水化合物除了分别需要C4途径和CAM途径外，<strong>最终还需要C3途径</strong>。在碳同化特性上，CAM与C4植物相似，都有PEP羧化酶，需要两次羧化反应固定CO2。只是固定CO2与生成光合作用产物在时间空间有差异，<strong>C4植物在叶肉细胞内固定CO2，在维管束鞘细胞中同化CO2。CAM植物则在晚上固定CO2，在白天同化CO2。</strong></p>
-<h2 id="内质网-ER"><a href="#内质网-ER" class="headerlink" title="内质网(ER)"></a>内质网(ER)</h2><p>内质网是细胞内除核酸以外的一系列重要的物质， 如蛋白质、 脂类(如甘油三酯) 和糖类合成的基地。 滑面内质网还具有解毒功能， 如肝细胞中的滑面内质网中含有一些酶， 用以清除脂溶性的废物和代谢产生的有害物质。</p>
-<p>蛋白质转入内质网合成至少涉及5种成分：<br>①信号肽（signal peptide），是引导新合成肽链转移到内质网上的一段多肽，位于新合成肽链的N端。<br>②信号识别颗粒（signal recognition particle，SRP），由6种结构不同的多肽组成，结合一个7S RNA，分子量325KD，属于一种核糖核蛋白(ribonucleoprotein)。SRP与信号序列结合，导致蛋白质合成暂停。<br>③ SRP受体（SPR receptor），是膜的整合蛋白，为异二聚体蛋白，存在于内质网上，可与SRP特异结合。<br>④停止转移序列（stop transfer sequence），肽链上的一段特殊序列，与内质网膜的亲合力很高，能阻止肽链继续进入内质网腔，使其成为跨膜蛋白质。<br>⑤转位因子（translocator），由3-4个Sec61蛋白复合体构成的一个类似炸面圈的结构，每个Sec61蛋白由三条肽链组成。<br>蛋白质转入内质网合成的过程：<br>信号肽与SRP结合→肽链延伸终止→SRP与受体结合→SRP脱离信号肽→肽链在内质网上继续合成，同时信号肽引导新生肽链进入内质网腔→信号肽切除→肽链延伸至终止→翻译体系解散。这种肽链边合成边向内质网腔转移的方式，称为<strong>cotranslation</strong>。</p>
-<h6 id="应激反应"><a href="#应激反应" class="headerlink" title="应激反应"></a>应激反应</h6><p>在某些情况下，钙稳态失衡，出现错误蛋白质或未折叠蛋白质过度堆积、固醇和脂质等水平失调而启动的应激机制，从而影响特定基因表达。</p>
-<p>大体可以分为未折叠蛋白应答反应（UPR）、内质网超负荷反应（EOR）、胆固醇调节级联反应（SREBP）三种。</p>
-<p>在应激反应依然无法调节，持续的不平衡状态出现后，细胞会启动凋亡程序。内质网膜上IP3R通道开放，致使大量钙离子外流，高水平的钙离子与需钙蛋白酶结合导致calpain酶原大小亚基水解而被活化，活化的calpain可以裂解多种蛋白质底物，</p>
-<p>比如裂解vinculin而破坏细胞骨架稳定性，使细胞凋亡，还可以剪切Bcl-xL使其由抗凋亡变为促凋亡。活化的calpain还可以转移至内质网，在几个切割位点切割caspase-12酶原，使其活化，作为细胞凋亡的重要水解酶而发挥作用。</p>
+{% block page_class %}page-post-detail{% endblock %}
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/03/LSP-2/" data-id="cl7lzetje00005kja19g6extv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2022/09/03/Little%20Star%20Plan(LSP)--1/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
-    </a>
-  
-</nav>
 
-  
-</article>
+{% block content %}
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
 
+{% endblock %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/09/03/LSP-2/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/03/Little%20Star%20Plan(LSP)--1/">(no title)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
