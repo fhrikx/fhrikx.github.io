@@ -5,7 +5,7 @@
     <url>/2022/09/03/LSP1/</url>
     <content><![CDATA[<meta name="referrer" content="no-referrer">
 
-<h1 id="Little-Star-Plan-LSP-–1"><a href="#Little-Star-Plan-LSP-–1" class="headerlink" title="Little Star Plan(LSP)–1"></a>Little Star Plan(LSP)–1</h1><ul>
+<h1 id="Little-Star-Plan-LSP-—1"><a href="#Little-Star-Plan-LSP-—1" class="headerlink" title="Little Star Plan(LSP)—1"></a>Little Star Plan(LSP)—1</h1><ul>
 <li><h2 id="Normal-Distribution"><a href="#Normal-Distribution" class="headerlink" title="Normal Distribution"></a>Normal Distribution</h2><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
 <li><img src="https://bkimg.cdn.bcebos.com/formula/01a91c9fd0fb903c925ffe1faa8bcbfe.svg" alt="img"></li>
 <li>如果 <img src="https://bkimg.cdn.bcebos.com/formula/3c7ca371bffedf09ae2cd011c4238506.svg" alt="img">,a,b是实数,<img src="https://bkimg.cdn.bcebos.com/formula/093f43c92561a74621c51f68f3fdcfe0.svg" alt="img"></li>
@@ -14,26 +14,29 @@
 <li><p>平均数、众数、中位数是同一值</p>
 </li>
 <li><p>函数曲线的反曲点（inflection point）为离平均数一个标准差距离的位置。</p>
-<span id="more"></span></li>
+<span id="more"></span>
+</li>
 </ol>
 </li>
+</ul>
+<ul>
 <li><h2 id="张锋-CRISPR-Cas"><a href="#张锋-CRISPR-Cas" class="headerlink" title="张锋 CRISPR-Cas"></a>张锋 CRISPR-Cas</h2><p><strong>CRISPR-Cas系统是原核生物的一种天然免疫系统</strong>。某些细菌在遭到病毒入侵后，能够把病毒基因的一小段存储到自身的 DNA 里一个称为 CRISPR 的存储空间。当再次遇到病毒入侵时，细菌能够根据存写的片段识别病毒，将病毒的DNA切断而使之失效。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCCt25ILxUdhb4lvSclpxbbq2R6D1yWR5dvTftZmWbiafPCmxpCEjLDqg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCCt25ILxUdhb4lvSclpxbbq2R6D1yWR5dvTftZmWbiafPCmxpCEjLDqg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
 <p><strong>CRISPR-Cas系统包含CRISPR基因座和Cas基因（CRISPR关联基因）两部分。</strong></p>
 </li>
 </ul>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCDPhK3bIheQMTNnp7sRymrE9wcyr2ibaecsMJVEAZic5xTyzXZeU6KTBA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCDPhK3bIheQMTNnp7sRymrE9wcyr2ibaecsMJVEAZic5xTyzXZeU6KTBA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
 <ol>
 <li><p>前导序列：富含AT碱基，位于CRISPR基因上游，被认为是CRISPR序列的启动子。</p>
 </li>
 <li><p>重复序列：长度约20–50 bp碱基且包含5–7 bp回文序列，转录产物可以形成发卡结构，稳定RNA的整体二级结构。</p>
 </li>
-<li><p>间隔序列：是被细菌俘获的外源DNA序列。这就相当于细菌免疫系统的“黑名单”，当这些外源遗传物质再次入侵时，CRISPR&#x2F;Cas系统就会予以精确打击。</p>
-<p>**作用机理 **</p>
+<li><p>间隔序列：是被细菌俘获的外源DNA序列。这就相当于细菌免疫系统的“黑名单”，当这些外源遗传物质再次入侵时，CRISPR/Cas系统就会予以精确打击。</p>
+<p><strong>作用机理 </strong></p>
 <ol>
 <li>CRISPR 的高度可变的间隔区的获得（俘获外源DNA，登记“黑名单”）</li>
 <li>CRIPSR 基因座的表达（包括转录和转录后的成熟加工）</li>
-<li>CRISPR&#x2F;Cas 系统活性的发挥（靶向干扰）</li>
+<li>CRISPR/Cas 系统活性的发挥（靶向干扰）</li>
 </ol>
 </li>
 </ol>
@@ -46,12 +49,12 @@
 <li><h2 id="相互独立事件"><a href="#相互独立事件" class="headerlink" title="相互独立事件"></a>相互独立事件</h2><p>A，B相互独立，是说A的发生对B发生的<strong>概率</strong>没有影响，可能会产生一丝丝“干扰”。详情见《导与练》。</p>
 </li>
 <li><h2 id="向量积"><a href="#向量积" class="headerlink" title="向量积"></a>向量积</h2><p>记作$\vec{a}\times  \vec{b} $</p>
-<p>模长：$|\vec{a}\times  \vec{b} |&#x3D;|\vec{a}| \cdot |\vec{b}| \cdot sin\theta$</p>
+<p>模长：$|\vec{a}\times  \vec{b} |=|\vec{a}| \cdot |\vec{b}| \cdot sin\theta$</p>
 <p>方向：a向量与b向量的向量积的方向与这两个向量所在平面垂直，且遵守右手定则。（一个简单的确定满足“右手定则”的结果向量的方向的方法是这样的：若坐标系是满足右手定则的，当右手的四指从<strong>a</strong>以不超过180度的转角转向<strong>b</strong>时，竖起的大拇指指向是<strong>c</strong>的方向。）</p>
 </li>
 </ul>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>We are built as gene machines and cultured as meme machines,but we have the power to turn against our creators.We,alone on earth,can rebel against the tyranny of the selfish replicators.</p>
-<p>​																							–Rechard Dawkins &lt;&lt; The Selfish Gene &gt;&gt;</p>
+<p>​                                                                                            —Rechard Dawkins &lt;&lt; The Selfish Gene &gt;&gt;</p>
 <h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>太不容易了！有些问题确实刁钻，根本查不到。</p>
 ]]></content>
       <tags>
@@ -59,17 +62,10 @@
       </tags>
   </entry>
   <entry>
-    <title>hello2</title>
-    <url>/2022/09/04/hello2/</url>
-    <content><![CDATA[<p><img src="/2022/09/04/hello2/mdbl.jpg" alt="曼德勃罗"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>LSP2</title>
     <url>/2022/09/03/LSP2/</url>
     <content><![CDATA[<h1 id="LSP-2"><a href="#LSP-2" class="headerlink" title="LSP-2"></a>LSP-2</h1><h2 id="CAM与C4植物"><a href="#CAM与C4植物" class="headerlink" title="CAM与C4植物"></a>CAM与C4植物</h2><h3 id="CAM"><a href="#CAM" class="headerlink" title="CAM"></a>CAM</h3><p>CAM植物是具景天酸代谢途径的植物,在夜间通过开放的孔吸收CO2，然后借助PEP羧化酶与磷酸烯醇式丙酮酸结合，形成草酰乙酸，然后在<strong>苹果酸脱氢酶（NADPH）</strong>作用下还原成苹果酸，进入液泡并累计变酸（从pH5-3）；第二天光照后苹果酸从液泡中转运回细胞质和叶绿体中脱羧，释放CO2被RuBP吸收形成碳水化合物.苹果酸从细胞质通过液泡膜进入液泡是主动过程，而从液泡回到细胞质中则是被动过程。</p>
 <span id="more"></span>
-
 <h3 id="碳四"><a href="#碳四" class="headerlink" title="碳四"></a>碳四</h3><p>碳四植物常写作$C_4$植物。生长过程中从空气中吸收二氧化碳首先合成苹果酸或天门冬氨酸等含四个碳原子化合物的植物，如玉米、甘蔗等。</p>
 <p>二氧化碳首先在叶肉细胞内经PEP羧化酶的作用，与<strong>磷酸烯醇式丙酮酸（PEP）</strong>形成苹果酸或天门冬氨酸，然后被运输到<strong>维管束鞘细胞</strong>中脱羧，放出二氧化碳和一分子丙酮酸，二氧化碳被 Rubisco催化的羧化反应再次固定；而丙酮酸再次合成PEP（消耗ATP）。该途径实际上是在二氧化碳同化的基础上增加了一个四碳双羧酸循环，这个循环像一个二氧化碳泵,使 Rubisco羧化部位的二氧化碳浓度比碳3植物的高很多，从而减少光呼吸，因而碳4植物在强光下具有比碳3植物更高的光合效率。</p>
 <h5 id="C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"><a href="#C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。" class="headerlink" title="C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"></a>C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。</h5><p>在C4植物叶片维管束的周围，有维管束鞘围绕，这些维管束鞘细胞里有叶绿体，但里面<strong>并无基粒或基粒发育不良</strong>。在这里，主要进行卡尔文循环。</p>
@@ -86,13 +82,16 @@
       </tags>
   </entry>
   <entry>
+    <title>hello2</title>
+    <url>/2022/09/04/hello2/</url>
+    <content><![CDATA[<p><img src="/2022/09/04/hello2/mdbl.jpg" alt="曼德勃罗"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>steve jobs</title>
     <url>/2022/09/04/steve-jobs/</url>
     <content><![CDATA[<p>乔布斯演讲</p>
 <span id="more"></span>
-
-
-
 <iframe src="//player.bilibili.com/player.html?aid=17203668&bvid=BV1oW411h7Ea&cid=28116082&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 ]]></content>
       <tags>
@@ -113,18 +112,17 @@
     <url>/2022/09/23/%E9%AB%98%E4%B8%AD%E5%9B%9E%E5%BF%86%E5%BD%95/</url>
     <content><![CDATA[<h1 id="高中回忆录"><a href="#高中回忆录" class="headerlink" title="高中回忆录"></a>高中回忆录</h1><h2 id="为什么会有这么一篇文章？"><a href="#为什么会有这么一篇文章？" class="headerlink" title="为什么会有这么一篇文章？"></a>为什么会有这么一篇文章？</h2><p>前几天上C语言课，突然想起高中时那段竞赛生涯，很是感慨，由此写下这样一篇文章，算是一个纪念吧。</p>
 <span id="more"></span>
-
 <h2 id="关于SPFA，它死了"><a href="#关于SPFA，它死了" class="headerlink" title="关于SPFA，它死了"></a>关于SPFA，它死了</h2><p>我看着黑板上熟悉的代码，试图回忆起快忘干净的C++知识，第一个出现在脑海中的就是SPFA算法，还得是那句”关于SPFA。它死了“，于是我重新登上洛谷，想找一道SPFA题回忆回忆，结果却找不到这样的算法标签，或许它已经太老了吧~</p>
 <h2 id="NOIP生涯"><a href="#NOIP生涯" class="headerlink" title="NOIP生涯"></a>NOIP生涯</h2><p>其实谈不上生涯，只能算是混了个OIer身份。梦开始的地方应该是截留那年五一假期，选择在学校学习C++这样一门完全陌生的课，记得那时候复联4正上映，和日天偷偷看复联😂。之后应该是到了暑假和几个同学们还有高一级的学长学姐去日照培训，那是我第一次进入大学的大门（虽然是个普通大学🐶），也第一次见到了rqy，看见他在讲台上讲金牌之路，或许是那时候开始对清北有了憧憬吧，不知道zjs同学还记不记得”有人有HDMI转VGA的线吗“这句话。说实话这几天的培训知识上并没有太大的提升，但是心态上我认为是个质变，让我在高一的时候，虽然晚上去学习C++，并不会过于焦虑。</p>
 <p>然后高一太菜，NOIP结束，不过还是有幸和wyy，nyc一起比赛，那时候对高三没有概念，只是看到wyy几乎时刻都在做试卷，而我一道想了半天的数学题他一会儿就解决了，而且当时我从没见过那种方法。等我回去之后数学老师已经把这道题讲完了，可我并不着急，毕竟wyy大佬也给我讲了🐶。期末考试之后就到了快乐的c++（摸鱼）时间，几个人在那研究VPN，那时候对川普印象还是挺好的，twitter上还关注了。</p>
 <p>之后就到了疫情，谁也没想到，突如其来，然后几个同学接连退出，只剩下了三个人。</p>
 <p>然后暑假接着学，一直到高二开学，我们三个是提前一天到学校学C++，但是谁也没想到，突然接到亲爱的zj老师不再教我们的消息😥。然后就是白天上课晚上学C++的模式，因为换了班主任，语文老师，化学老师，这样导致一段时间和老师都不太熟悉。不过那时候最喜欢的就是晚上可以借机查一些数学知识（比如奔驰定理、哥德尔不完备定理），用现在的话，就是摆。然后终于盼到了国庆节，出去培训了七天，和fqr同学住在一起，这个时候更是感觉到了大佬的密集程度，考完试颁奖的时候，他们在那喊”曹队“”李队“，fqr就说”你啥时候上去，我们也喊冯队“，结果一次也没上去😂。但是回来后就全天不上课，仍然住在宿舍，还是能听到一些消息，没有与班级完全隔离。之后参加CSP，是某新来的历史老师带我们去的，fqr那”给我倒杯水“永远也忘不掉。</p>
 <p>CSP之后，回到班级一段时间，现在已经忘了当时的感觉了，只记得参加了一次考试，还没考完就又被拉去准备NOIP，但这次只有两个人了，bia233没有来。之后那段日子，应该是挺痛苦的，当时处于看啥啥不会的状态，最后就水了个省二。</p>
-<p>终于回到了教室，老师们”迫不及待“地给我们补课，那绝对是我最认真的时候，或许是竞赛带来的某种”优越感“，总认为这些我一定很快能学会。结果第一次考试椭圆$c^2&#x3D;a^2-b^2$就写成了$c^2&#x3D;a^2+b^2$，但是好像别人还有思路错的，这反而给我了一些信心。之后我也不记得怎么补的了（借口体育课不上之类的），最后是回到了相对让各方满意的水平😥。但是老师总是认为我们这段知识是假生饭，仔细想想好像这段时间学的真是不少。</p>
+<p>终于回到了教室，老师们”迫不及待“地给我们补课，那绝对是我最认真的时候，或许是竞赛带来的某种”优越感“，总认为这些我一定很快能学会。结果第一次考试椭圆$c^2=a^2-b^2$就写成了$c^2=a^2+b^2$，但是好像别人还有思路错的，这反而给我了一些信心。之后我也不记得怎么补的了（借口体育课不上之类的），最后是回到了相对让各方满意的水平😥。但是老师总是认为我们这段知识是假生饭，仔细想想好像这段时间学的真是不少。</p>
 <h2 id="阳信之旅"><a href="#阳信之旅" class="headerlink" title="阳信之旅"></a>阳信之旅</h2><p>到了高二期末完了之后，学校组织了几个人去了阳信培训，在那之前还有一个实验比赛，必须提一下，那是物理老师带我去参加的，和她谈了很多，感受到了她对我的期望，对我是个很大的鼓励。不管怎么说，大约八个人到了阳信，遇见了lws,txy,zjh等人，那时候正值东京奥运会，还记得乒乓球混双输了的场景。离开的前一天晚上，第一次”奔放“地唱歌，白月光与朱砂痣印象最深。</p>
 <p>之后有去过几次阳信，人比较少。每次都是别人在”托管“，回来的时候正好上到一半。以后到了高三越来越感觉是不是老师在我没来的几天把所有内容讲完了（尤其是语文）。</p>
 <h2 id="高三"><a href="#高三" class="headerlink" title="高三"></a>高三</h2><p>高三是以三门竞赛考试开始的，非常魔幻😂。但说实话，整个高三基本没有太过紧张。虽然觉得复习方式效率不高，但还是一轮一轮地复习完了，中间看了一些书（高妙、高掌），到这时候我才发现前面两年我有多摆。不知道什么时候，体育课上开始打篮球，也算是减轻了一些压力吧。到了下学期，学习更紧张了，几次模考都是按着老师说的，当作高考对待🙈。现在一时竟然记不起下学期都干了什么，还是说说高考前吧。感觉大家还是比较放松的，我同样也很放松（或许是英语听力两次满分给了我信心？或许是准备好了？又或许只是考麻了……）来说说数学吧，还记得考前还没搬教室的时候，我和后桌xc讨论这次数学必难，我当时想的，入学2019年维纳斯，2022年……三年，对吧，不得对应上吗。结果确实很难，但考的时候没想到这。</p>
-<h2 id="高考后—USTC"><a href="#高考后—USTC" class="headerlink" title="高考后—USTC"></a>高考后—USTC</h2><p>填志愿的时候选择了中科大，得知yxy也在合肥，很高兴。</p>
+<h2 id="高考后—USTC"><a href="#高考后—USTC" class="headerlink" title="高考后—USTC"></a>高考后—USTC</h2><p>填志愿的时候选择了中科大，只能说USTC YYDS。</p>
 ]]></content>
       <tags>
         <tag>回忆</tag>
