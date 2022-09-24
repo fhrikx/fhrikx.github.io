@@ -184,6 +184,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/24/Manjaro%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="Never Settle">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fhr's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/09/24/Manjaro%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Manjaro配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-09-24 17:23:06 / 修改时间：17:41:10" itemprop="dateCreated datePublished" datetime="2022-09-24T17:23:06+08:00">2022-09-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -m rank</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加Archlinuxcn软件源"><a href="#添加Archlinuxcn软件源" class="headerlink" title="添加Archlinuxcn软件源"></a>添加Archlinuxcn软件源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+
+<p>在末尾添加</p>
+<p><code>[archlinuxcn] Server = https://mirrors.aliyun.com/archlinuxcn/$arch</code></p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>更新软件库缓存</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy</span><br></pre></td></tr></table></figure>
+
+<p>更新系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syyu</span><br></pre></td></tr></table></figure>
+
+<h2 id="YAY下载"><a href="#YAY下载" class="headerlink" title="YAY下载"></a>YAY下载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S yay</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h2><p>这里选择的是<code>fcitx</code>+搜狗输入法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-im fcitx-configtool</span><br><span class="line">yay -S base-devel</span><br><span class="line">yay -S fcitx-sogoupinyin</span><br></pre></td></tr></table></figure>
+
+<p>安装完后在<code>/etc/profile</code>加上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">&quot;@im=fcitx&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>重启电脑，选择搜狗。</p>
+<h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><h3 id="网易云"><a href="#网易云" class="headerlink" title="网易云"></a>网易云</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S netease-cloud-music</span><br></pre></td></tr></table></figure>
+
+<h3 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S microsoft-edge-dev-bin</span><br></pre></td></tr></table></figure>
+
+<h3 id="微信"><a href="#微信" class="headerlink" title="微信"></a>微信</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S deepin-wine-wechat</span><br></pre></td></tr></table></figure>
+
+<h3 id="VScode"><a href="#VScode" class="headerlink" title="VScode"></a>VScode</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S visual-studio-code-bin</span><br></pre></td></tr></table></figure>
+
+<h3 id="Typora（收费了）"><a href="#Typora（收费了）" class="headerlink" title="Typora（收费了）"></a>Typora（收费了）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S typora</span><br></pre></td></tr></table></figure>
+
+<h3 id="WPS"><a href="#WPS" class="headerlink" title="WPS"></a>WPS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S wps-office-mui-zh-cn wps-office-mime-cn wps-office-cn wps-office-fonts ttf-ms-fonts  ttf-wps-fonts</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/23/%E9%AB%98%E4%B8%AD%E5%9B%9E%E5%BF%86%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +306,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-09-24 10:35:48" itemprop="dateModified" datetime="2022-09-24T10:35:48+08:00">2022-09-24</time>
+                <time title="修改时间：2022-09-24 10:36:58" itemprop="dateModified" datetime="2022-09-24T10:36:58+08:00">2022-09-24</time>
               </span>
 
           
@@ -658,14 +749,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
