@@ -94,12 +94,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hello2</title>
-    <url>/2022/09/04/hello2/</url>
-    <content><![CDATA[<p><img src="/2022/09/04/hello2/mdbl.jpg" alt="曼德勃罗"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>幂集</title>
     <url>/2022/09/05/%E5%B9%82%E9%9B%86/</url>
     <content><![CDATA[<h1 id="幂集"><a href="#幂集" class="headerlink" title="幂集"></a>幂集</h1><p>幂集：原集合中所有的子集（包括全集和空集）构成的集族。</p>
@@ -181,8 +175,9 @@
     <title>哲哥回忆录</title>
     <url>/2022/09/24/%E5%93%B2%E5%93%A5%E5%9B%9E%E5%BF%86%E5%BD%95/</url>
     <content><![CDATA[<p>wyz同学也有了一些感慨，我们来看看。</p>
+<span id="more"></span>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">《我学过C++》</span><br><span class="line">《python不难》</span><br><span class="line">《他为啥不是从左往右算》</span><br><span class="line">《这小王八是啥》</span><br><span class="line">《wawawa》</span><br><span class="line">《****》</span><br></pre></td></tr></table></figure>
-
+<p>纯属整活，不要当真。🐶🐶🐶</p>
 ]]></content>
       <tags>
         <tag>回忆</tag>
