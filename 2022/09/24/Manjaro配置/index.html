@@ -228,40 +228,27 @@
       
         <p>介绍了一些manjaro常用配置，比较简陋，供个人食用（doge）。</p>
 <span id="more"></span>
-
 <h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -m rank</span><br></pre></td></tr></table></figure>
-
 <h2 id="添加Archlinuxcn软件源"><a href="#添加Archlinuxcn软件源" class="headerlink" title="添加Archlinuxcn软件源"></a>添加Archlinuxcn软件源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/pacman.conf</span><br></pre></td></tr></table></figure>
-
 <p>在末尾添加</p>
-<p><code>[archlinuxcn] Server = https://mirrors.aliyun.com/archlinuxcn/$arch</code></p>
+<p><code>[archlinuxcn]
+Server = https://mirrors.aliyun.com/archlinuxcn/$arch</code></p>
 <h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>更新软件库缓存</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy</span><br></pre></td></tr></table></figure>
-
 <p>更新系统</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syyu</span><br></pre></td></tr></table></figure>
-
 <h2 id="YAY下载"><a href="#YAY下载" class="headerlink" title="YAY下载"></a>YAY下载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S yay</span><br></pre></td></tr></table></figure>
-
 <h2 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h2><p>这里选择的是<code>fcitx</code>+搜狗输入法：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-im fcitx-configtool</span><br><span class="line">yay -S base-devel</span><br><span class="line">yay -S fcitx-sogoupinyin</span><br></pre></td></tr></table></figure>
-
 <p>安装完后在<code>/etc/profile</code>加上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">&quot;@im=fcitx&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p>重启电脑，选择搜狗。</p>
 <h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><h3 id="网易云"><a href="#网易云" class="headerlink" title="网易云"></a>网易云</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S netease-cloud-music</span><br></pre></td></tr></table></figure>
-
 <h3 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S microsoft-edge-dev-bin</span><br></pre></td></tr></table></figure>
-
 <h3 id="微信"><a href="#微信" class="headerlink" title="微信"></a>微信</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S deepin-wine-wechat</span><br></pre></td></tr></table></figure>
-
 <h3 id="VScode"><a href="#VScode" class="headerlink" title="VScode"></a>VScode</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S visual-studio-code-bin</span><br></pre></td></tr></table></figure>
-
 <h3 id="Typora（收费了）"><a href="#Typora（收费了）" class="headerlink" title="Typora（收费了）"></a>Typora（收费了）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S typora</span><br></pre></td></tr></table></figure>
-
 <h3 id="WPS"><a href="#WPS" class="headerlink" title="WPS"></a>WPS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S wps-office-mui-zh-cn wps-office-mime-cn wps-office-cn wps-office-fonts ttf-ms-fonts  ttf-wps-fonts</span><br></pre></td></tr></table></figure>
-
 <h3 id="可能用到的网址"><a href="#可能用到的网址" class="headerlink" title="可能用到的网址"></a>可能用到的网址</h3><h4 id="美化："><a href="#美化：" class="headerlink" title="美化："></a>美化：</h4><p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/unixporn/comments/xeml3h/gnome_awesome_retrostyled_pixel_effects/?utm_source=share&amp;utm_medium=ios_app&amp;utm_name=iossmf">gnome美化</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27525611/article/details/109260917">Oh-my-zsh美化</a></p>
 
@@ -413,6 +400,7 @@
         </div>
 
     </div>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=7591034045&auto=1&height=90"></iframe>
   </aside>
   <div id="sidebar-dimmer"></div>
 
