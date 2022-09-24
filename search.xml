@@ -1,64 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LSP1</title>
-    <url>/2022/09/03/LSP1/</url>
-    <content><![CDATA[<meta name="referrer" content="no-referrer">
-
-<h1 id="Little-Star-Plan-LSP-–1"><a href="#Little-Star-Plan-LSP-–1" class="headerlink" title="Little Star Plan(LSP)–1"></a>Little Star Plan(LSP)–1</h1><ul>
-<li><h2 id="Normal-Distribution"><a href="#Normal-Distribution" class="headerlink" title="Normal Distribution"></a>Normal Distribution</h2><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
-<li><img src="https://bkimg.cdn.bcebos.com/formula/01a91c9fd0fb903c925ffe1faa8bcbfe.svg" alt="img"></li>
-<li>如果 <img src="https://bkimg.cdn.bcebos.com/formula/3c7ca371bffedf09ae2cd011c4238506.svg" alt="img">,a,b是实数,<img src="https://bkimg.cdn.bcebos.com/formula/093f43c92561a74621c51f68f3fdcfe0.svg" alt="img"></li>
-</ol>
-<h4 id="标准正态分布（Standard-Normal-Distribution）"><a href="#标准正态分布（Standard-Normal-Distribution）" class="headerlink" title="标准正态分布（Standard Normal Distribution）"></a>标准正态分布（Standard Normal Distribution）</h4><ol>
-<li><p>平均数、众数、中位数是同一值</p>
-</li>
-<li><p>函数曲线的反曲点（inflection point）为离平均数一个标准差距离的位置。</p>
-<span id="more"></span></li>
-</ol>
-</li>
-<li><h2 id="张锋-CRISPR-Cas"><a href="#张锋-CRISPR-Cas" class="headerlink" title="张锋 CRISPR-Cas"></a>张锋 CRISPR-Cas</h2><p><strong>CRISPR-Cas系统是原核生物的一种天然免疫系统</strong>。某些细菌在遭到病毒入侵后，能够把病毒基因的一小段存储到自身的 DNA 里一个称为 CRISPR 的存储空间。当再次遇到病毒入侵时，细菌能够根据存写的片段识别病毒，将病毒的DNA切断而使之失效。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCCt25ILxUdhb4lvSclpxbbq2R6D1yWR5dvTftZmWbiafPCmxpCEjLDqg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<p><strong>CRISPR-Cas系统包含CRISPR基因座和Cas基因（CRISPR关联基因）两部分。</strong></p>
-</li>
-</ul>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCDPhK3bIheQMTNnp7sRymrE9wcyr2ibaecsMJVEAZic5xTyzXZeU6KTBA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<ol>
-<li><p>前导序列：富含AT碱基，位于CRISPR基因上游，被认为是CRISPR序列的启动子。</p>
-</li>
-<li><p>重复序列：长度约20–50 bp碱基且包含5–7 bp回文序列，转录产物可以形成发卡结构，稳定RNA的整体二级结构。</p>
-</li>
-<li><p>间隔序列：是被细菌俘获的外源DNA序列。这就相当于细菌免疫系统的“黑名单”，当这些外源遗传物质再次入侵时，CRISPR&#x2F;Cas系统就会予以精确打击。</p>
-<p>**作用机理 **</p>
-<ol>
-<li>CRISPR 的高度可变的间隔区的获得（俘获外源DNA，登记“黑名单”）</li>
-<li>CRIPSR 基因座的表达（包括转录和转录后的成熟加工）</li>
-<li>CRISPR&#x2F;Cas 系统活性的发挥（靶向干扰）</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li><h2 id="埃德曼测氨基酸序列——N端测序"><a href="#埃德曼测氨基酸序列——N端测序" class="headerlink" title="埃德曼测氨基酸序列——N端测序"></a>埃德曼测氨基酸序列——N端测序</h2><p>Edman降解（埃德曼降解）法，是由菲尔•埃德曼（Pehr Edman）首先创立用于肽链或蛋白质中N-端氨基酸序列分析的方法。Edman降解法检测的原理非常简单，在碱性条件下反应，用异硫氰酸苯酯与待检测的蛋白质（多肽）的N-端氨基生成苯氨基硫甲酰（PTC）的衍生物，然后处理-关环-选择性切断肽链N-端，得到N-端氨基酸残基的噻唑啉酮苯胺衍生物。接着用有机溶剂萃取衍生物，在酸的作用下，不稳定的衍生物转变为稳定的的乙内苯酰硫脲（PTH）衍生物，余下肽链中的酰胺键不受影响。通过用HPLC或电泳法分析生成的乙内酰苯硫脲氨基酸（PTH-氨基酸），可以鉴定出氨基酸类别。重复氨基酸鉴定反应可以达到对N端氨基酸按照从N端到C端的方向依次对氨基酸序列进行分析。对于序列较长的蛋白质（多肽），还可以把样品先切成小的肽段，先对肽段序列分析，再把肽段信息进行拼接即可获得完整蛋白质的序列信息。<img src="http://www.biotech-pack.com/upload/N%E7%AB%AF%E6%B5%8B%E5%BA%8F.png" alt="百泰派克生物科技提供基于Edman降解对蛋白质（多肽）进行N端氨基酸序列分析的技术服务."></p>
-</li>
-<li><h2 id="铁细菌"><a href="#铁细菌" class="headerlink" title="铁细菌"></a>铁细菌</h2><p><strong>铁细菌</strong>是一类生活在含有高浓度二价铁离子的池塘、湖泊、温泉等水域中，能将二价铁盐氧化成三价铁化合物，并能利用此氧化过程中产生的能量来同化二氧化碳进行生长的<strong>细菌</strong>的总称。</p>
-</li>
-<li><h2 id="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"><a href="#必然事件和不可能事件是随机事件的两种极端情况（个人见解）" class="headerlink" title="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"></a>必然事件和不可能事件是随机事件的两种极端情况（个人见解）</h2></li>
-<li><h2 id="相互独立事件"><a href="#相互独立事件" class="headerlink" title="相互独立事件"></a>相互独立事件</h2><p>A，B相互独立，是说A的发生对B发生的<strong>概率</strong>没有影响，可能会产生一丝丝“干扰”。详情见《导与练》。</p>
-</li>
-<li><h2 id="向量积"><a href="#向量积" class="headerlink" title="向量积"></a>向量积</h2><p>记作$\vec{a}\times  \vec{b} $</p>
-<p>模长：$|\vec{a}\times  \vec{b} |&#x3D;|\vec{a}| \cdot |\vec{b}| \cdot sin\theta$</p>
-<p>方向：a向量与b向量的向量积的方向与这两个向量所在平面垂直，且遵守右手定则。（一个简单的确定满足“右手定则”的结果向量的方向的方法是这样的：若坐标系是满足右手定则的，当右手的四指从<strong>a</strong>以不超过180度的转角转向<strong>b</strong>时，竖起的大拇指指向是<strong>c</strong>的方向。）</p>
-</li>
-</ul>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>We are built as gene machines and cultured as meme machines,but we have the power to turn against our creators.We,alone on earth,can rebel against the tyranny of the selfish replicators.</p>
-<p>​																							–Rechard Dawkins &lt;&lt; The Selfish Gene &gt;&gt;</p>
-<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>太不容易了！有些问题确实刁钻，根本查不到。</p>
-]]></content>
-      <tags>
-        <tag>LSP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Manjaro配置</title>
     <url>/2022/09/24/Manjaro%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>介绍了一些manjaro常用配置，比较简陋，供个人食用（doge）。</p>
@@ -120,6 +62,64 @@
 <p>大体可以分为未折叠蛋白应答反应（UPR）、内质网超负荷反应（EOR）、胆固醇调节级联反应（SREBP）三种。</p>
 <p>在应激反应依然无法调节，持续的不平衡状态出现后，细胞会启动凋亡程序。内质网膜上IP3R通道开放，致使大量钙离子外流，高水平的钙离子与需钙蛋白酶结合导致calpain酶原大小亚基水解而被活化，活化的calpain可以裂解多种蛋白质底物，</p>
 <p>比如裂解vinculin而破坏细胞骨架稳定性，使细胞凋亡，还可以剪切Bcl-xL使其由抗凋亡变为促凋亡。活化的calpain还可以转移至内质网，在几个切割位点切割caspase-12酶原，使其活化，作为细胞凋亡的重要水解酶而发挥作用。</p>
+]]></content>
+      <tags>
+        <tag>LSP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LSP1</title>
+    <url>/2022/09/03/LSP1/</url>
+    <content><![CDATA[<meta name="referrer" content="no-referrer">
+
+<h1 id="Little-Star-Plan-LSP-–1"><a href="#Little-Star-Plan-LSP-–1" class="headerlink" title="Little Star Plan(LSP)–1"></a>Little Star Plan(LSP)–1</h1><ul>
+<li><h2 id="Normal-Distribution"><a href="#Normal-Distribution" class="headerlink" title="Normal Distribution"></a>Normal Distribution</h2><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li><img src="https://bkimg.cdn.bcebos.com/formula/01a91c9fd0fb903c925ffe1faa8bcbfe.svg" alt="img"></li>
+<li>如果 <img src="https://bkimg.cdn.bcebos.com/formula/3c7ca371bffedf09ae2cd011c4238506.svg" alt="img">,a,b是实数,<img src="https://bkimg.cdn.bcebos.com/formula/093f43c92561a74621c51f68f3fdcfe0.svg" alt="img"></li>
+</ol>
+<h4 id="标准正态分布（Standard-Normal-Distribution）"><a href="#标准正态分布（Standard-Normal-Distribution）" class="headerlink" title="标准正态分布（Standard Normal Distribution）"></a>标准正态分布（Standard Normal Distribution）</h4><ol>
+<li><p>平均数、众数、中位数是同一值</p>
+</li>
+<li><p>函数曲线的反曲点（inflection point）为离平均数一个标准差距离的位置。</p>
+<span id="more"></span></li>
+</ol>
+</li>
+<li><h2 id="张锋-CRISPR-Cas"><a href="#张锋-CRISPR-Cas" class="headerlink" title="张锋 CRISPR-Cas"></a>张锋 CRISPR-Cas</h2><p><strong>CRISPR-Cas系统是原核生物的一种天然免疫系统</strong>。某些细菌在遭到病毒入侵后，能够把病毒基因的一小段存储到自身的 DNA 里一个称为 CRISPR 的存储空间。当再次遇到病毒入侵时，细菌能够根据存写的片段识别病毒，将病毒的DNA切断而使之失效。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCCt25ILxUdhb4lvSclpxbbq2R6D1yWR5dvTftZmWbiafPCmxpCEjLDqg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>CRISPR-Cas系统包含CRISPR基因座和Cas基因（CRISPR关联基因）两部分。</strong></p>
+</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCDPhK3bIheQMTNnp7sRymrE9wcyr2ibaecsMJVEAZic5xTyzXZeU6KTBA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ol>
+<li><p>前导序列：富含AT碱基，位于CRISPR基因上游，被认为是CRISPR序列的启动子。</p>
+</li>
+<li><p>重复序列：长度约20–50 bp碱基且包含5–7 bp回文序列，转录产物可以形成发卡结构，稳定RNA的整体二级结构。</p>
+</li>
+<li><p>间隔序列：是被细菌俘获的外源DNA序列。这就相当于细菌免疫系统的“黑名单”，当这些外源遗传物质再次入侵时，CRISPR&#x2F;Cas系统就会予以精确打击。</p>
+<p>**作用机理 **</p>
+<ol>
+<li>CRISPR 的高度可变的间隔区的获得（俘获外源DNA，登记“黑名单”）</li>
+<li>CRIPSR 基因座的表达（包括转录和转录后的成熟加工）</li>
+<li>CRISPR&#x2F;Cas 系统活性的发挥（靶向干扰）</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li><h2 id="埃德曼测氨基酸序列——N端测序"><a href="#埃德曼测氨基酸序列——N端测序" class="headerlink" title="埃德曼测氨基酸序列——N端测序"></a>埃德曼测氨基酸序列——N端测序</h2><p>Edman降解（埃德曼降解）法，是由菲尔•埃德曼（Pehr Edman）首先创立用于肽链或蛋白质中N-端氨基酸序列分析的方法。Edman降解法检测的原理非常简单，在碱性条件下反应，用异硫氰酸苯酯与待检测的蛋白质（多肽）的N-端氨基生成苯氨基硫甲酰（PTC）的衍生物，然后处理-关环-选择性切断肽链N-端，得到N-端氨基酸残基的噻唑啉酮苯胺衍生物。接着用有机溶剂萃取衍生物，在酸的作用下，不稳定的衍生物转变为稳定的的乙内苯酰硫脲（PTH）衍生物，余下肽链中的酰胺键不受影响。通过用HPLC或电泳法分析生成的乙内酰苯硫脲氨基酸（PTH-氨基酸），可以鉴定出氨基酸类别。重复氨基酸鉴定反应可以达到对N端氨基酸按照从N端到C端的方向依次对氨基酸序列进行分析。对于序列较长的蛋白质（多肽），还可以把样品先切成小的肽段，先对肽段序列分析，再把肽段信息进行拼接即可获得完整蛋白质的序列信息。<img src="http://www.biotech-pack.com/upload/N%E7%AB%AF%E6%B5%8B%E5%BA%8F.png" alt="百泰派克生物科技提供基于Edman降解对蛋白质（多肽）进行N端氨基酸序列分析的技术服务."></p>
+</li>
+<li><h2 id="铁细菌"><a href="#铁细菌" class="headerlink" title="铁细菌"></a>铁细菌</h2><p><strong>铁细菌</strong>是一类生活在含有高浓度二价铁离子的池塘、湖泊、温泉等水域中，能将二价铁盐氧化成三价铁化合物，并能利用此氧化过程中产生的能量来同化二氧化碳进行生长的<strong>细菌</strong>的总称。</p>
+</li>
+<li><h2 id="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"><a href="#必然事件和不可能事件是随机事件的两种极端情况（个人见解）" class="headerlink" title="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"></a>必然事件和不可能事件是随机事件的两种极端情况（个人见解）</h2></li>
+<li><h2 id="相互独立事件"><a href="#相互独立事件" class="headerlink" title="相互独立事件"></a>相互独立事件</h2><p>A，B相互独立，是说A的发生对B发生的<strong>概率</strong>没有影响，可能会产生一丝丝“干扰”。详情见《导与练》。</p>
+</li>
+<li><h2 id="向量积"><a href="#向量积" class="headerlink" title="向量积"></a>向量积</h2><p>记作$\vec{a}\times  \vec{b} $</p>
+<p>模长：$|\vec{a}\times  \vec{b} |&#x3D;|\vec{a}| \cdot |\vec{b}| \cdot sin\theta$</p>
+<p>方向：a向量与b向量的向量积的方向与这两个向量所在平面垂直，且遵守右手定则。（一个简单的确定满足“右手定则”的结果向量的方向的方法是这样的：若坐标系是满足右手定则的，当右手的四指从<strong>a</strong>以不超过180度的转角转向<strong>b</strong>时，竖起的大拇指指向是<strong>c</strong>的方向。）</p>
+</li>
+</ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>We are built as gene machines and cultured as meme machines,but we have the power to turn against our creators.We,alone on earth,can rebel against the tyranny of the selfish replicators.</p>
+<p>​																							–Rechard Dawkins &lt;&lt; The Selfish Gene &gt;&gt;</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>太不容易了！有些问题确实刁钻，根本查不到。</p>
 ]]></content>
       <tags>
         <tag>LSP</tag>
