@@ -59,27 +59,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LSP2</title>
-    <url>/2022/09/03/LSP2/</url>
-    <content><![CDATA[<h1 id="LSP-2"><a href="#LSP-2" class="headerlink" title="LSP-2"></a>LSP-2</h1><h2 id="CAM与C4植物"><a href="#CAM与C4植物" class="headerlink" title="CAM与C4植物"></a>CAM与C4植物</h2><h3 id="CAM"><a href="#CAM" class="headerlink" title="CAM"></a>CAM</h3><p>CAM植物是具景天酸代谢途径的植物,在夜间通过开放的孔吸收CO2，然后借助PEP羧化酶与磷酸烯醇式丙酮酸结合，形成草酰乙酸，然后在<strong>苹果酸脱氢酶（NADPH）</strong>作用下还原成苹果酸，进入液泡并累计变酸（从pH5-3）；第二天光照后苹果酸从液泡中转运回细胞质和叶绿体中脱羧，释放CO2被RuBP吸收形成碳水化合物.苹果酸从细胞质通过液泡膜进入液泡是主动过程，而从液泡回到细胞质中则是被动过程。</p>
-<span id="more"></span>
-
-<h3 id="碳四"><a href="#碳四" class="headerlink" title="碳四"></a>碳四</h3><p>碳四植物常写作$C_4$植物。生长过程中从空气中吸收二氧化碳首先合成苹果酸或天门冬氨酸等含四个碳原子化合物的植物，如玉米、甘蔗等。</p>
-<p>二氧化碳首先在叶肉细胞内经PEP羧化酶的作用，与<strong>磷酸烯醇式丙酮酸（PEP）</strong>形成苹果酸或天门冬氨酸，然后被运输到<strong>维管束鞘细胞</strong>中脱羧，放出二氧化碳和一分子丙酮酸，二氧化碳被 Rubisco催化的羧化反应再次固定；而丙酮酸再次合成PEP（消耗ATP）。该途径实际上是在二氧化碳同化的基础上增加了一个四碳双羧酸循环，这个循环像一个二氧化碳泵,使 Rubisco羧化部位的二氧化碳浓度比碳3植物的高很多，从而减少光呼吸，因而碳4植物在强光下具有比碳3植物更高的光合效率。</p>
-<h5 id="C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"><a href="#C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。" class="headerlink" title="C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"></a>C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。</h5><p>在C4植物叶片维管束的周围，有维管束鞘围绕，这些维管束鞘细胞里有叶绿体，但里面<strong>并无基粒或基粒发育不良</strong>。在这里，主要进行卡尔文循环。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>C3途径是光合途径同化的基本途径，C4和CAM植物形成碳水化合物除了分别需要C4途径和CAM途径外，<strong>最终还需要C3途径</strong>。在碳同化特性上，CAM与C4植物相似，都有PEP羧化酶，需要两次羧化反应固定CO2。只是固定CO2与生成光合作用产物在时间空间有差异，<strong>C4植物在叶肉细胞内固定CO2，在维管束鞘细胞中同化CO2。CAM植物则在晚上固定CO2，在白天同化CO2。</strong></p>
-<h2 id="内质网-ER"><a href="#内质网-ER" class="headerlink" title="内质网(ER)"></a>内质网(ER)</h2><p>内质网是细胞内除核酸以外的一系列重要的物质， 如蛋白质、 脂类(如甘油三酯) 和糖类合成的基地。 滑面内质网还具有解毒功能， 如肝细胞中的滑面内质网中含有一些酶， 用以清除脂溶性的废物和代谢产生的有害物质。</p>
-<p>蛋白质转入内质网合成至少涉及5种成分：<br>①信号肽（signal peptide），是引导新合成肽链转移到内质网上的一段多肽，位于新合成肽链的N端。<br>②信号识别颗粒（signal recognition particle，SRP），由6种结构不同的多肽组成，结合一个7S RNA，分子量325KD，属于一种核糖核蛋白(ribonucleoprotein)。SRP与信号序列结合，导致蛋白质合成暂停。<br>③ SRP受体（SPR receptor），是膜的整合蛋白，为异二聚体蛋白，存在于内质网上，可与SRP特异结合。<br>④停止转移序列（stop transfer sequence），肽链上的一段特殊序列，与内质网膜的亲合力很高，能阻止肽链继续进入内质网腔，使其成为跨膜蛋白质。<br>⑤转位因子（translocator），由3-4个Sec61蛋白复合体构成的一个类似炸面圈的结构，每个Sec61蛋白由三条肽链组成。<br>蛋白质转入内质网合成的过程：<br>信号肽与SRP结合→肽链延伸终止→SRP与受体结合→SRP脱离信号肽→肽链在内质网上继续合成，同时信号肽引导新生肽链进入内质网腔→信号肽切除→肽链延伸至终止→翻译体系解散。这种肽链边合成边向内质网腔转移的方式，称为<strong>cotranslation</strong>。</p>
-<h6 id="应激反应"><a href="#应激反应" class="headerlink" title="应激反应"></a>应激反应</h6><p>在某些情况下，钙稳态失衡，出现错误蛋白质或未折叠蛋白质过度堆积、固醇和脂质等水平失调而启动的应激机制，从而影响特定基因表达。</p>
-<p>大体可以分为未折叠蛋白应答反应（UPR）、内质网超负荷反应（EOR）、胆固醇调节级联反应（SREBP）三种。</p>
-<p>在应激反应依然无法调节，持续的不平衡状态出现后，细胞会启动凋亡程序。内质网膜上IP3R通道开放，致使大量钙离子外流，高水平的钙离子与需钙蛋白酶结合导致calpain酶原大小亚基水解而被活化，活化的calpain可以裂解多种蛋白质底物，</p>
-<p>比如裂解vinculin而破坏细胞骨架稳定性，使细胞凋亡，还可以剪切Bcl-xL使其由抗凋亡变为促凋亡。活化的calpain还可以转移至内质网，在几个切割位点切割caspase-12酶原，使其活化，作为细胞凋亡的重要水解酶而发挥作用。</p>
-]]></content>
-      <tags>
-        <tag>LSP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Manjaro配置</title>
     <url>/2022/09/24/Manjaro%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>介绍了一些manjaro常用配置，比较简陋，供个人食用（doge）。</p>
@@ -126,23 +105,33 @@
       </tags>
   </entry>
   <entry>
-    <title>哲哥回忆录</title>
-    <url>/2022/09/24/%E5%93%B2%E5%93%A5%E5%9B%9E%E5%BF%86%E5%BD%95/</url>
-    <content><![CDATA[<p>wyz同学也有了一些感慨，我们来看看。</p>
+    <title>LSP2</title>
+    <url>/2022/09/03/LSP2/</url>
+    <content><![CDATA[<h1 id="LSP-2"><a href="#LSP-2" class="headerlink" title="LSP-2"></a>LSP-2</h1><h2 id="CAM与C4植物"><a href="#CAM与C4植物" class="headerlink" title="CAM与C4植物"></a>CAM与C4植物</h2><h3 id="CAM"><a href="#CAM" class="headerlink" title="CAM"></a>CAM</h3><p>CAM植物是具景天酸代谢途径的植物,在夜间通过开放的孔吸收CO2，然后借助PEP羧化酶与磷酸烯醇式丙酮酸结合，形成草酰乙酸，然后在<strong>苹果酸脱氢酶（NADPH）</strong>作用下还原成苹果酸，进入液泡并累计变酸（从pH5-3）；第二天光照后苹果酸从液泡中转运回细胞质和叶绿体中脱羧，释放CO2被RuBP吸收形成碳水化合物.苹果酸从细胞质通过液泡膜进入液泡是主动过程，而从液泡回到细胞质中则是被动过程。</p>
 <span id="more"></span>
 
-<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">《我学过C++》</span><br><span class="line">《python不难》</span><br><span class="line">《他为啥不是从左往右算》</span><br><span class="line">《这小王八是啥》</span><br><span class="line">《wawawa》</span><br><span class="line">《<span class="strong">***</span>*》</span><br></pre></td></tr></table></figure>
-
-<p>纯属整活，不要当真。🐶🐶🐶</p>
+<h3 id="碳四"><a href="#碳四" class="headerlink" title="碳四"></a>碳四</h3><p>碳四植物常写作$C_4$植物。生长过程中从空气中吸收二氧化碳首先合成苹果酸或天门冬氨酸等含四个碳原子化合物的植物，如玉米、甘蔗等。</p>
+<p>二氧化碳首先在叶肉细胞内经PEP羧化酶的作用，与<strong>磷酸烯醇式丙酮酸（PEP）</strong>形成苹果酸或天门冬氨酸，然后被运输到<strong>维管束鞘细胞</strong>中脱羧，放出二氧化碳和一分子丙酮酸，二氧化碳被 Rubisco催化的羧化反应再次固定；而丙酮酸再次合成PEP（消耗ATP）。该途径实际上是在二氧化碳同化的基础上增加了一个四碳双羧酸循环，这个循环像一个二氧化碳泵,使 Rubisco羧化部位的二氧化碳浓度比碳3植物的高很多，从而减少光呼吸，因而碳4植物在强光下具有比碳3植物更高的光合效率。</p>
+<h5 id="C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"><a href="#C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。" class="headerlink" title="C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"></a>C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。</h5><p>在C4植物叶片维管束的周围，有维管束鞘围绕，这些维管束鞘细胞里有叶绿体，但里面<strong>并无基粒或基粒发育不良</strong>。在这里，主要进行卡尔文循环。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>C3途径是光合途径同化的基本途径，C4和CAM植物形成碳水化合物除了分别需要C4途径和CAM途径外，<strong>最终还需要C3途径</strong>。在碳同化特性上，CAM与C4植物相似，都有PEP羧化酶，需要两次羧化反应固定CO2。只是固定CO2与生成光合作用产物在时间空间有差异，<strong>C4植物在叶肉细胞内固定CO2，在维管束鞘细胞中同化CO2。CAM植物则在晚上固定CO2，在白天同化CO2。</strong></p>
+<h2 id="内质网-ER"><a href="#内质网-ER" class="headerlink" title="内质网(ER)"></a>内质网(ER)</h2><p>内质网是细胞内除核酸以外的一系列重要的物质， 如蛋白质、 脂类(如甘油三酯) 和糖类合成的基地。 滑面内质网还具有解毒功能， 如肝细胞中的滑面内质网中含有一些酶， 用以清除脂溶性的废物和代谢产生的有害物质。</p>
+<p>蛋白质转入内质网合成至少涉及5种成分：<br>①信号肽（signal peptide），是引导新合成肽链转移到内质网上的一段多肽，位于新合成肽链的N端。<br>②信号识别颗粒（signal recognition particle，SRP），由6种结构不同的多肽组成，结合一个7S RNA，分子量325KD，属于一种核糖核蛋白(ribonucleoprotein)。SRP与信号序列结合，导致蛋白质合成暂停。<br>③ SRP受体（SPR receptor），是膜的整合蛋白，为异二聚体蛋白，存在于内质网上，可与SRP特异结合。<br>④停止转移序列（stop transfer sequence），肽链上的一段特殊序列，与内质网膜的亲合力很高，能阻止肽链继续进入内质网腔，使其成为跨膜蛋白质。<br>⑤转位因子（translocator），由3-4个Sec61蛋白复合体构成的一个类似炸面圈的结构，每个Sec61蛋白由三条肽链组成。<br>蛋白质转入内质网合成的过程：<br>信号肽与SRP结合→肽链延伸终止→SRP与受体结合→SRP脱离信号肽→肽链在内质网上继续合成，同时信号肽引导新生肽链进入内质网腔→信号肽切除→肽链延伸至终止→翻译体系解散。这种肽链边合成边向内质网腔转移的方式，称为<strong>cotranslation</strong>。</p>
+<h6 id="应激反应"><a href="#应激反应" class="headerlink" title="应激反应"></a>应激反应</h6><p>在某些情况下，钙稳态失衡，出现错误蛋白质或未折叠蛋白质过度堆积、固醇和脂质等水平失调而启动的应激机制，从而影响特定基因表达。</p>
+<p>大体可以分为未折叠蛋白应答反应（UPR）、内质网超负荷反应（EOR）、胆固醇调节级联反应（SREBP）三种。</p>
+<p>在应激反应依然无法调节，持续的不平衡状态出现后，细胞会启动凋亡程序。内质网膜上IP3R通道开放，致使大量钙离子外流，高水平的钙离子与需钙蛋白酶结合导致calpain酶原大小亚基水解而被活化，活化的calpain可以裂解多种蛋白质底物，</p>
+<p>比如裂解vinculin而破坏细胞骨架稳定性，使细胞凋亡，还可以剪切Bcl-xL使其由抗凋亡变为促凋亡。活化的calpain还可以转移至内质网，在几个切割位点切割caspase-12酶原，使其活化，作为细胞凋亡的重要水解酶而发挥作用。</p>
 ]]></content>
       <tags>
-        <tag>回忆</tag>
+        <tag>LSP</tag>
       </tags>
   </entry>
   <entry>
     <title>Windows 11安卓子系统</title>
     <url>/2022/09/25/Windows-11%E5%AE%89%E5%8D%93%E5%AD%90%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>打开设置，选择时间和语言，更改地区为“美国”。</p>
+    <content><![CDATA[<p>别人安装android是为了开发，我是为了能回到android🐶</p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>打开设置，选择时间和语言，更改地区为“美国”。</p>
 <p>打开微软商店，搜索“Amazon Appstore”</p>
 <p><img src="/2022/09/25/Windows-11%E5%AE%89%E5%8D%93%E5%AD%90%E7%B3%BB%E7%BB%9F/%5Cimage1.png" alt="image-20220925114039579"></p>
 <p>安装打开，会提示安装安卓子系统。</p>
@@ -163,9 +152,37 @@
       </tags>
   </entry>
   <entry>
+    <title>steve jobs</title>
+    <url>/2022/09/04/steve-jobs/</url>
+    <content><![CDATA[<p>乔布斯演讲</p>
+<span id="more"></span>
+
+
+
+<iframe src="//player.bilibili.com/player.html?aid=17203668&bvid=BV1oW411h7Ea&cid=28116082&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+]]></content>
+      <tags>
+        <tag>名人</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>哲哥回忆录</title>
+    <url>/2022/09/24/%E5%93%B2%E5%93%A5%E5%9B%9E%E5%BF%86%E5%BD%95/</url>
+    <content><![CDATA[<p>wyz同学也有了一些感慨，我们来看看。</p>
+<span id="more"></span>
+
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">《我学过C++》</span><br><span class="line">《python不难》</span><br><span class="line">《他为啥不是从左往右算》</span><br><span class="line">《这小王八是啥》</span><br><span class="line">《wawawa》</span><br><span class="line">《<span class="strong">***</span>*》</span><br></pre></td></tr></table></figure>
+
+<p>纯属整活，不要当真。🐶🐶🐶</p>
+]]></content>
+      <tags>
+        <tag>回忆</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>高中回忆录</title>
     <url>/2022/09/23/%E9%AB%98%E4%B8%AD%E5%9B%9E%E5%BF%86%E5%BD%95/</url>
-    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1960650720&auto=1&height=66"></iframe>（建议搭配音乐食用）
+    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1960650720&auto=0&height=66"></iframe>（建议搭配音乐食用）
 
 <h2 id="为什么会有这么一篇文章？"><a href="#为什么会有这么一篇文章？" class="headerlink" title="为什么会有这么一篇文章？"></a>为什么会有这么一篇文章？</h2><p>前几天上C语言课，突然想起高中时那段竞赛生涯，很是感慨，由此写下这样一篇文章，算是一个纪念吧。</p>
 <span id="more"></span>
@@ -185,20 +202,6 @@
 ]]></content>
       <tags>
         <tag>回忆</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>steve jobs</title>
-    <url>/2022/09/04/steve-jobs/</url>
-    <content><![CDATA[<p>乔布斯演讲</p>
-<span id="more"></span>
-
-
-
-<iframe src="//player.bilibili.com/player.html?aid=17203668&bvid=BV1oW411h7Ea&cid=28116082&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-]]></content>
-      <tags>
-        <tag>名人</tag>
       </tags>
   </entry>
 </search>
