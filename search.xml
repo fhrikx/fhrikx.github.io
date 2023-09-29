@@ -1,69 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LSP1</title>
-    <url>/2022/09/03/LSP1/</url>
-    <content><![CDATA[<meta name="referrer" content="no-referrer">
-
-<h1 id="Little-Star-Plan-LSP-–1"><a href="#Little-Star-Plan-LSP-–1" class="headerlink" title="Little Star Plan(LSP)–1"></a>Little Star Plan(LSP)–1</h1><ul>
-<li><h2 id="Normal-Distribution"><a href="#Normal-Distribution" class="headerlink" title="Normal Distribution"></a>Normal Distribution</h2><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
-<li><img src="https://bkimg.cdn.bcebos.com/formula/01a91c9fd0fb903c925ffe1faa8bcbfe.svg" alt="img"></li>
-<li>如果 <img src="https://bkimg.cdn.bcebos.com/formula/3c7ca371bffedf09ae2cd011c4238506.svg" alt="img">,a,b是实数,<img src="https://bkimg.cdn.bcebos.com/formula/093f43c92561a74621c51f68f3fdcfe0.svg" alt="img"></li>
-</ol>
-<h4 id="标准正态分布（Standard-Normal-Distribution）"><a href="#标准正态分布（Standard-Normal-Distribution）" class="headerlink" title="标准正态分布（Standard Normal Distribution）"></a>标准正态分布（Standard Normal Distribution）</h4><ol>
-<li><p>平均数、众数、中位数是同一值</p>
-</li>
-<li><p>函数曲线的反曲点（inflection point）为离平均数一个标准差距离的位置。</p>
-<span id="more"></span></li>
-</ol>
-</li>
-<li><h2 id="张锋-CRISPR-Cas"><a href="#张锋-CRISPR-Cas" class="headerlink" title="张锋 CRISPR-Cas"></a>张锋 CRISPR-Cas</h2><p><strong>CRISPR-Cas系统是原核生物的一种天然免疫系统</strong>。某些细菌在遭到病毒入侵后，能够把病毒基因的一小段存储到自身的 DNA 里一个称为 CRISPR 的存储空间。当再次遇到病毒入侵时，细菌能够根据存写的片段识别病毒，将病毒的DNA切断而使之失效。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCCt25ILxUdhb4lvSclpxbbq2R6D1yWR5dvTftZmWbiafPCmxpCEjLDqg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<p><strong>CRISPR-Cas系统包含CRISPR基因座和Cas基因（CRISPR关联基因）两部分。</strong></p>
-</li>
-</ul>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCDPhK3bIheQMTNnp7sRymrE9wcyr2ibaecsMJVEAZic5xTyzXZeU6KTBA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<ol>
-<li><p>前导序列：富含AT碱基，位于CRISPR基因上游，被认为是CRISPR序列的启动子。</p>
-</li>
-<li><p>重复序列：长度约20–50 bp碱基且包含5–7 bp回文序列，转录产物可以形成发卡结构，稳定RNA的整体二级结构。</p>
-</li>
-<li><p>间隔序列：是被细菌俘获的外源DNA序列。这就相当于细菌免疫系统的“黑名单”，当这些外源遗传物质再次入侵时，CRISPR&#x2F;Cas系统就会予以精确打击。</p>
-<p>**作用机理 **</p>
-<ol>
-<li>CRISPR 的高度可变的间隔区的获得（俘获外源DNA，登记“黑名单”）</li>
-<li>CRIPSR 基因座的表达（包括转录和转录后的成熟加工）</li>
-<li>CRISPR&#x2F;Cas 系统活性的发挥（靶向干扰）</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li><h2 id="埃德曼测氨基酸序列——N端测序"><a href="#埃德曼测氨基酸序列——N端测序" class="headerlink" title="埃德曼测氨基酸序列——N端测序"></a>埃德曼测氨基酸序列——N端测序</h2><p>Edman降解（埃德曼降解）法，是由菲尔•埃德曼（Pehr Edman）首先创立用于肽链或蛋白质中N-端氨基酸序列分析的方法。Edman降解法检测的原理非常简单，在碱性条件下反应，用异硫氰酸苯酯与待检测的蛋白质（多肽）的N-端氨基生成苯氨基硫甲酰（PTC）的衍生物，然后处理-关环-选择性切断肽链N-端，得到N-端氨基酸残基的噻唑啉酮苯胺衍生物。接着用有机溶剂萃取衍生物，在酸的作用下，不稳定的衍生物转变为稳定的的乙内苯酰硫脲（PTH）衍生物，余下肽链中的酰胺键不受影响。通过用HPLC或电泳法分析生成的乙内酰苯硫脲氨基酸（PTH-氨基酸），可以鉴定出氨基酸类别。重复氨基酸鉴定反应可以达到对N端氨基酸按照从N端到C端的方向依次对氨基酸序列进行分析。对于序列较长的蛋白质（多肽），还可以把样品先切成小的肽段，先对肽段序列分析，再把肽段信息进行拼接即可获得完整蛋白质的序列信息。<img src="http://www.biotech-pack.com/upload/N%E7%AB%AF%E6%B5%8B%E5%BA%8F.png" alt="百泰派克生物科技提供基于Edman降解对蛋白质（多肽）进行N端氨基酸序列分析的技术服务."></p>
-</li>
-<li><h2 id="铁细菌"><a href="#铁细菌" class="headerlink" title="铁细菌"></a>铁细菌</h2><p><strong>铁细菌</strong>是一类生活在含有高浓度二价铁离子的池塘、湖泊、温泉等水域中，能将二价铁盐氧化成三价铁化合物，并能利用此氧化过程中产生的能量来同化二氧化碳进行生长的<strong>细菌</strong>的总称。</p>
-</li>
-<li><h2 id="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"><a href="#必然事件和不可能事件是随机事件的两种极端情况（个人见解）" class="headerlink" title="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"></a>必然事件和不可能事件是随机事件的两种极端情况（个人见解）</h2></li>
-<li><h2 id="相互独立事件"><a href="#相互独立事件" class="headerlink" title="相互独立事件"></a>相互独立事件</h2><p>A，B相互独立，是说A的发生对B发生的<strong>概率</strong>没有影响，可能会产生一丝丝“干扰”。详情见《导与练》。</p>
-</li>
-<li><h2 id="向量积"><a href="#向量积" class="headerlink" title="向量积"></a>向量积</h2><p>记作$\vec{a}\times  \vec{b} $</p>
-<p>模长：$|\vec{a}\times  \vec{b} |&#x3D;|\vec{a}| \cdot |\vec{b}| \cdot sin\theta$</p>
-<p>方向：a向量与b向量的向量积的方向与这两个向量所在平面垂直，且遵守右手定则。（一个简单的确定满足“右手定则”的结果向量的方向的方法是这样的：若坐标系是满足右手定则的，当右手的四指从<strong>a</strong>以不超过180度的转角转向<strong>b</strong>时，竖起的大拇指指向是<strong>c</strong>的方向。）</p>
-</li>
-</ul>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>We are built as gene machines and cultured as meme machines,but we have the power to turn against our creators.We,alone on earth,can rebel against the tyranny of the selfish replicators.</p>
-<p>​																							–Rechard Dawkins &lt;&lt; The Selfish Gene &gt;&gt;</p>
-<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>太不容易了！有些问题确实刁钻，根本查不到。</p>
-]]></content>
-      <tags>
-        <tag>LSP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LSP2</title>
     <url>/2022/09/03/LSP2/</url>
     <content><![CDATA[<h1 id="LSP-2"><a href="#LSP-2" class="headerlink" title="LSP-2"></a>LSP-2</h1><h2 id="CAM与C4植物"><a href="#CAM与C4植物" class="headerlink" title="CAM与C4植物"></a>CAM与C4植物</h2><h3 id="CAM"><a href="#CAM" class="headerlink" title="CAM"></a>CAM</h3><p>CAM植物是具景天酸代谢途径的植物,在夜间通过开放的孔吸收CO2，然后借助PEP羧化酶与磷酸烯醇式丙酮酸结合，形成草酰乙酸，然后在<strong>苹果酸脱氢酶（NADPH）</strong>作用下还原成苹果酸，进入液泡并累计变酸（从pH5-3）；第二天光照后苹果酸从液泡中转运回细胞质和叶绿体中脱羧，释放CO2被RuBP吸收形成碳水化合物.苹果酸从细胞质通过液泡膜进入液泡是主动过程，而从液泡回到细胞质中则是被动过程。</p>
 <span id="more"></span>
-
 <h3 id="碳四"><a href="#碳四" class="headerlink" title="碳四"></a>碳四</h3><p>碳四植物常写作$C_4$植物。生长过程中从空气中吸收二氧化碳首先合成苹果酸或天门冬氨酸等含四个碳原子化合物的植物，如玉米、甘蔗等。</p>
 <p>二氧化碳首先在叶肉细胞内经PEP羧化酶的作用，与<strong>磷酸烯醇式丙酮酸（PEP）</strong>形成苹果酸或天门冬氨酸，然后被运输到<strong>维管束鞘细胞</strong>中脱羧，放出二氧化碳和一分子丙酮酸，二氧化碳被 Rubisco催化的羧化反应再次固定；而丙酮酸再次合成PEP（消耗ATP）。该途径实际上是在二氧化碳同化的基础上增加了一个四碳双羧酸循环，这个循环像一个二氧化碳泵,使 Rubisco羧化部位的二氧化碳浓度比碳3植物的高很多，从而减少光呼吸，因而碳4植物在强光下具有比碳3植物更高的光合效率。</p>
 <h5 id="C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"><a href="#C4植物与C3植物的一个重要区别是C4植物的-CO-2-补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。" class="headerlink" title="C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。"></a>C4植物与C3植物的一个重要区别是C4植物的$CO_2$补偿点很低，而C3植物的补偿点很高，所以C4植物在CO2含量低的情况下存活率更高。二氧化碳固定效率高，有利于植物在干旱环境生长。</h5><p>在C4植物叶片维管束的周围，有维管束鞘围绕，这些维管束鞘细胞里有叶绿体，但里面<strong>并无基粒或基粒发育不良</strong>。在这里，主要进行卡尔文循环。</p>
@@ -80,44 +21,92 @@
       </tags>
   </entry>
   <entry>
+    <title>LSP1</title>
+    <url>/2022/09/03/LSP1/</url>
+    <content><![CDATA[<meta name="referrer" content="no-referrer">
+
+<h1 id="Little-Star-Plan-LSP-—1"><a href="#Little-Star-Plan-LSP-—1" class="headerlink" title="Little Star Plan(LSP)—1"></a>Little Star Plan(LSP)—1</h1><ul>
+<li><h2 id="Normal-Distribution"><a href="#Normal-Distribution" class="headerlink" title="Normal Distribution"></a>Normal Distribution</h2><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li><img src="https://bkimg.cdn.bcebos.com/formula/01a91c9fd0fb903c925ffe1faa8bcbfe.svg" alt="img"></li>
+<li>如果 <img src="https://bkimg.cdn.bcebos.com/formula/3c7ca371bffedf09ae2cd011c4238506.svg" alt="img">,a,b是实数,<img src="https://bkimg.cdn.bcebos.com/formula/093f43c92561a74621c51f68f3fdcfe0.svg" alt="img"></li>
+</ol>
+<h4 id="标准正态分布（Standard-Normal-Distribution）"><a href="#标准正态分布（Standard-Normal-Distribution）" class="headerlink" title="标准正态分布（Standard Normal Distribution）"></a>标准正态分布（Standard Normal Distribution）</h4><ol>
+<li><p>平均数、众数、中位数是同一值</p>
+</li>
+<li><p>函数曲线的反曲点（inflection point）为离平均数一个标准差距离的位置。</p>
+<span id="more"></span>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><h2 id="张锋-CRISPR-Cas"><a href="#张锋-CRISPR-Cas" class="headerlink" title="张锋 CRISPR-Cas"></a>张锋 CRISPR-Cas</h2><p><strong>CRISPR-Cas系统是原核生物的一种天然免疫系统</strong>。某些细菌在遭到病毒入侵后，能够把病毒基因的一小段存储到自身的 DNA 里一个称为 CRISPR 的存储空间。当再次遇到病毒入侵时，细菌能够根据存写的片段识别病毒，将病毒的DNA切断而使之失效。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCCt25ILxUdhb4lvSclpxbbq2R6D1yWR5dvTftZmWbiafPCmxpCEjLDqg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p><strong>CRISPR-Cas系统包含CRISPR基因座和Cas基因（CRISPR关联基因）两部分。</strong></p>
+</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/o3MBAJn8Z9TdeQCZ2onwxYHpN96XBgHCDPhK3bIheQMTNnp7sRymrE9wcyr2ibaecsMJVEAZic5xTyzXZeU6KTBA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<ol>
+<li><p>前导序列：富含AT碱基，位于CRISPR基因上游，被认为是CRISPR序列的启动子。</p>
+</li>
+<li><p>重复序列：长度约20–50 bp碱基且包含5–7 bp回文序列，转录产物可以形成发卡结构，稳定RNA的整体二级结构。</p>
+</li>
+<li><p>间隔序列：是被细菌俘获的外源DNA序列。这就相当于细菌免疫系统的“黑名单”，当这些外源遗传物质再次入侵时，CRISPR/Cas系统就会予以精确打击。</p>
+<p><strong>作用机理 </strong></p>
+<ol>
+<li>CRISPR 的高度可变的间隔区的获得（俘获外源DNA，登记“黑名单”）</li>
+<li>CRIPSR 基因座的表达（包括转录和转录后的成熟加工）</li>
+<li>CRISPR/Cas 系统活性的发挥（靶向干扰）</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li><h2 id="埃德曼测氨基酸序列——N端测序"><a href="#埃德曼测氨基酸序列——N端测序" class="headerlink" title="埃德曼测氨基酸序列——N端测序"></a>埃德曼测氨基酸序列——N端测序</h2><p>Edman降解（埃德曼降解）法，是由菲尔•埃德曼（Pehr Edman）首先创立用于肽链或蛋白质中N-端氨基酸序列分析的方法。Edman降解法检测的原理非常简单，在碱性条件下反应，用异硫氰酸苯酯与待检测的蛋白质（多肽）的N-端氨基生成苯氨基硫甲酰（PTC）的衍生物，然后处理-关环-选择性切断肽链N-端，得到N-端氨基酸残基的噻唑啉酮苯胺衍生物。接着用有机溶剂萃取衍生物，在酸的作用下，不稳定的衍生物转变为稳定的的乙内苯酰硫脲（PTH）衍生物，余下肽链中的酰胺键不受影响。通过用HPLC或电泳法分析生成的乙内酰苯硫脲氨基酸（PTH-氨基酸），可以鉴定出氨基酸类别。重复氨基酸鉴定反应可以达到对N端氨基酸按照从N端到C端的方向依次对氨基酸序列进行分析。对于序列较长的蛋白质（多肽），还可以把样品先切成小的肽段，先对肽段序列分析，再把肽段信息进行拼接即可获得完整蛋白质的序列信息。<img src="http://www.biotech-pack.com/upload/N%E7%AB%AF%E6%B5%8B%E5%BA%8F.png" alt="百泰派克生物科技提供基于Edman降解对蛋白质（多肽）进行N端氨基酸序列分析的技术服务."></p>
+</li>
+<li><h2 id="铁细菌"><a href="#铁细菌" class="headerlink" title="铁细菌"></a>铁细菌</h2><p><strong>铁细菌</strong>是一类生活在含有高浓度二价铁离子的池塘、湖泊、温泉等水域中，能将二价铁盐氧化成三价铁化合物，并能利用此氧化过程中产生的能量来同化二氧化碳进行生长的<strong>细菌</strong>的总称。</p>
+</li>
+<li><h2 id="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"><a href="#必然事件和不可能事件是随机事件的两种极端情况（个人见解）" class="headerlink" title="必然事件和不可能事件是随机事件的两种极端情况（个人见解）"></a>必然事件和不可能事件是随机事件的两种极端情况（个人见解）</h2></li>
+<li><h2 id="相互独立事件"><a href="#相互独立事件" class="headerlink" title="相互独立事件"></a>相互独立事件</h2><p>A，B相互独立，是说A的发生对B发生的<strong>概率</strong>没有影响，可能会产生一丝丝“干扰”。详情见《导与练》。</p>
+</li>
+<li><h2 id="向量积"><a href="#向量积" class="headerlink" title="向量积"></a>向量积</h2><p>记作$\vec{a}\times  \vec{b} $</p>
+<p>模长：$|\vec{a}\times  \vec{b} |=|\vec{a}| \cdot |\vec{b}| \cdot sin\theta$</p>
+<p>方向：a向量与b向量的向量积的方向与这两个向量所在平面垂直，且遵守右手定则。（一个简单的确定满足“右手定则”的结果向量的方向的方法是这样的：若坐标系是满足右手定则的，当右手的四指从<strong>a</strong>以不超过180度的转角转向<strong>b</strong>时，竖起的大拇指指向是<strong>c</strong>的方向。）</p>
+</li>
+</ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>We are built as gene machines and cultured as meme machines,but we have the power to turn against our creators.We,alone on earth,can rebel against the tyranny of the selfish replicators.</p>
+<p>​                                                                                            —Rechard Dawkins &lt;&lt; The Selfish Gene &gt;&gt;</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>太不容易了！有些问题确实刁钻，根本查不到。</p>
+]]></content>
+      <tags>
+        <tag>LSP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Manjaro配置</title>
     <url>/2022/09/24/Manjaro%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>介绍了一些manjaro常用配置，比较简陋，供个人食用（doge）。</p>
 <span id="more"></span>
-
 <h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -m rank</span><br></pre></td></tr></table></figure>
-
 <h2 id="添加Archlinuxcn软件源"><a href="#添加Archlinuxcn软件源" class="headerlink" title="添加Archlinuxcn软件源"></a>添加Archlinuxcn软件源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/pacman.conf</span><br></pre></td></tr></table></figure>
-
 <p>在末尾添加</p>
-<p><code>[archlinuxcn] Server = https://mirrors.aliyun.com/archlinuxcn/$arch</code></p>
+<p><code>[archlinuxcn]
+Server = https://mirrors.aliyun.com/archlinuxcn/$arch</code></p>
 <h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>更新软件库缓存</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -Syy</span><br></pre></td></tr></table></figure>
-
 <p>更新系统</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -Syyu</span><br></pre></td></tr></table></figure>
-
 <h2 id="YAY下载"><a href="#YAY下载" class="headerlink" title="YAY下载"></a>YAY下载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S yay</span><br></pre></td></tr></table></figure>
-
 <h2 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h2><p>这里选择的是<code>fcitx</code>+搜狗输入法：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S fcitx-im fcitx-configtool</span><br><span class="line">yay -S base-devel</span><br><span class="line">yay -S fcitx-sogoupinyin</span><br></pre></td></tr></table></figure>
-
 <p>安装完后在<code>/etc/profile</code>加上：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">&quot;@im=fcitx&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p>重启电脑，选择搜狗。</p>
 <h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><h3 id="网易云"><a href="#网易云" class="headerlink" title="网易云"></a>网易云</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S netease-cloud-music</span><br></pre></td></tr></table></figure>
-
 <h3 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S microsoft-edge-dev-bin</span><br></pre></td></tr></table></figure>
-
 <h3 id="微信"><a href="#微信" class="headerlink" title="微信"></a>微信</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S deepin-wine-wechat</span><br></pre></td></tr></table></figure>
-
 <h3 id="VScode"><a href="#VScode" class="headerlink" title="VScode"></a>VScode</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S visual-studio-code-bin</span><br></pre></td></tr></table></figure>
-
 <h3 id="Typora（收费了）"><a href="#Typora（收费了）" class="headerlink" title="Typora（收费了）"></a>Typora（收费了）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S typora</span><br></pre></td></tr></table></figure>
-
 <h3 id="WPS"><a href="#WPS" class="headerlink" title="WPS"></a>WPS</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S wps-office-mui-zh-cn wps-office-mime-cn wps-office-cn wps-office-fonts ttf-ms-fonts  ttf-wps-fonts</span><br></pre></td></tr></table></figure>
-
 <h3 id="可能用到的网址"><a href="#可能用到的网址" class="headerlink" title="可能用到的网址"></a>可能用到的网址</h3><h4 id="美化："><a href="#美化：" class="headerlink" title="美化："></a>美化：</h4><p><a href="https://www.reddit.com/r/unixporn/comments/xeml3h/gnome_awesome_retrostyled_pixel_effects/?utm_source=share&amp;utm_medium=ios_app&amp;utm_name=iossmf">gnome美化</a></p>
 <p><a href="https://blog.csdn.net/qq_27525611/article/details/109260917">Oh-my-zsh美化</a></p>
 ]]></content>
@@ -126,11 +115,21 @@
       </tags>
   </entry>
   <entry>
+    <title>steve jobs</title>
+    <url>/2022/09/04/steve-jobs/</url>
+    <content><![CDATA[<p>乔布斯演讲</p>
+<span id="more"></span>
+<iframe src="//player.bilibili.com/player.html?aid=17203668&bvid=BV1oW411h7Ea&cid=28116082&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+]]></content>
+      <tags>
+        <tag>名人</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows 11安卓子系统</title>
     <url>/2022/09/25/Windows-11%E5%AE%89%E5%8D%93%E5%AD%90%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>别人安装android是为了开发，我是为了能回到android🐶</p>
 <span id="more"></span>
-
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>打开设置，选择时间和语言，更改地区为“美国”。</p>
 <p>打开微软商店，搜索“Amazon Appstore”</p>
 <p><img src="/2022/09/25/Windows-11%E5%AE%89%E5%8D%93%E5%AD%90%E7%B3%BB%E7%BB%9F/image1.png" alt="image-20220925114039579"></p>
@@ -140,7 +139,7 @@
 <p>重启后开始菜单会出现上面的图标。</p>
 <p>可以登录亚马逊账号下载APP。</p>
 <h2 id="WSA工具"><a href="#WSA工具" class="headerlink" title="WSA工具"></a>WSA工具</h2><p>我更推荐使用WSA自己安装APP。</p>
-<p>首先<a href="https://t.bilibili.com/583953911166568962">下载WSA</a></p>
+<p>首先<a href="https:t.bilibili.com/583953911166568962">下载WSA</a></p>
 <p>打开上述安卓子系统设置界面，打开“开发人员模式”，注意记住IP地址，如下图，为”127.0.0.1：58526“。</p>
 <p><img src="/2022/09/25/Windows-11%E5%AE%89%E5%8D%93%E5%AD%90%E7%B3%BB%E7%BB%9F/image-3.png" alt="image-20220925114733987"></p>
 <p>然后打开WSA，将刚才的IP输入到备用地址。就可以快乐享用了。</p>
@@ -152,41 +151,120 @@
       </tags>
   </entry>
   <entry>
-    <title>steve jobs</title>
-    <url>/2022/09/04/steve-jobs/</url>
-    <content><![CDATA[<p>乔布斯演讲</p>
+    <title>从万有引力推出轨道方程</title>
+    <url>/2022/09/27/%E4%BB%8E%E4%B8%87%E6%9C%89%E5%BC%95%E5%8A%9B%E6%8E%A8%E5%87%BA%E8%BD%A8%E9%81%93%E6%96%B9%E7%A8%8B/</url>
+    <content><![CDATA[<p>&gt;<br>&gt;</p>
+<blockquote>
+<p>前言：上了个习题课，决定记录一下推导过程顺便练习一下LaTeX语法。</p>
 <span id="more"></span>
-
-
-
-<iframe src="//player.bilibili.com/player.html?aid=17203668&bvid=BV1oW411h7Ea&cid=28116082&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+</blockquote>
+<h4 id="万有引力公式"><a href="#万有引力公式" class="headerlink" title="万有引力公式"></a>万有引力公式</h4><script type="math/tex; mode=display">
+{F} = \frac{GMm}{r^2}</script><p>故</p>
+<script type="math/tex; mode=display">
+{a_r}=\dot{r}\dot{}-r\dot{\theta}^2=-\frac{GM}{r^2}</script><p>根据开普勒第二定律，有</p>
+<script type="math/tex; mode=display">
+\dot{\theta}r^2=l</script><p>接下来就是数学运算了，我们的目的是找到$r$和$\theta$的关系，由上述式子</p>
+<script type="math/tex; mode=display">
+\frac{d\theta}{dt}r^2=l</script><p>故</p>
+<script type="math/tex; mode=display">
+\frac{dr}{dt}=\frac{dr}{d\theta}\cdot\frac{l}{r^2}\\\\</script><script type="math/tex; mode=display">
+\frac{d}{dt}(\frac{dr}{dt})=\frac{l}{r^2}\cdot\frac{d}{d\theta}(\frac{l}{r^2}\cdot\frac{dr}{dt})</script><p>带入1式，有</p>
+<script type="math/tex; mode=display">
+\frac{l}{r^2}\cdot\frac{d}{d\theta}(\frac{l}{r^2}\cdot\frac{dr}{dt})-\frac{l^2}{r^3}=-\frac{GM}{r^2}</script><p>接下来是一步<strong>换元</strong>,令<strong>u=$\frac{1}{r}$</strong>,则$du=-\frac{1}{r^2}dr$,带入并约分可得，</p>
+<script type="math/tex; mode=display">
+l\cdot\frac{d}{d\theta}(-l\frac{du}{d\theta})-l^2u=-GM\\\\</script><script type="math/tex; mode=display">
+l^2\cdot\frac{d}{d\theta}(\frac{du}{d\theta})+l^2u=GM\\\\</script><script type="math/tex; mode=display">
+\frac{d^2u}{d\theta^2}+u=\frac{GM}{l^2}</script><p>(1)考虑齐次方程</p>
+<script type="math/tex; mode=display">
+\frac{d^2u}{d\theta^2}+u=0</script><script type="math/tex; mode=display">
+\therefore\frac{du'}{d\theta}+u=0</script><script type="math/tex; mode=display">
+\therefore\frac{du'}{du}\cdot\frac{du}{d\theta}+u=0</script><script type="math/tex; mode=display">
+\frac{du'}{du}\cdot u'+u=0</script><script type="math/tex; mode=display">
+u'du'=-udu</script><script type="math/tex; mode=display">
+\int u'du'=\int -udu</script><script type="math/tex; mode=display">
+u'^2=u^2+C</script><script type="math/tex; mode=display">
+u'=-\sqrt{u^2+C}</script><p>这里u’取正负解并不影响最终方程，为了方便取负解，下文会解释。</p>
+<script type="math/tex; mode=display">
+\frac{du}{d\theta}=-\sqrt{u^2+C}</script><script type="math/tex; mode=display">
+-\frac{1}{\sqrt{u^2+C}}du=d\theta</script><script type="math/tex; mode=display">
+\int-\frac{1}{\sqrt{u^2+C}}du=\int d\theta</script><script type="math/tex; mode=display">
+\int-\frac{1}{\sqrt{(\frac{u}{C})^2+1}}d\frac{u}{C}=\int d\theta</script><script type="math/tex; mode=display">
+(毕竟\sqrt C和C都是常数，没人会傻傻地用\sqrt C)</script><script type="math/tex; mode=display">
+arccos\frac{u}{C}=\theta</script><script type="math/tex; mode=display">
+u=Ccos\theta</script><p>(2)考虑特解</p>
+<p>显然特解为$u=\frac{GM}{l^2}$</p>
+<p>(3)故该方程的解为，</p>
+<script type="math/tex; mode=display">
+u=\frac{GM}{l^2}+Ccos\theta</script><p>结合前面$u=\frac{1}{r}$,</p>
+<script type="math/tex; mode=display">
+r=\frac{1}{\frac{GM}{l^2}+Ccos\theta}</script><p>显然是个圆锥曲线的方程。</p>
+<p>(4)r若前面取正解，积出来应该是sin，不影响是圆锥曲线的性质。</p>
 ]]></content>
       <tags>
-        <tag>名人</tag>
+        <tag>力学</tag>
       </tags>
   </entry>
   <entry>
-    <title>哲哥回忆录</title>
-    <url>/2022/09/24/%E5%93%B2%E5%93%A5%E5%9B%9E%E5%BF%86%E5%BD%95/</url>
-    <content><![CDATA[<p>wyz同学也有了一些感慨，我们来看看。</p>
+    <title>优雅地使用Windows触摸板</title>
+    <url>/2023/02/01/%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8Windows%E8%A7%A6%E6%91%B8%E6%9D%BF/</url>
+    <content><![CDATA[<p>众所周知，Mac上的触摸板体验是远远好于Windows的，但是Windows更新到win11，在触控板上的改进也是不小的，下面进行一些设置让你能优雅地使用Windows触摸板。</p>
 <span id="more"></span>
-
-<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">《我学过C++》</span><br><span class="line">《python不难》</span><br><span class="line">《他为啥不是从左往右算》</span><br><span class="line">《这小王八是啥》</span><br><span class="line">《wawawa》</span><br><span class="line">《<span class="strong">***</span>*》</span><br></pre></td></tr></table></figure>
-
-<p>纯属整活，不要当真。🐶🐶🐶</p>
+<h2 id="在设置中进行个性设置"><a href="#在设置中进行个性设置" class="headerlink" title="在设置中进行个性设置"></a>在设置中进行个性设置</h2><p><img src="/2023/02/01/%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8Windows%E8%A7%A6%E6%91%B8%E6%9D%BF/1.png" alt="1695951679862"></p>
+<p>可以看到微软提供了基本的手势操作，我们可以选择学习熟悉这种手势。</p>
+<p>当然也可以根据自身情况更改（比如我就很少用到多桌面的情况）</p>
+<p>点击上图中的高级手势，下面贴出个人的设置供参考。</p>
+<p><img src="/2023/02/01/%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8Windows%E8%A7%A6%E6%91%B8%E6%9D%BF/2.png" alt="image-20230201153500521"></p>
+<p>这样就可以拥有一个比较丝滑的触控板了。（当然，在matlab，steam等专业软件上还是鼠标来得实在）</p>
 ]]></content>
+      <categories>
+        <category>瞎折腾系列</category>
+      </categories>
       <tags>
-        <tag>回忆</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>傅科摆</title>
+    <url>/2022/09/29/%E5%82%85%E7%A7%91%E6%91%86/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>傅科摆是一个单摆，但是由于地球自转，受到科里奥利力的影响，振动面不断偏转，由傅科于1851年在巴黎制成。</p>
+<span id="more"></span>
+<h2 id="理论推导"><a href="#理论推导" class="headerlink" title="理论推导"></a>理论推导</h2><p>首先建立坐标系，如下图，由于摆角很小，半径很大，一小段圆弧可以近似为某平面上的一段直线运动，不妨设沿r方向。</p>
+<p><strong>现考虑纬度为</strong>$\lambda$<strong>的位置</strong></p>
+<p>设地球自转速度为$\omega_0$</p>
+<p><img src="/2022/09/29/%E5%82%85%E7%A7%91%E6%91%86/1.png" alt="图片1"></p>
+<script type="math/tex; mode=display">
+绳子拉力分力\vec F=-mg\frac{r}{l}(T\approx mg)\\
+惯性离心力\vec F_c=-m\omega^2r\\\\
+科里奥利力\vec F_{cor}=2m\omega\times v(垂直r方向)\\\\
+\omega=\omega sin\lambda\\\\
+v=\dot r\hat r+r\dot \theta \hat \theta\\\\
+所以\vec F_{cor}=m(2\omega\dot r\hat \theta-2\omega r\dot\theta\hat r)</script><p>所以,有</p>
+<script type="math/tex; mode=display">
+m(\ddot r-\dot \theta^2r)=-m(g\frac{r}{l}+\omega^2r+2\omega r\dot\theta)\\\\
+m(2\dot r \dot \theta+r\ddot \theta)=2m\omega\dot r\\</script><p>显然，沿r方向是比较复杂的，我们现在也不关心，所以看第二个式子。</p>
+<p>通过观察，可以想到</p>
+<script type="math/tex; mode=display">
+等式两边同乘r,有2r\dot r \dot \theta+r^2\ddot \theta=2\omega r\dot r</script><p>对于右边</p>
+<script type="math/tex; mode=display">
+\because \frac{d(r^2 \dot\theta)}{dt}=2r\dot r \dot \theta+r^2\ddot \theta\\\\
+\therefore \frac{d(r^2\dot \theta)}{dt}=2\omega r\cdot\frac{dr}{dt}\\\\
+同时积分有，r^2\dot \theta=\omega r^2+C</script><p>不妨假设，$\theta=0$时，有$r=0,\dot\theta=0$,故$C=0$。</p>
+<p>所以,</p>
+<script type="math/tex; mode=display">
+\dot\theta=\omega\\\\
+\omega=\omega_0sin\lambda</script><p>即</p>
+<script type="math/tex; mode=display">
+\dot\theta=\omega_0sin\lambda</script>]]></content>
+      <tags>
+        <tag>力学</tag>
       </tags>
   </entry>
   <entry>
     <title>高中回忆录</title>
     <url>/2022/09/23/%E9%AB%98%E4%B8%AD%E5%9B%9E%E5%BF%86%E5%BD%95/</url>
-    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1960650720&auto=0&height=66"></iframe>（建议搭配音乐食用）
-
+    <content><![CDATA[<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1960650720&auto=0&height=66"></iframe>（建议搭配音乐食用）</p>
 <h2 id="为什么会有这么一篇文章？"><a href="#为什么会有这么一篇文章？" class="headerlink" title="为什么会有这么一篇文章？"></a>为什么会有这么一篇文章？</h2><p>前几天上C语言课，突然想起高中时那段竞赛生涯，很是感慨，由此写下这样一篇文章，算是一个纪念吧。</p>
 <span id="more"></span>
-
 <h2 id="关于SPFA，它死了"><a href="#关于SPFA，它死了" class="headerlink" title="关于SPFA，它死了"></a>关于SPFA，它死了</h2><p>我看着黑板上熟悉的代码，试图回忆起快忘干净的C++知识，第一个出现在脑海中的就是SPFA算法，还得是那句”关于SPFA。它死了“，于是我重新登上洛谷，想找一道SPFA题回忆回忆，结果却找不到这样的算法标签，或许它已经太老了吧~</p>
 <h2 id="NOIP之前"><a href="#NOIP之前" class="headerlink" title="NOIP之前"></a>NOIP之前</h2><p>短暂的一段截留生活，但却忘不了“拖拉机”🤣，还记得刚进教室的时候，看到大家都在背《劝学》甚至《师说》，吓了我一跳，原来可以这么卷的吗。一群完全陌生的面孔中，找到了一个熟悉的人-lwyx，就坐过去，我的后面是shuo哥，第一顿饭和他一起吃的面（高三最后一顿饭时他又提醒了我😊），但是最经典的还得是《一曲相思》，无论是二楼老板的歌声还是数学老师的铃声，每次听到都仿佛回到刚截留那会。</p>
 <h2 id="NOIP生涯"><a href="#NOIP生涯" class="headerlink" title="NOIP生涯"></a>NOIP生涯</h2><p>其实谈不上生涯，只能算是混了个OIer身份。梦开始的地方应该是截留那年五一假期，选择在学校学习C++这样一门完全陌生的课，记得那时候复联4正上映，和日天偷偷看复联😂。之后应该是到了暑假和几个同学们还有高一级的学长学姐去日照培训，那是我第一次进入大学的大门（虽然是个普通大学🐶），路上zjs同学用那个老年机放着《成都》。第一次见到了rqy，看见他在讲台上讲金牌之路，或许是那时候开始对清北有了憧憬吧，不知道zjs同学还记不记得”有人有HDMI转VGA的线吗“这句话。说实话这几天的培训知识上并没有太大的提升，但是心态上我认为是个质变，让我在高一的时候，虽然晚上去学习C++，并不会过于焦虑。</p>
@@ -194,11 +272,11 @@
 <p>之后就到了疫情，谁也没想到，突如其来，然后几个同学接连退出，只剩下了三个人。开学后又要补上疫情时的学业bug，晚上还要学习c++，同时换了新教室，出现了一些新面孔。</p>
 <p>然后暑假接着学，一直到高二开学，我们三个是提前一天到学校学C++，但是谁也没想到，突然接到亲爱的zj老师不再教我们的消息😥。然后就是白天上课晚上学C++的模式，因为换了级部主任，班主任，语文老师，化学老师，这样导致一段时间和老师都不太熟悉。不过那时候最喜欢的就是晚上可以借机查一些数学知识（比如奔驰定理、哥德尔不完备定理），当然会angry bird，某同学还会《春风十里不如你》（绝无嘲讽），那时候最常放的歌应该是《辞九门回忆》，用现在的话，就是摆。然后终于盼到了国庆节，出去培训了七天，和fqr同学住在一起，这个时候更是感觉到了大佬的密集程度，考完试颁奖的时候，他们在那喊”曹队“”李队“，fqr就说”你啥时候上去，我们也喊冯队“，结果一次也没上去😂。但是回来后就全天不上课，仍然住在宿舍，还是能听到一些消息，没有与班级完全隔离，每天早晨伴着海王（不知道那时候是不是已经有这个称呼了）放的音乐起床，老樊和邓紫棋应该是最常听的吧。之后参加CSP，是某新来的历史老师带我们去的，fqr那句”给我倒杯水“永远也忘不掉。</p>
 <p>CSP之后，回到班级一段时间，现在已经忘了当时的感觉了，只记得参加了一次考试，还没考完就又被拉去准备NOIP，但这次只有两个人了，bia233没有来。之后那段日子，应该是挺痛苦的，当时处于看啥啥不会的状态，最后就水了个省二。</p>
-<p>终于回到了教室，老师们”迫不及待“地给我们补课，那绝对是我最认真的时候，或许是竞赛带来的某种”优越感“，总认为这些我一定很快能学会。结果第一次考试椭圆$c^2&#x3D;a^2-b^2$就写成了$c^2&#x3D;a^2+b^2$，但是好像别人还有思路错的，这反而给我了一些信心。之后我也不记得怎么补的了（借口体育课不上之类的），最后是回到了相对让各方满意的水平😥。但是老师总是认为我们这段知识是假生饭，仔细想想好像这段时间学的真是不少。</p>
+<p>终于回到了教室，老师们”迫不及待“地给我们补课，那绝对是我最认真的时候，或许是竞赛带来的某种”优越感“，总认为这些我一定很快能学会。结果第一次考试椭圆$c^2=a^2-b^2$就写成了$c^2=a^2+b^2$，但是好像别人还有思路错的，这反而给我了一些信心。之后我也不记得怎么补的了（借口体育课不上之类的），最后是回到了相对让各方满意的水平😥。但是老师总是认为我们这段知识是假生饭，仔细想想好像这段时间学的真是不少。</p>
 <h2 id="阳信之旅"><a href="#阳信之旅" class="headerlink" title="阳信之旅"></a>阳信之旅</h2><p>到了高二期末完了之后，学校组织了几个人去了阳信培训，在那之前还有一个实验比赛，必须提一下，那是物理老师带我去参加的，和她谈了很多，感受到了她对我的期望，对我是个很大的鼓励。不管怎么说，大约八个人到了阳信，遇见了lws,txy,zjh等人，突然发现原来课本之外有这么多东西，那时候正值东京奥运会，还记得乒乓球混双输了的场景。离开的前一天晚上，第一次”奔放“地唱歌，《白月光与朱砂痣》印象最深。</p>
 <p>之后有去过几次阳信，人比较少。每次都是别人在”托管“，回来的时候正好上到一半。以后到了高三越来越感觉是不是老师在我没来的几天把所有内容讲完了（尤其是语文）。</p>
 <h2 id="高三"><a href="#高三" class="headerlink" title="高三"></a>高三</h2><p>高三是以三门竞赛考试开始的，非常魔幻😂。但说实话，整个高三基本没有太过紧张。虽然觉得复习方式效率不高，但还是一轮一轮地复习完了，中间看了一些书（高妙、高掌），到这时候我才发现前面两年我有多摆。不知道什么时候，体育课上开始打篮球，也算是减轻了一些压力吧。到了下学期，学习更紧张了，几次模考都是按着老师说的，当作高考对待🙈。现在一时竟然记不起下学期都干了什么，或许日子很单调，只能记得一些美好的事情😂，还是说说高考前吧。突然想起来，考前请了某机构来进行考前加油，《你的答案》这首歌是印在脑子里了，“有困难找恩师，有问题找恩师；有困难找恩师，有问题找恩师。”之后，语文老师让我们摸了高高的粽子（高 中），感觉大家还是比较放松的，我同样也很放松（或许是英语听力两次满分给了我信心？或许是准备好了？又或许只是考麻了……），来说说数学吧，还记得考前还没搬教室的时候，我和后桌xc讨论这次数学必难，我当时想的是，入学2019年维纳斯，2022年……三年，对吧，不得对应上吗。结果确实很难，但考的时候没想到这。最后一门生物的准备时间是比较充足的，生物老师也是唯一从截留一直教到毕业的，考生物的时候正好靠窗，考完的那一刻试图像别人说的，眺望远方，但或许是我没有什么艺术细胞，没有什么感觉🤣。</p>
-<h2 id="高考后—USTC"><a href="#高考后—USTC" class="headerlink" title="高考后—USTC"></a>高考后—USTC</h2><p>出成绩后又回到了学校强基了一会，再次吃了食堂的饭，又住进了宿舍，又回到了那个各种回忆掺杂在一起的创客教室，黑板上还是化学老师最后讲的某道有机题，然后拿着<em><strong>“印有PKU的笔”</strong></em>参加PKU的笔试，然而没有考上，有预料到。填志愿的时候，很多人也都说合肥的地理位置，但最后还是选择了中科大，只能说USTC YYDS。</p>
+<h2 id="高考后—USTC"><a href="#高考后—USTC" class="headerlink" title="高考后—USTC"></a>高考后—USTC</h2><p>出成绩后又回到了学校强基了一会，再次吃了食堂的饭，又住进了宿舍，又回到了那个各种回忆掺杂在一起的创客教室，黑板上还是化学老师最后讲的某道有机题，然后拿着<strong><em>“印有PKU的笔”</em></strong>参加PKU的笔试，然而没有考上，有预料到。填志愿的时候，很多人也都说合肥的地理位置，但最后还是选择了中科大，只能说USTC YYDS。</p>
 ]]></content>
       <tags>
         <tag>回忆</tag>
