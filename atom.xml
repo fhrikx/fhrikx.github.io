@@ -3,18 +3,18 @@
   <title>HR Feng&#39;s Blog</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="http://hrfeng,uno/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="http://hrfeng,uno/"/>
   <updated>2025-08-19T08:16:16.588Z</updated>
-  <id>http://example.com/</id>
+  <id>http://hrfeng,uno/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://example.com/2025/08/19/hello-world/"/>
-    <id>http://example.com/2025/08/19/hello-world/</id>
+    <link href="http://hrfeng,uno/2025/08/19/hello-world/"/>
+    <id>http://hrfeng,uno/2025/08/19/hello-world/</id>
     <published>2025-08-19T08:16:16.588Z</published>
     <updated>2025-08-19T08:16:16.588Z</updated>
     
