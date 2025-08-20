@@ -6,10 +6,35 @@
   <link href="http://hrfeng,uno/atom.xml" rel="self"/>
   
   <link href="http://hrfeng,uno/"/>
-  <updated>2025-08-19T08:16:16.588Z</updated>
+  <updated>2025-08-20T12:41:52.657Z</updated>
   <id>http://hrfeng,uno/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>电动力学大纲</title>
+    <link href="http://hrfeng,uno/2025/08/20/%E7%94%B5%E5%8A%A8%E5%8A%9B%E5%AD%A6%E5%A4%A7%E7%BA%B2/"/>
+    <id>http://hrfeng,uno/2025/08/20/%E7%94%B5%E5%8A%A8%E5%8A%9B%E5%AD%A6%E5%A4%A7%E7%BA%B2/</id>
+    <published>2025-08-20T12:41:00.000Z</published>
+    <updated>2025-08-20T12:41:52.657Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;张量初步&quot;&gt;张量初步&lt;/h1&gt;
+&lt;h2 id=&quot;数学记号&quot;&gt;数学记号&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&quot;katex-display&quot;&gt;&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+        
+      
+    
+    
+    
+    
+    <category term="电动力学" scheme="http://hrfeng,uno/tags/%E7%94%B5%E5%8A%A8%E5%8A%9B%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
