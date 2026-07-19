@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+
+// 统计每个标签下的文章数
+const tagCounts = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  }
+}
+
+// 按文章数倒序，相同数量按标签名排
+const tags = [...tagCounts.entries()].sort((a, b) => {
+  if (b[1] !== a[1]) return b[1] - a[1];
+  return a[0].localeCompare(b[0], 'zh-Hans-CN');
+});
+---
+
+<BaseLayout title="标签" description="按标签浏览文章">
+  <section class="container">
+    <header class="page-head">
+      <h1 class="page-head__title">标签</h1>
+      <p class="page-head__count text-faint">{tags.length} 个</p>
+    </header>
+
+    <ul class="tag-cloud">
+      {
+        tags.map(([tag, count]) => (
+          <li class="tag-cloud__item">
+            <a href={`/blog/tags/${encodeURIComponent(tag)}/`} class="tag-cloud__link">
+              <span class="tag-cloud__name">#{tag}</span>
+              <span class="tag-cloud__count text-faint">{count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    {tags.length === 0 && <p class="text-soft">还没有标签。</p>}
+
+    <p class="tag-back">
+      <a href="/blog" class="tag-back__link">← 全部文章</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .page-head__title {
+    margin: 0;
+  }
+
+  .page-head__count {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+  }
+
+  .tag-cloud {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tag-cloud__item {
+    margin: 0;
+  }
+
+  .tag-cloud__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-text-soft);
+    text-decoration: none;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .tag-cloud__link:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .tag-cloud__count {
+    font-size: 0.8rem;
+  }
+
+  .tag-back {
+    margin: var(--space-3) 0 0;
+  }
+
+  .tag-back__link {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-soft);
+    text-decoration: none;
+  }
+
+  .tag-back__link:hover {
+    color: var(--color-accent);
+  }
+</style>

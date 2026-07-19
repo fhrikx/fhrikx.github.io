@@ -1,40 +1,36 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+export const getStaticPaths = (async () => {
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
 
-const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort(
+    (a, b) => a.localeCompare(b, 'zh-Hans-CN'),
+  );
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts
+        .filter((p) => p.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag, posts } = Astro.props;
 ---
 
-<BaseLayout title="文章" description="所有文章列表">
+<BaseLayout title={`#${tag}`} description={`标签「${tag}」下的文章`}>
   <section class="container">
     <header class="page-head">
-      <h1 class="page-head__title">文章</h1>
+      <h1 class="page-head__title">#{tag}</h1>
       <p class="page-head__count text-faint">{posts.length} 篇</p>
     </header>
-
-    {
-      allTags.length > 0 && (
-        <div class="tags">
-          {allTags.map((tag) => (
-            <a
-              href={`/blog/tags/${encodeURIComponent(tag)}/`}
-              class="tags__item"
-            >
-              #{tag}
-            </a>
-          ))}
-        </div>
-      )
-    }
-
-    <p class="tags__all">
-      <a href="/blog/tags/" class="tags__all-link">全部标签 →</a>
-    </p>
 
     <ul class="post-list">
       {
@@ -62,9 +58,11 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
       }
     </ul>
 
-    {
-      posts.length === 0 && <p class="text-soft">还没有文章。</p>
-    }
+    {posts.length === 0 && <p class="text-soft">这个标签下还没有文章。</p>}
+
+    <p class="tag-back">
+      <a href="/blog/tags/" class="tag-back__link">← 全部标签</a>
+    </p>
   </section>
 </BaseLayout>
 
@@ -86,46 +84,6 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
   .page-head__count {
     font-family: var(--font-sans);
     font-size: 0.85rem;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: var(--space-2);
-  }
-
-  .tags__item {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--color-text-soft);
-    text-decoration: none;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    transition:
-      color 0.15s ease,
-      border-color 0.15s ease;
-  }
-
-  .tags__item:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-  }
-
-  .tags__all {
-    margin: 0 0 var(--space-3);
-  }
-
-  .tags__all-link {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--color-text-soft);
-    text-decoration: none;
-  }
-
-  .tags__all-link:hover {
-    color: var(--color-accent);
   }
 
   .post-list {
@@ -172,6 +130,21 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
     font-size: 0.82rem;
     white-space: nowrap;
     flex-shrink: 0;
+  }
+
+  .tag-back {
+    margin: var(--space-3) 0 0;
+  }
+
+  .tag-back__link {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-soft);
+    text-decoration: none;
+  }
+
+  .tag-back__link:hover {
+    color: var(--color-accent);
   }
 
   @media (max-width: 480px) {
