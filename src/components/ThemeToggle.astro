@@ -1,0 +1,97 @@
+---
+---
+
+<button
+  class="theme-toggle"
+  type="button"
+  aria-label="切换深色 / 浅色主题"
+  title="切换主题"
+>
+  <span class="theme-toggle__icon theme-toggle__icon--sun">☀</span>
+  <span class="theme-toggle__icon theme-toggle__icon--moon">☾</span>
+</button>
+
+<script is:inline>
+  (function () {
+    const root = document.documentElement;
+    const btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+
+    const syncIcon = () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      btn.setAttribute('data-is-dark', isDark ? '1' : '0');
+    };
+
+    syncIcon();
+
+    btn.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('theme', next);
+      } catch (e) {
+        /* noop */
+      }
+      syncIcon();
+      // 通知 giscus
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: next } } },
+          'https://giscus.app',
+        );
+      }
+      window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
+    });
+
+    // 跟随系统变化（仅当用户未手动设置时）
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => {
+        if (localStorage.getItem('theme')) return;
+        const next = e.matches ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        syncIcon();
+      });
+  })();
+</script>
+
+<style>
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    cursor: pointer;
+    color: var(--color-text-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    font-family: var(--font-sans);
+    line-height: 1;
+    position: relative;
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-text);
+    border-color: var(--color-border-strong);
+  }
+
+  .theme-toggle__icon {
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  /* 默认（浅色）显示月亮，深色显示太阳 */
+  .theme-toggle[data-is-dark='0'] .theme-toggle__icon--sun {
+    display: none;
+  }
+  .theme-toggle[data-is-dark='1'] .theme-toggle__icon--moon {
+    display: none;
+  }
+</style>

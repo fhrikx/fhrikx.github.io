@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于" description="关于这个站点">
+  <section class="container">
+    <header class="page-head">
+      <h1 class="page-head__title">关于</h1>
+    </header>
+
+    <div class="prose">
+      <p>
+        这是一个用于记录的个人空间。主要内容是物理文献的阅读总结，
+        以及一些零散的想法。
+      </p>
+
+      <p>
+        我尽量让这里保持简单——黑白为主，留白充足，方便阅读和书写。
+        数学公式使用 KaTeX 渲染，文章以 Markdown / MDX 撰写。
+      </p>
+
+      <h2>配色与排版</h2>
+      <ul>
+        <li>主色：黑、白，少量蓝色作为强调</li>
+        <li>正文：衬线字体，优先阅读体验</li>
+        <li>界面：无衬线字体，保持清爽</li>
+        <li>支持深色模式（跟随系统）</li>
+      </ul>
+
+      <h2>技术</h2>
+      <p>
+        基于 <a href="https://astro.build">Astro</a> 构建，
+        静态生成，部署灵活。
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .page-head__title {
+    margin: 0;
+  }
+
+  .prose {
+    padding-bottom: var(--space-5);
+  }
+</style>

@@ -1,0 +1,148 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+---
+
+<BaseLayout title="文章" description="所有文章列表">
+  <section class="container">
+    <header class="page-head">
+      <h1 class="page-head__title">文章</h1>
+      <p class="page-head__count text-faint">{posts.length} 篇</p>
+    </header>
+
+    {
+      allTags.length > 0 && (
+        <div class="tags">
+          {allTags.map((tag) => (
+            <span class="tags__item">#{tag}</span>
+          ))}
+        </div>
+      )
+    }
+
+    <ul class="post-list">
+      {
+        posts.map((post, i) => (
+          <li
+            class="post-list__item"
+            data-reveal
+            style={`--reveal-delay: ${i * 70}`}
+          >
+            <a href={`/blog/${post.id}/`} class="post-list__link">
+              <div class="post-list__main">
+                <span class="post-list__title">{post.data.title}</span>
+                {post.data.description && (
+                  <span class="post-list__desc text-soft">
+                    {post.data.description}
+                  </span>
+                )}
+              </div>
+              <span class="post-list__date text-faint">
+                <FormattedDate date={post.data.pubDate} />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      posts.length === 0 && <p class="text-soft">还没有文章。</p>
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .page-head__title {
+    margin: 0;
+  }
+
+  .page-head__count {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .tags__item {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-text-faint);
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-list__item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-list__link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    text-decoration: none;
+  }
+
+  .post-list__main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .post-list__title {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .post-list__link:hover .post-list__title {
+    color: var(--color-accent);
+  }
+
+  .post-list__desc {
+    font-size: 0.9rem;
+  }
+
+  .post-list__date {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 480px) {
+    .post-list__link {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+    }
+  }
+</style>

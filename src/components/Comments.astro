@@ -1,0 +1,81 @@
+---
+import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
+---
+
+<section class="comments" aria-label="评论">
+  <h2 class="comments__title">评论</h2>
+
+  {
+    GISCUS_ENABLED ? (
+      <script
+        src="https://giscus.app/client.js"
+        data-repo={GISCUS_CONFIG.repo}
+        data-repo-id={GISCUS_CONFIG.repoId}
+        data-category={GISCUS_CONFIG.category}
+        data-category-id={GISCUS_CONFIG.categoryId}
+        data-mapping={GISCUS_CONFIG.mapping}
+        data-strict="0"
+        data-reactions-enabled={GISCUS_CONFIG.reactionsEnabled}
+        data-emit-metadata={GISCUS_CONFIG.emitMetadata}
+        data-input-position={GISCUS_CONFIG.inputPosition}
+        data-theme="light"
+        data-lang={GISCUS_CONFIG.lang}
+        crossorigin="anonymous"
+        async
+      />
+    ) : (
+      <p class="comments__hint text-soft">
+        评论系统尚未配置。在
+        <code>src/giscus.config.ts</code>
+        填入仓库信息后即可启用（详见文件内注释）。
+      </p>
+    )
+  }
+</section>
+
+<script is:inline>
+  (function () {
+    const sendTheme = (theme) => {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe || !iframe.contentWindow) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        'https://giscus.app',
+      );
+    };
+
+    const current = () =>
+      document.documentElement.getAttribute('data-theme') === 'dark'
+        ? 'dark'
+        : 'light';
+
+    // 监听 ThemeToggle 派发的事件
+    window.addEventListener('themechange', (e) => sendTheme(e.detail));
+
+    // giscus iframe 加载完成后同步一次当前主题
+    window.addEventListener('message', (e) => {
+      if (e.origin !== 'https://giscus.app') return;
+      sendTheme(current());
+    });
+  })();
+</script>
+
+<style>
+  .comments {
+    margin-top: var(--space-5);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .comments__title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-soft);
+    margin: 0 0 var(--space-2);
+  }
+
+  .comments__hint {
+    font-size: 0.9rem;
+  }
+</style>

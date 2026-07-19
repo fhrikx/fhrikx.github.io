@@ -1,0 +1,316 @@
+:root {
+  --color-bg: #ffffff;
+  --color-bg-soft: #fafafa;
+  --color-text: #111111;
+  --color-text-soft: #555555;
+  --color-text-faint: #888888;
+  --color-border: #e5e5e5;
+  --color-border-strong: #1a1a1a;
+  --color-accent: #1d4ed8;
+  --color-accent-soft: #2563eb;
+
+  /* 正文：思源宋体（中文）+ Source Serif 4（英文） */
+  --font-serif: 'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
+    'Songti SC', Georgia, serif;
+  /* 标题：思源黑体 Medium（中文）+ Inter（英文） */
+  --font-sans: 'Inter', 'Source Han Sans SC', 'Noto Sans CJK SC',
+    'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  /* 代码：JetBrains Mono */
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', 'Source Code Pro',
+    monospace;
+
+  --max-width: 720px;
+  --max-width-wide: 1040px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  font-feature-settings: 'kern', 'liga';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* flex 列布局：内容不足视口高度时，main 撑开把 footer 推到视口底 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border-strong);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: 1.9rem;
+  margin: 0 0 var(--space-3);
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin: var(--space-4) 0 var(--space-2);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin: var(--space-3) 0 var(--space-1);
+}
+
+p {
+  margin: 0 0 var(--space-2);
+}
+
+ul,
+ol {
+  margin: 0 0 var(--space-2);
+  padding-left: 1.4rem;
+}
+
+li {
+  margin: 0.25rem 0;
+}
+
+blockquote {
+  margin: var(--space-2) 0;
+  padding: 0 var(--space-2);
+  border-left: 3px solid var(--color-text);
+  color: var(--color-text-soft);
+  font-style: italic;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-bg-soft);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: var(--font-mono);
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: var(--space-2);
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-4) 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: var(--space-2) auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-2) 0;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+th {
+  border-bottom: 2px solid var(--color-border-strong);
+  font-weight: 600;
+}
+
+/* KaTeX：数学用 STIX Two Math（装了则用真数学字体），回退 STIX Two Text */
+.katex {
+  font-size: 1.05em;
+  font-family: 'STIX Two Math', 'STIX Two Text', 'Times New Roman', serif !important;
+}
+
+/* 覆盖 KaTeX 自带的分字体类（正文/斜体/粗体），统一走 STIX */
+.katex .mathnormal,
+.katex .mathit,
+.katex .mathbf,
+.katex .mathrm,
+.katex .mathsf,
+.katex .mathtt,
+.katex .mathfrak,
+.katex .mathcal,
+.katex .mathbb {
+  font-family: 'STIX Two Math', 'STIX Two Text', 'Times New Roman', serif !important;
+}
+
+.katex-display {
+  margin: var(--space-2) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-2);
+}
+
+.container-wide {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-2);
+}
+
+.text-soft {
+  color: var(--color-text-soft);
+}
+
+.text-faint {
+  color: var(--color-text-faint);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* 进入视口浮出效果：在 html.js 下隐藏初始态，
+   IntersectionObserver 命中时加 .is-visible。
+   无 JS 时元素照常显示（.js 类未加上）。
+   prefers-reduced-motion 时跳过动画。 */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+  will-change: opacity, transform;
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* 深色主题：data-theme=dark 时生效；
+   未保存偏好时由 BaseHead 脚本依据系统设置自动写入 data-theme */
+:root[data-theme='dark'] {
+  --color-bg: #0b0b0c;
+  --color-bg-soft: #161618;
+  --color-text: #e8e8ea;
+  --color-text-soft: #a8a8ad;
+  --color-text-faint: #6f6f75;
+  --color-border: #26262a;
+  --color-border-strong: #e8e8ea;
+  --color-accent: #6ea8fe;
+  --color-accent-soft: #93c5fd;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* KaTeX 在深色下不变色（公式本就是黑色），
+   但要确保 background 不突兀 */
+:root[data-theme='dark'] .katex {
+  color: var(--color-text);
+}
+
+/* 代码块在深色下用更明显的边框，避免与正文混淆 */
+:root[data-theme='dark'] pre {
+  background: #121214;
+  border-color: var(--color-border);
+}
+
+:root[data-theme='dark'] code {
+  background: #1a1a1d;
+}
+
+/* 行内引用的左侧条在深色下稍微调亮 */
+:root[data-theme='dark'] blockquote {
+  border-left-color: var(--color-text-soft);
+}

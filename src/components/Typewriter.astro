@@ -1,0 +1,181 @@
+---
+/**
+ * 打字机效果。
+ *
+ * - loop=false（默认）：进入页面后打一次，打完光标淡出。
+ * - loop=true：在多句短语间循环"打字 → 停顿 → 删除"。
+ *
+ * SSR 会渲染完整文本，保证 SEO 和无 JS 时可见；
+ * 在 html.js 下用 CSS 隐藏文本直到 JS ready，
+ * 避免 JS 执行前短暂闪现完整文本。
+ *
+ * prefers-reduced-motion: reduce 时跳过动画，直接显示完整文本。
+ */
+interface Props {
+  phrases?: string[];
+  typeSpeed?: number;
+  deleteSpeed?: number;
+  pause?: number;
+  loop?: boolean;
+  startDelay?: number;
+  class?: string;
+  /** 标签元素，默认 span；文章标题可用 h1 */
+  as?: 'span' | 'h1' | 'h2' | 'p';
+}
+
+const {
+  phrases = ['Hello.'],
+  typeSpeed = 70,
+  deleteSpeed = 35,
+  pause = 1800,
+  loop = false,
+  startDelay = 200,
+  class: className,
+  as = 'span',
+} = Astro.props;
+
+const first = phrases[0] ?? '';
+const Tag = as;
+const dataAttrs = {
+  'data-typewriter': '',
+  'data-phrases': JSON.stringify(phrases),
+  'data-type-speed': typeSpeed,
+  'data-delete-speed': deleteSpeed,
+  'data-pause': pause,
+  'data-loop': loop ? '1' : '0',
+  'data-start-delay': startDelay,
+};
+---
+
+<Tag class:list={['typewriter', className]} {...dataAttrs} aria-label={first}>
+  <span class="typewriter__text" data-typewriter-text>{first}</span><span class="typewriter__cursor" aria-hidden="true">▎</span>
+</Tag>
+
+<style>
+  .typewriter {
+    display: inline;
+  }
+
+  .typewriter__cursor {
+    display: inline-block;
+    margin-left: 1px;
+    transform: translateY(-1px);
+    animation: blink 1.1s steps(1) infinite;
+    color: var(--color-accent);
+    font-weight: 400;
+    user-select: none;
+    transition: opacity 0.6s ease;
+  }
+
+  /* 打完后淡出光标（JS 给 .typewriter 加 .is-done） */
+  .typewriter.is-done .typewriter__cursor {
+    opacity: 0;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  /* JS 已加载：在 JS 把文本清空之前，先用 CSS 隐藏文本，
+     避免完整文本短暂闪现。reduced-motion 分支会取消隐藏。 */
+  .js .typewriter:not(.is-ready) .typewriter__text {
+    visibility: hidden;
+  }
+
+  /* 减少动效：显示完整文本，不闪光标，不淡出 */
+  @media (prefers-reduced-motion: reduce) {
+    .typewriter__cursor {
+      animation: none;
+      display: none;
+    }
+    .js .typewriter:not(.is-ready) .typewriter__text {
+      visibility: visible;
+    }
+  }
+
+  /* 无 JS：文本正常可见，光标隐藏 */
+  .no-js .typewriter__cursor {
+    display: none;
+  }
+</style>
+
+<script>
+  (function () {
+    const els = document.querySelectorAll('[data-typewriter]');
+    if (!els.length) return;
+
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    function init(el) {
+      const phrases = JSON.parse(el.dataset.phrases || '[""]');
+      const typeSpeed = Number(el.dataset.typeSpeed || 70);
+      const deleteSpeed = Number(el.dataset.deleteSpeed || 35);
+      const pause = Number(el.dataset.pause || 1800);
+      const loop = el.dataset.loop === '1';
+      const startDelay = Number(el.dataset.startDelay || 200);
+      const textEl = el.querySelector('[data-typewriter-text]');
+
+      if (!textEl || phrases.length === 0) {
+        el.classList.add('is-ready');
+        return;
+      }
+
+      // reduced-motion：保持 SSR 文本，标记 ready（取消隐藏）
+      if (prefersReduced) {
+        textEl.textContent = phrases[0];
+        el.classList.add('is-ready');
+        return;
+      }
+
+      // 有 JS 且允许动画：清空文本 → 取消隐藏 → 开始打字
+      textEl.textContent = '';
+      el.classList.add('is-ready');
+
+      let phraseIdx = 0;
+      let charIdx = 0;
+      let deleting = false;
+
+      function tick() {
+        const current = phrases[phraseIdx];
+        if (deleting) {
+          charIdx--;
+          textEl.textContent = current.slice(0, charIdx);
+          if (charIdx === 0) {
+            deleting = false;
+            phraseIdx = (phraseIdx + 1) % phrases.length;
+            if (phraseIdx === 0 && !loop) {
+              // 单次模式且已回到起点：兜底，正常不会到这里
+              el.classList.add('is-done');
+              return;
+            }
+            setTimeout(tick, 220);
+            return;
+          }
+          setTimeout(tick, deleteSpeed);
+        } else {
+          charIdx++;
+          textEl.textContent = current.slice(0, charIdx);
+          if (charIdx === current.length) {
+            if (loop) {
+              deleting = true;
+              setTimeout(tick, pause);
+              return;
+            } else {
+              // 单次模式：打完即止，光标淡出
+              el.classList.add('is-done');
+              return;
+            }
+          }
+          setTimeout(tick, typeSpeed);
+        }
+      }
+
+      setTimeout(tick, startDelay);
+    }
+
+    els.forEach(init);
+  })();
+</script>
