@@ -34,14 +34,7 @@
         /* noop */
       }
       syncIcon();
-      // 通知 giscus
-      const iframe = document.querySelector('iframe.giscus-frame');
-      if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: next } } },
-          'https://giscus.app',
-        );
-      }
+      // 通知 Comments 组件去同步 giscus 主题（由 Comments 自己发 setConfig URL）
       window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
     });
 
