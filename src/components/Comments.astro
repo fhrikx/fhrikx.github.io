@@ -61,14 +61,18 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
     const currentTheme = () =>
       root.getAttribute('data-theme') === 'dark' ? DARK : LIGHT;
 
-    // 在 giscus client.js 执行前把 data-theme 写成当前主题对应的 URL，
-    // 避免 iframe 用默认主题加载后再切换造成的闪烁。
+    // 首次加载用静态 URL（带 ?v=N），让 CDN 缓存生效。
     const slot = host.querySelector('script');
     if (slot) {
       slot.setAttribute('data-theme', currentTheme());
     }
 
     let iframeReady = false;
+
+    // giscus 已知问题 (#1316): setConfig 传 URL theme 不会触发 CSS 重新加载。
+    // 解决：每次切换时给 URL 加时间戳 cache-bust，强制 giscus 当成新 URL 处理。
+    const bust = (url) => `${url}&t=${Date.now()}`;
+
     const sendTheme = (theme) => {
       const iframe = host.querySelector('iframe.giscus-frame');
       if (!iframe || !iframe.contentWindow) return;
@@ -78,21 +82,20 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
       );
     };
 
-    // 等 giscus iframe 派发 ready 信号后，才发 setConfig 才会生效。
-    // 未 ready 时发的 setConfig 会被丢弃——这是切主题不生效的根因。
     window.addEventListener('message', (e) => {
       if (e.origin !== 'https://giscus.app') return;
       if (e.data?.giscus?.ready) {
         iframeReady = true;
+        // ready 后同步一次当前主题（用原始 URL，首次加载无需 bust）
         sendTheme(currentTheme());
       }
     });
 
-    // 切主题时：iframe 已 ready 就立刻 setConfig，没 ready 就等它 ready
-    //（首次 data-theme 已经设对了，不需要急着发）。
+    // 切主题时：用带时间戳的 URL 强制 giscus 重新加载 CSS
     window.addEventListener('themechange', (e) => {
+      if (!iframeReady) return;
       const next = e.detail === 'dark' ? DARK : LIGHT;
-      if (iframeReady) sendTheme(next);
+      sendTheme(bust(next));
     });
   })();
 </script>
