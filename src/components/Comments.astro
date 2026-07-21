@@ -9,8 +9,8 @@ const themeBase = Astro.site
   ? new URL('/giscus-', Astro.site).toString()
   : '/giscus-';
 // 加版本 query 触发 giscus CDN 重新拉 CSS，避免缓存旧主题
-const GISCUS_LIGHT_THEME = `${themeBase}light.css?v=3`;
-const GISCUS_DARK_THEME = `${themeBase}dark.css?v=3`;
+const GISCUS_LIGHT_THEME = `${themeBase}light.css?v=4`;
+const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
 ---
 
 <section class="comments" aria-label="评论">

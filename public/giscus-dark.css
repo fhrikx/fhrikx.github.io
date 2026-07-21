@@ -57,6 +57,18 @@ main {
   background-color: var(--color-border-default) !important;
 }
 
+/* 输入框：显式给背景和文字色，保证对比度 */
+.gsc-comment-box-textarea,
+.gsc-comment-box-preview,
+.gsc-comment-box-write {
+  background-color: #161618 !important;
+  color: var(--color-fg-default) !important;
+}
+
+.gsc-comment-box-textarea::placeholder {
+  color: var(--color-fg-subtle) !important;
+}
+
 main {
   --font-body:
     'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
