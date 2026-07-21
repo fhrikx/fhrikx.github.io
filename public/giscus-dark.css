@@ -1,218 +1,121 @@
 /*
  * giscus 主题（暗色）—— 对齐博客 dark 主题配色。
+ *
+ * 覆盖 giscus 使用的 CSS 变量（见 giscus/styles/base.css）。
  * 配色取自 src/styles/global.css 的 :root[data-theme='dark']。
  */
 
-:root {
-  --color-bg: #0b0b0c;
-  --color-bg-soft: #161618;
-  --color-bg-emphasis: #161618;
+main {
+  --color-canvas-default: transparent;
+  --color-canvas-overlay: transparent;
+  --color-canvas-inset: #161618;
+  --color-canvas-subtle: #161618;
 
-  --color-border: #26262a;
+  --color-border-default: #26262a;
   --color-border-muted: #26262a;
-  --color-border-strong: #e8e8ea;
 
-  --color-text: #e8e8ea;
-  --color-text-soft: #a8a8ad;
-  --color-text-faint: #6f6f75;
+  --color-fg-default: #e8e8ea;
+  --color-fg-muted: #a8a8ad;
+  --color-fg-subtle: #6f6f75;
 
-  --color-accent: #ff8a4c;
+  --color-accent-fg: #ff8a4c;
   --color-accent-emphasis: #ff8a4c;
-  --color-accent-muted: #ffa873;
+  --color-accent-muted: rgba(255, 138, 76, 0.4);
+  --color-accent-subtle: rgba(255, 138, 76, 0.12);
 
+  --color-btn-text: #e8e8ea;
   --color-btn-bg: #161618;
-  --color-btn-bg-hover: #26262a;
   --color-btn-border: #26262a;
-  --color-btn-primary-bg: #ff8a4c;
-  --color-btn-primary-bg-hover: #ff9a60;
-  --color-btn-primary-border: #ff8a4c;
+  --color-btn-hover-bg: #26262a;
+  --color-btn-hover-border: #e8e8ea;
   --color-btn-primary-text: #0b0b0c;
+  --color-btn-primary-bg: #ff8a4c;
+  --color-btn-primary-border: #ff8a4c;
+  --color-btn-primary-hover-bg: #ff9a60;
+  --color-btn-primary-hover-border: #ff8a4c;
 
-  --color-reaction-bg: rgba(255, 138, 76, 0.12);
-  --color-reaction-hover-bg: rgba(255, 138, 76, 0.2);
-
-  --font-body: 'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
-    'Songti SC', Georgia, serif;
-  --font-ui: 'Inter', 'Source Han Sans SC', 'Noto Sans CJK SC',
-    'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  --color-social-reaction-bg-hover: rgba(255, 138, 76, 0.16);
+  --color-social-reaction-bg-reacted-hover: rgba(255, 138, 76, 0.24);
 }
 
-.giscus,
-.giscus-frame {
+.gsc-main,
+.gsc-comment,
+.gsc-comment-header,
+.gsc-comment-box,
+.gsc-comment-box:not(.gsc-comment-box-is-reply),
+.gsc-comment-box-tabs,
+.gsc-reply-box,
+.gsc-comments,
+.gsc-header,
+.gsc-timeline {
   background: transparent !important;
-  color: var(--color-text) !important;
-  font-family: var(--font-body) !important;
-}
-
-.giscus .giscus-emoji-button,
-.giscus .giscus-comment-header,
-.giscus .giscus-comment-meta,
-.giscus .giscus-editor,
-.giscus .giscus-editor-toolbar,
-.giscus .giscus-input,
-.giscus .giscus-textarea,
-.giscus .giscus-button,
-.giscus .giscus-reactions,
-.giscus .giscus-pagination,
-.giscus .giscus-opinion,
-.giscus .giscus-reply,
-.giscus .giscus-sort,
-.giscus .giscus-count {
-  font-family: var(--font-ui) !important;
-}
-
-.giscus .giscus-comment-content {
-  font-family: var(--font-body) !important;
-  color: var(--color-text) !important;
-}
-
-.giscus a {
-  color: var(--color-accent) !important;
-  text-decoration-color: var(--color-accent) !important;
-}
-
-.giscus a:hover {
-  color: var(--color-accent-emphasis) !important;
-}
-
-.giscus .giscus-comment,
-.giscus .giscus-comment-header {
-  background: transparent !important;
-  border: none !important;
+  border-color: var(--color-border-default) !important;
   box-shadow: none !important;
 }
 
-.giscus .giscus-editor,
-.giscus .giscus-input,
-.giscus .giscus-textarea {
-  background: var(--color-bg-soft) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 4px !important;
-  color: var(--color-text) !important;
+.gsc-tl-line {
+  background-color: var(--color-border-default) !important;
+}
+
+main {
+  --font-body:
+    'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
+    'Songti SC', Georgia, serif;
+  --font-ui:
+    'Inter', 'Source Han Sans SC', 'Noto Sans CJK SC',
+    'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  --font-mono:
+    'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+}
+
+.gsc-comment-content,
+.gsc-comment-box-textarea,
+.gsc-comment-box-preview {
   font-family: var(--font-body) !important;
 }
 
-.giscus .giscus-editor:focus-within,
-.giscus .giscus-input:focus,
-.giscus .giscus-textarea:focus {
-  border-color: var(--color-accent) !important;
+.gsc-comment-header,
+.gsc-comment-author,
+.gsc-comment-meta,
+.gsc-comment-time,
+.gsc-comments-count,
+.gsc-pagination,
+.gsc-comment-box-tabs,
+.gsc-toolbar-item,
+.gsc-comment-box-markdown-hint,
+.gsc-button,
+.gsc-social-reaction-summary-item {
+  font-family: var(--font-ui) !important;
 }
 
-/* markdown 工具栏：默认淡显，hover 时才清晰 */
-.giscus .giscus-editor-toolbar,
-.giscus .giscus-toolbar {
+.gsc-comment-content code,
+.gsc-comment-content pre {
+  font-family: var(--font-mono) !important;
+}
+
+.gsc-button:not(.gsc-button--primary) {
   background: transparent !important;
-  border: none !important;
+  border: 1px solid var(--color-border-default) !important;
+  color: var(--color-fg-muted) !important;
+}
+
+.gsc-button:not(.gsc-button--primary):hover {
+  background: transparent !important;
+  border-color: var(--color-fg-default) !important;
+  color: var(--color-fg-default) !important;
+}
+
+.gsc-comment-box-md-toolbar {
   opacity: 0.55;
   transition: opacity 0.15s ease;
 }
 
-.giscus .giscus-editor:hover .giscus-editor-toolbar,
-.giscus .giscus-editor:focus-within .giscus-editor-toolbar {
+.gsc-comment-box:hover .gsc-comment-box-md-toolbar,
+.gsc-comment-box:focus-within .gsc-comment-box-md-toolbar {
   opacity: 1;
 }
 
-.giscus .giscus-editor-toolbar button,
-.giscus .giscus-toolbar button {
-  background: transparent !important;
-  border: none !important;
-  color: var(--color-text-soft) !important;
-}
-
-.giscus .giscus-editor-toolbar button:hover,
-.giscus .giscus-toolbar button:hover {
-  color: var(--color-accent) !important;
-  background: transparent !important;
-}
-
-/* 顶部 "Sign in" / 提示文字：调淡 */
-.giscus .giscus-direct-reply,
-.giscus .giscus-info,
-.giscus .giscus-hint {
-  color: var(--color-text-faint) !important;
-  font-family: var(--font-ui) !important;
-}
-
-/* 提交按钮：极简文字风，去背景去边框 */
-.giscus .giscus-button {
-  background: transparent !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-soft) !important;
-  border-radius: 3px !important;
-}
-
-.giscus .giscus-button:hover {
-  background: transparent !important;
-  border-color: var(--color-text) !important;
-  color: var(--color-text) !important;
-}
-
-.giscus .giscus-button--primary,
-.giscus .giscus-button-primary {
-  background: var(--color-btn-primary-bg) !important;
-  border-color: var(--color-btn-primary-border) !important;
-  color: var(--color-btn-primary-text) !important;
-}
-
-.giscus .giscus-button--primary:hover,
-.giscus .giscus-button-primary:hover {
-  background: var(--color-btn-primary-bg-hover) !important;
-  border-color: var(--color-btn-primary-border) !important;
-}
-
-.giscus .giscus-reaction {
-  background: transparent !important;
-  border-color: var(--color-border) !important;
-}
-
-.giscus .giscus-reaction:hover {
-  background: var(--color-reaction-hover-bg) !important;
-  border-color: var(--color-accent) !important;
-}
-
-.giscus .giscus-reaction--active,
-.giscus .giscus-reaction[aria-pressed='true'] {
-  background: var(--color-reaction-bg) !important;
-  border-color: var(--color-accent) !important;
-  color: var(--color-accent) !important;
-}
-
-.giscus hr,
-.giscus .giscus-divider {
-  border-color: var(--color-border) !important;
-}
-
-.giscus code,
-.giscus pre {
-  font-family: var(--font-mono) !important;
-  background: var(--color-bg-soft) !important;
-  border-color: var(--color-border) !important;
-}
-
-.giscus blockquote {
-  border-left-color: var(--color-accent) !important;
-  color: var(--color-text-soft) !important;
-}
-
-.giscus .giscus-count,
-.giscus .giscus-meta,
-.giscus .giscus-sort,
-.giscus .giscus-pagination {
-  color: var(--color-text-faint) !important;
-}
-
-.giscus .giscus-comment-author,
-.giscus .giscus-comment-author:hover {
-  color: var(--color-text) !important;
-  text-decoration-color: var(--color-accent) !important;
-}
-
-.giscus .giscus-comment-meta,
-.giscus .giscus-comment-time {
-  color: var(--color-text-faint) !important;
-}
-
-.giscus .giscus-footer a {
-  color: var(--color-text-faint) !important;
+.gsc-footer,
+.gsc-footer a {
+  color: var(--color-fg-subtle) !important;
 }

@@ -1,218 +1,138 @@
 /*
  * giscus 主题（亮色）—— 对齐博客 light 主题配色。
+ *
+ * 正确做法是覆盖 giscus 使用的 CSS 变量（见 giscus/styles/base.css），
+ * 而不是写元素级覆盖——giscus 的元素类名是 .gsc-* 不是 .giscus-*，
+ * 之前写错前缀导致样式完全不生效。
+ *
  * 配色取自 src/styles/global.css 的 :root。
+ * 变量名映射参考 giscus Primer primitives。
  */
 
-:root {
-  --color-bg: #faf8f3;
-  --color-bg-soft: #f3f0e8;
-  --color-bg-emphasis: #f3f0e8;
+main {
+  /* 背景层：让评论卡片透明，融入页面纸底 */
+  --color-canvas-default: transparent;
+  --color-canvas-overlay: transparent;
+  --color-canvas-inset: #f3f0e8;
+  --color-canvas-subtle: #f3f0e8;
 
-  --color-border: #e3ddd2;
+  /* 边框 */
+  --color-border-default: #e3ddd2;
   --color-border-muted: #e3ddd2;
-  --color-border-strong: #1a1814;
 
-  --color-text: #1a1814;
-  --color-text-soft: #55504a;
-  --color-text-faint: #8a847c;
+  /* 文字三阶 */
+  --color-fg-default: #1a1814;
+  --color-fg-muted: #55504a;
+  --color-fg-subtle: #8a847c;
 
-  --color-accent: #ff5e00;
+  /* accent：链接、focus、primary */
+  --color-accent-fg: #ff5e00;
   --color-accent-emphasis: #ff5e00;
-  --color-accent-muted: #ff7a33;
+  --color-accent-muted: rgba(255, 94, 0, 0.4);
+  --color-accent-subtle: rgba(255, 94, 0, 0.08);
 
+  /* 按钮 */
+  --color-btn-text: #1a1814;
   --color-btn-bg: #f3f0e8;
-  --color-btn-bg-hover: #e3ddd2;
   --color-btn-border: #e3ddd2;
-  --color-btn-primary-bg: #ff5e00;
-  --color-btn-primary-bg-hover: #e54f00;
-  --color-btn-primary-border: #ff5e00;
+  --color-btn-hover-bg: #e3ddd2;
+  --color-btn-hover-border: #1a1814;
   --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #ff5e00;
+  --color-btn-primary-border: #ff5e00;
+  --color-btn-primary-hover-bg: #e54f00;
+  --color-btn-primary-hover-border: #ff5e00;
 
-  --color-reaction-bg: rgba(255, 94, 0, 0.08);
-  --color-reaction-hover-bg: rgba(255, 94, 0, 0.16);
-
-  --font-body: 'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
-    'Songti SC', Georgia, serif;
-  --font-ui: 'Inter', 'Source Han Sans SC', 'Noto Sans CJK SC',
-    'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  /* reactions */
+  --color-social-reaction-bg-hover: rgba(255, 94, 0, 0.12);
+  --color-social-reaction-bg-reacted-hover: rgba(255, 94, 0, 0.2);
 }
 
-.giscus,
-.giscus-frame {
+/* 评论容器透明，让页面纸底透出来 */
+.gsc-main,
+.gsc-comment,
+.gsc-comment-header,
+.gsc-comment-box,
+.gsc-comment-box:not(.gsc-comment-box-is-reply),
+.gsc-comment-box-tabs,
+.gsc-reply-box,
+.gsc-comments,
+.gsc-header,
+.gsc-timeline {
   background: transparent !important;
-  color: var(--color-text) !important;
-  font-family: var(--font-body) !important;
-}
-
-.giscus .giscus-emoji-button,
-.giscus .giscus-comment-header,
-.giscus .giscus-comment-meta,
-.giscus .giscus-editor,
-.giscus .giscus-editor-toolbar,
-.giscus .giscus-input,
-.giscus .giscus-textarea,
-.giscus .giscus-button,
-.giscus .giscus-reactions,
-.giscus .giscus-pagination,
-.giscus .giscus-opinion,
-.giscus .giscus-reply,
-.giscus .giscus-sort,
-.giscus .giscus-count {
-  font-family: var(--font-ui) !important;
-}
-
-.giscus .giscus-comment-content {
-  font-family: var(--font-body) !important;
-  color: var(--color-text) !important;
-}
-
-.giscus a {
-  color: var(--color-accent) !important;
-  text-decoration-color: var(--color-accent) !important;
-}
-
-.giscus a:hover {
-  color: var(--color-accent-emphasis) !important;
-}
-
-.giscus .giscus-comment,
-.giscus .giscus-comment-header {
-  background: transparent !important;
-  border: none !important;
+  border-color: var(--color-border-default) !important;
   box-shadow: none !important;
 }
 
-.giscus .giscus-editor,
-.giscus .giscus-input,
-.giscus .giscus-textarea {
-  background: var(--color-bg-soft) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 4px !important;
-  color: var(--color-text) !important;
+/* 时间线竖线调淡 */
+.gsc-tl-line {
+  background-color: var(--color-border-default) !important;
+}
+
+/* 正文用衬线，UI 用无衬线 —— 用 CSS 变量统一传递字体 */
+main {
+  --font-body:
+    'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
+    'Songti SC', Georgia, serif;
+  --font-ui:
+    'Inter', 'Source Han Sans SC', 'Noto Sans CJK SC',
+    'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  --font-mono:
+    'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+}
+
+.gsc-comment-content,
+.gsc-comment-box-textarea,
+.gsc-comment-box-preview {
   font-family: var(--font-body) !important;
 }
 
-.giscus .giscus-editor:focus-within,
-.giscus .giscus-input:focus,
-.giscus .giscus-textarea:focus {
-  border-color: var(--color-accent) !important;
+.gsc-comment-header,
+.gsc-comment-author,
+.gsc-comment-meta,
+.gsc-comment-time,
+.gsc-comments-count,
+.gsc-pagination,
+.gsc-comment-box-tabs,
+.gsc-toolbar-item,
+.gsc-comment-box-markdown-hint,
+.gsc-button,
+.gsc-social-reaction-summary-item {
+  font-family: var(--font-ui) !important;
 }
 
-/* markdown 工具栏：默认淡显，hover 时才清晰 */
-.giscus .giscus-editor-toolbar,
-.giscus .giscus-toolbar {
+/* 代码块字体 */
+.gsc-comment-content code,
+.gsc-comment-content pre {
+  font-family: var(--font-mono) !important;
+}
+
+/* 次要按钮：极简文字风，去背景 */
+.gsc-button:not(.gsc-button--primary) {
   background: transparent !important;
-  border: none !important;
+  border: 1px solid var(--color-border-default) !important;
+  color: var(--color-fg-muted) !important;
+}
+
+.gsc-button:not(.gsc-button--primary):hover {
+  background: transparent !important;
+  border-color: var(--color-fg-default) !important;
+  color: var(--color-fg-default) !important;
+}
+
+/* 工具栏默认淡显，编辑器 hover/focus 时清晰 */
+.gsc-comment-box-md-toolbar {
   opacity: 0.55;
   transition: opacity 0.15s ease;
 }
 
-.giscus .giscus-editor:hover .giscus-editor-toolbar,
-.giscus .giscus-editor:focus-within .giscus-editor-toolbar {
+.gsc-comment-box:hover .gsc-comment-box-md-toolbar,
+.gsc-comment-box:focus-within .gsc-comment-box-md-toolbar {
   opacity: 1;
 }
 
-.giscus .giscus-editor-toolbar button,
-.giscus .giscus-toolbar button {
-  background: transparent !important;
-  border: none !important;
-  color: var(--color-text-soft) !important;
-}
-
-.giscus .giscus-editor-toolbar button:hover,
-.giscus .giscus-toolbar button:hover {
-  color: var(--color-accent) !important;
-  background: transparent !important;
-}
-
-/* 顶部 "Sign in" / 提示文字：调淡 */
-.giscus .giscus-direct-reply,
-.giscus .giscus-info,
-.giscus .giscus-hint {
-  color: var(--color-text-faint) !important;
-  font-family: var(--font-ui) !important;
-}
-
-/* 提交按钮：极简文字风，去背景去边框 */
-.giscus .giscus-button {
-  background: transparent !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-soft) !important;
-  border-radius: 3px !important;
-}
-
-.giscus .giscus-button:hover {
-  background: transparent !important;
-  border-color: var(--color-text) !important;
-  color: var(--color-text) !important;
-}
-
-.giscus .giscus-button--primary,
-.giscus .giscus-button-primary {
-  background: var(--color-btn-primary-bg) !important;
-  border-color: var(--color-btn-primary-border) !important;
-  color: var(--color-btn-primary-text) !important;
-}
-
-.giscus .giscus-button--primary:hover,
-.giscus .giscus-button-primary:hover {
-  background: var(--color-btn-primary-bg-hover) !important;
-  border-color: var(--color-btn-primary-border) !important;
-}
-
-.giscus .giscus-reaction {
-  background: transparent !important;
-  border-color: var(--color-border) !important;
-}
-
-.giscus .giscus-reaction:hover {
-  background: var(--color-reaction-hover-bg) !important;
-  border-color: var(--color-accent) !important;
-}
-
-.giscus .giscus-reaction--active,
-.giscus .giscus-reaction[aria-pressed='true'] {
-  background: var(--color-reaction-bg) !important;
-  border-color: var(--color-accent) !important;
-  color: var(--color-accent) !important;
-}
-
-.giscus hr,
-.giscus .giscus-divider {
-  border-color: var(--color-border) !important;
-}
-
-.giscus code,
-.giscus pre {
-  font-family: var(--font-mono) !important;
-  background: var(--color-bg-soft) !important;
-  border-color: var(--color-border) !important;
-}
-
-.giscus blockquote {
-  border-left-color: var(--color-accent) !important;
-  color: var(--color-text-soft) !important;
-}
-
-.giscus .giscus-count,
-.giscus .giscus-meta,
-.giscus .giscus-sort,
-.giscus .giscus-pagination {
-  color: var(--color-text-faint) !important;
-}
-
-.giscus .giscus-comment-author,
-.giscus .giscus-comment-author:hover {
-  color: var(--color-text) !important;
-  text-decoration-color: var(--color-accent) !important;
-}
-
-.giscus .giscus-comment-meta,
-.giscus .giscus-comment-time {
-  color: var(--color-text-faint) !important;
-}
-
-.giscus .giscus-footer a {
-  color: var(--color-text-faint) !important;
+/* footer "Powered by giscus" 调淡 */
+.gsc-footer,
+.gsc-footer a {
+  color: var(--color-fg-subtle) !important;
 }
