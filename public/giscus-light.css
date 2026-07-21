@@ -86,26 +86,72 @@
 .giscus .giscus-editor,
 .giscus .giscus-input,
 .giscus .giscus-textarea {
-  background: var(--color-bg-soft) !important;
-  border-color: var(--color-border) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  border-radius: 0 !important;
   color: var(--color-text) !important;
+  font-family: var(--font-body) !important;
 }
 
 .giscus .giscus-editor:focus-within,
 .giscus .giscus-input:focus,
 .giscus .giscus-textarea:focus {
-  border-color: var(--color-accent) !important;
+  border-bottom-color: var(--color-accent) !important;
 }
 
+/* 编辑器外层卡片去边框去背景，只留一条底线 */
+.giscus .giscus-editor {
+  padding: 0 0 0.5rem !important;
+}
+
+/* markdown 工具栏：默认淡显，hover 时才清晰 */
+.giscus .giscus-editor-toolbar,
+.giscus .giscus-toolbar {
+  background: transparent !important;
+  border: none !important;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+.giscus .giscus-editor:hover .giscus-editor-toolbar,
+.giscus .giscus-editor:focus-within .giscus-editor-toolbar {
+  opacity: 1;
+}
+
+.giscus .giscus-editor-toolbar button,
+.giscus .giscus-toolbar button {
+  background: transparent !important;
+  border: none !important;
+  color: var(--color-text-soft) !important;
+}
+
+.giscus .giscus-editor-toolbar button:hover,
+.giscus .giscus-toolbar button:hover {
+  color: var(--color-accent) !important;
+  background: transparent !important;
+}
+
+/* 顶部 "Sign in" / 提示文字：调淡 */
+.giscus .giscus-direct-reply,
+.giscus .giscus-info,
+.giscus .giscus-hint {
+  color: var(--color-text-faint) !important;
+  font-family: var(--font-ui) !important;
+}
+
+/* 提交按钮：极简文字风，去背景去边框 */
 .giscus .giscus-button {
-  background: var(--color-btn-bg) !important;
-  border-color: var(--color-btn-border) !important;
-  color: var(--color-text) !important;
+  background: transparent !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-soft) !important;
+  border-radius: 3px !important;
 }
 
 .giscus .giscus-button:hover {
-  background: var(--color-btn-bg-hover) !important;
-  border-color: var(--color-border-strong) !important;
+  background: transparent !important;
+  border-color: var(--color-text) !important;
+  color: var(--color-text) !important;
 }
 
 .giscus .giscus-button--primary,
