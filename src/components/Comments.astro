@@ -3,8 +3,6 @@ import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
 
 // giscus 自定义主题 CSS：一份，从 public/ 提供。
 // 必须用绝对 URL（giscus 跨域 iframe 不支持相对路径）。
-// 切换亮/暗通过 postMessage setConfig 传不同 URL 实现，
-// 但必须等 iframe ready 后发送才生效——见下方 inline script。
 const themeBase = Astro.site
   ? new URL('/giscus-', Astro.site).toString()
   : '/giscus-';
@@ -23,23 +21,24 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
         data-giscus
         data-light-theme={GISCUS_LIGHT_THEME}
         data-dark-theme={GISCUS_DARK_THEME}
+        data-repo={GISCUS_CONFIG.repo}
+        data-repo-id={GISCUS_CONFIG.repoId}
+        data-category={GISCUS_CONFIG.category}
+        data-category-id={GISCUS_CONFIG.categoryId}
+        data-mapping={GISCUS_CONFIG.mapping}
+        data-reactions-enabled={GISCUS_CONFIG.reactionsEnabled}
+        data-emit-metadata={GISCUS_CONFIG.emitMetadata}
+        data-input-position={GISCUS_CONFIG.inputPosition}
+        data-lang={GISCUS_CONFIG.lang}
       >
-        <script
-          src="https://giscus.app/client.js"
-          data-repo={GISCUS_CONFIG.repo}
-          data-repo-id={GISCUS_CONFIG.repoId}
-          data-category={GISCUS_CONFIG.category}
-          data-category-id={GISCUS_CONFIG.categoryId}
-          data-mapping={GISCUS_CONFIG.mapping}
-          data-strict="0"
-          data-reactions-enabled={GISCUS_CONFIG.reactionsEnabled}
-          data-emit-metadata={GISCUS_CONFIG.emitMetadata}
-          data-input-position={GISCUS_CONFIG.inputPosition}
-          data-theme={GISCUS_DARK_THEME}
-          data-lang={GISCUS_CONFIG.lang}
-          crossorigin="anonymous"
-          async
-        />
+        {/* giscus <script> 由下方 inline script 在滚到视口时插入，
+            避免一进页面就加载 iframe 和发起 GitHub API 请求 */}
+        <noscript>
+          <p class="comments__hint text-soft">
+            需要 JavaScript 才能查看评论。
+          </p>
+        </noscript>
+        <p class="comments__placeholder text-faint">评论加载中…</p>
       </div>
     ) : (
       <p class="comments__hint text-soft">
@@ -61,33 +60,63 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
     const currentTheme = () =>
       root.getAttribute('data-theme') === 'dark' ? DARK : LIGHT;
 
-    // 保存原始 giscus <script> 标签的 outerHTML，用于切主题时重建。
-    const originalScript = host.querySelector('script').outerHTML;
+    // 从 host 的 data-* 属性读 giscus 配置，拼成 <script> 标签
+    const cfg = host.dataset;
+    const buildScript = (theme) => {
+      const s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.setAttribute('data-repo', cfg.repo);
+      s.setAttribute('data-repo-id', cfg.repoId);
+      s.setAttribute('data-category', cfg.category);
+      s.setAttribute('data-category-id', cfg.categoryId);
+      s.setAttribute('data-mapping', cfg.mapping);
+      s.setAttribute('data-strict', '0');
+      s.setAttribute('data-reactions-enabled', cfg.reactionsEnabled);
+      s.setAttribute('data-emit-metadata', cfg.emitMetadata);
+      s.setAttribute('data-input-position', cfg.inputPosition);
+      s.setAttribute('data-theme', theme);
+      s.setAttribute('data-lang', cfg.lang);
+      s.crossOrigin = 'anonymous';
+      s.async = true;
+      return s;
+    };
 
-    // 首次加载用静态 URL（带 ?v=N），让 CDN 缓存生效。
-    const slot = host.querySelector('script');
-    if (slot) {
-      slot.setAttribute('data-theme', currentTheme());
+    let loaded = false;
+    const load = (theme) => {
+      if (loaded) return;
+      loaded = true;
+      const placeholder = host.querySelector('.comments__placeholder');
+      if (placeholder) placeholder.remove();
+      host.appendChild(buildScript(theme));
+    };
+
+    // 懒加载：滚到视口附近才插入 giscus script，避免一进页面就发请求
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              load(currentTheme());
+              io.disconnect();
+              break;
+            }
+          }
+        },
+        { rootMargin: '300px 0px' },
+      );
+      io.observe(host);
+    } else {
+      load(currentTheme());
     }
 
-    // giscus setConfig 传 URL theme 不会真正重新加载 CSS（已知问题），
-    // iframe.src 重写也不可靠。最稳的方案：清空容器 + 重新插入 script 标签，
-    // 让 giscus client.js 重新跑一遍，用新 theme 创建新 iframe。
+    // 切主题时重建（首次加载后才有意义）
     const rebuild = (theme) => {
-      host.innerHTML = originalScript;
-      const newScript = host.querySelector('script');
-      newScript.setAttribute('data-theme', theme);
-      // 重新插入 script 节点触发执行（直接 innerHTML 插入的 script 不会执行）
-      const clone = document.createElement('script');
-      for (const attr of newScript.attributes) {
-        clone.setAttribute(attr.name, attr.value);
-      }
-      clone.textContent = newScript.textContent;
-      newScript.replaceWith(clone);
+      host.innerHTML = '';
+      host.appendChild(buildScript(theme));
     };
 
     window.addEventListener('themechange', (e) => {
-      rebuild(e.detail === 'dark' ? DARK : LIGHT);
+      if (loaded) rebuild(e.detail === 'dark' ? DARK : LIGHT);
     });
   })();
 </script>
@@ -107,7 +136,8 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
     margin: 0 0 var(--space-2);
   }
 
-  .comments__hint {
+  .comments__hint,
+  .comments__placeholder {
     font-size: 0.9rem;
   }
 
