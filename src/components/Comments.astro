@@ -1,5 +1,15 @@
 ---
 import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
+
+// giscus 自定义主题 CSS：一份，从 public/ 提供。
+// 必须用绝对 URL（giscus 跨域 iframe 不支持相对路径）。
+// 切换亮/暗通过 postMessage setConfig 传不同 URL 实现，
+// 但必须等 iframe ready 后发送才生效——见下方 inline script。
+const themeBase = Astro.site
+  ? new URL('/giscus-', Astro.site).toString()
+  : '/giscus-';
+const GISCUS_LIGHT_THEME = `${themeBase}light.css`;
+const GISCUS_DARK_THEME = `${themeBase}dark.css`;
 ---
 
 <section class="comments" aria-label="评论">
@@ -7,22 +17,29 @@ import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
 
   {
     GISCUS_ENABLED ? (
-      <script
-        src="https://giscus.app/client.js"
-        data-repo={GISCUS_CONFIG.repo}
-        data-repo-id={GISCUS_CONFIG.repoId}
-        data-category={GISCUS_CONFIG.category}
-        data-category-id={GISCUS_CONFIG.categoryId}
-        data-mapping={GISCUS_CONFIG.mapping}
-        data-strict="0"
-        data-reactions-enabled={GISCUS_CONFIG.reactionsEnabled}
-        data-emit-metadata={GISCUS_CONFIG.emitMetadata}
-        data-input-position={GISCUS_CONFIG.inputPosition}
-        data-theme="light"
-        data-lang={GISCUS_CONFIG.lang}
-        crossorigin="anonymous"
-        async
-      />
+      <div
+        class="comments__giscus"
+        data-giscus
+        data-light-theme={GISCUS_LIGHT_THEME}
+        data-dark-theme={GISCUS_DARK_THEME}
+      >
+        <script
+          src="https://giscus.app/client.js"
+          data-repo={GISCUS_CONFIG.repo}
+          data-repo-id={GISCUS_CONFIG.repoId}
+          data-category={GISCUS_CONFIG.category}
+          data-category-id={GISCUS_CONFIG.categoryId}
+          data-mapping={GISCUS_CONFIG.mapping}
+          data-strict="0"
+          data-reactions-enabled={GISCUS_CONFIG.reactionsEnabled}
+          data-emit-metadata={GISCUS_CONFIG.emitMetadata}
+          data-input-position={GISCUS_CONFIG.inputPosition}
+          data-theme={GISCUS_DARK_THEME}
+          data-lang={GISCUS_CONFIG.lang}
+          crossorigin="anonymous"
+          async
+        />
+      </div>
     ) : (
       <p class="comments__hint text-soft">
         评论系统尚未配置。在
@@ -35,8 +52,24 @@ import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
 
 <script is:inline>
   (function () {
+    const root = document.documentElement;
+    const host = document.querySelector('[data-giscus]');
+    if (!host) return;
+    const LIGHT = host.getAttribute('data-light-theme');
+    const DARK = host.getAttribute('data-dark-theme');
+    const currentTheme = () =>
+      root.getAttribute('data-theme') === 'dark' ? DARK : LIGHT;
+
+    // 在 giscus client.js 执行前把 data-theme 写成当前主题对应的 URL，
+    // 避免 iframe 用默认主题加载后再切换造成的闪烁。
+    const slot = host.querySelector('script');
+    if (slot) {
+      slot.setAttribute('data-theme', currentTheme());
+    }
+
+    let iframeReady = false;
     const sendTheme = (theme) => {
-      const iframe = document.querySelector('iframe.giscus-frame');
+      const iframe = host.querySelector('iframe.giscus-frame');
       if (!iframe || !iframe.contentWindow) return;
       iframe.contentWindow.postMessage(
         { giscus: { setConfig: { theme } } },
@@ -44,18 +77,21 @@ import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
       );
     };
 
-    const current = () =>
-      document.documentElement.getAttribute('data-theme') === 'dark'
-        ? 'dark'
-        : 'light';
-
-    // 监听 ThemeToggle 派发的事件
-    window.addEventListener('themechange', (e) => sendTheme(e.detail));
-
-    // giscus iframe 加载完成后同步一次当前主题
+    // 等 giscus iframe 派发 ready 信号后，才发 setConfig 才会生效。
+    // 未 ready 时发的 setConfig 会被丢弃——这是切主题不生效的根因。
     window.addEventListener('message', (e) => {
       if (e.origin !== 'https://giscus.app') return;
-      sendTheme(current());
+      if (e.data?.giscus?.ready) {
+        iframeReady = true;
+        sendTheme(currentTheme());
+      }
+    });
+
+    // 切主题时：iframe 已 ready 就立刻 setConfig，没 ready 就等它 ready
+    //（首次 data-theme 已经设对了，不需要急着发）。
+    window.addEventListener('themechange', (e) => {
+      const next = e.detail === 'dark' ? DARK : LIGHT;
+      if (iframeReady) sendTheme(next);
     });
   })();
 </script>
@@ -77,5 +113,18 @@ import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
 
   .comments__hint {
     font-size: 0.9rem;
+  }
+
+  .comments__giscus :global(.giscus) {
+    max-width: 100%;
+  }
+
+  .comments__giscus :global(.giscus-frame) {
+    width: 100%;
+    border: none;
+  }
+
+  .comments__giscus :global(.giscus-loading) {
+    opacity: 0.4;
   }
 </style>

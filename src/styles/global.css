@@ -1,13 +1,17 @@
 :root {
-  --color-bg: #ffffff;
-  --color-bg-soft: #fafafa;
-  --color-text: #111111;
-  --color-text-soft: #555555;
-  --color-text-faint: #888888;
-  --color-border: #e5e5e5;
-  --color-border-strong: #1a1a1a;
-  --color-accent: #1d4ed8;
-  --color-accent-soft: #2563eb;
+  --color-bg: #faf8f3;
+  --color-bg-soft: #f3f0e8;
+  --color-text: #1a1814;
+  --color-text-soft: #55504a;
+  --color-text-faint: #8a847c;
+  --color-border: #e3ddd2;
+  --color-border-strong: #1a1814;
+  --color-accent: #ff5e00;
+  --color-accent-soft: #ff7a33;
+
+  /* 手稿坐标纸：网格周期 = 正文行高(1.6)，横线稳穿行间 */
+  --grid-color: rgba(58, 84, 132, 0.05);
+  --grid-size: 1.6rem;
 
   /* 正文：思源宋体（中文）+ Source Serif 4（英文） */
   --font-serif: 'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
@@ -40,10 +44,16 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  /* 手稿坐标纸：暖纸底 + 单层极淡网格，随内容滚动（同一张纸） */
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: 0 0;
   color: var(--color-text);
   font-family: var(--font-serif);
-  line-height: 1.75;
+  line-height: 1.6;
   font-feature-settings: 'kern', 'liga';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -122,7 +132,7 @@ li {
 blockquote {
   margin: var(--space-2) 0;
   padding: 0 var(--space-2);
-  border-left: 3px solid var(--color-text);
+  border-left: 3px solid var(--color-accent);
   color: var(--color-text-soft);
   font-style: italic;
 }
@@ -213,15 +223,13 @@ th {
 }
 
 .container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-2);
+  margin: 0;
+  padding: 0 var(--space-4);
 }
 
 .container-wide {
-  max-width: var(--max-width-wide);
-  margin: 0 auto;
-  padding: 0 var(--space-2);
+  margin: 0;
+  padding: 0 var(--space-4);
 }
 
 .text-soft {
@@ -275,6 +283,71 @@ th {
   }
 }
 
+/* —— 页面标题条：标题左 + 计数/副信息右，底部 hairline ——
+   各列表/标签/关于页统一复用，避免重复定义 */
+.page-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.75rem;
+}
+
+.page-head__title {
+  margin: 0;
+}
+
+.page-head__count {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+}
+
+/* —— 文章列表：日期作为 eyebrow 放在标题上方，行间 hairline —— */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list__item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.post-list__link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  padding: 1rem 0;
+  text-decoration: none;
+}
+
+.post-list__date {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-text-faint);
+  letter-spacing: 0.01em;
+}
+
+.post-list__title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.post-list__link:hover .post-list__title {
+  color: var(--color-accent);
+}
+
+.post-list__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+}
+
 /* 深色主题：data-theme=dark 时生效；
    未保存偏好时由 BaseHead 脚本依据系统设置自动写入 data-theme */
 :root[data-theme='dark'] {
@@ -285,8 +358,10 @@ th {
   --color-text-faint: #6f6f75;
   --color-border: #26262a;
   --color-border-strong: #e8e8ea;
-  --color-accent: #6ea8fe;
-  --color-accent-soft: #93c5fd;
+  --color-accent: #ff8a4c;
+  --color-accent-soft: #ffa873;
+  /* 暗色手稿：极淡青蓝网格，黑底上若隐若现 */
+  --grid-color: rgba(140, 180, 230, 0.04);
   color-scheme: dark;
 }
 

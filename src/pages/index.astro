@@ -9,10 +9,26 @@ import {
   SOCIAL_LINKS,
 } from '../consts';
 
-const posts = (await getCollection('blog'))
+const allPosts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = allPosts.slice(0, 5);
+
+// 热门标签：按文章数倒序，同数按标签名排，取前 8
+const tagCounts = new Map<string, number>();
+for (const post of allPosts) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  }
+}
+const topTags = [...tagCounts.entries()]
+  .sort((a, b) => {
+    if (b[1] !== a[1]) return b[1] - a[1];
+    return a[0].localeCompare(b[0], 'zh-Hans-CN');
+  })
+  .slice(0, 8);
+
+const recentDate = allPosts[0]?.data.pubDate;
 ---
 
 <BaseLayout>
@@ -42,6 +58,45 @@ const posts = (await getCollection('blog'))
           )
         }
       </div>
+
+      {
+        topTags.length > 0 && (
+          <div class="sidebar-block">
+            <h2 class="sidebar__heading">标签</h2>
+            <ul class="sidebar__tags">
+              {topTags.map(([tag, count]) => (
+                <li>
+                  <a
+                    href={`/blog/tags/${encodeURIComponent(tag)}/`}
+                    class="sidebar__tag"
+                  >
+                    <span class="sidebar__tag-name">#{tag}</span>
+                    <span class="sidebar__tag-count">{count}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      <div class="sidebar-block">
+        <h2 class="sidebar__heading">站点</h2>
+        <dl class="sidebar__stats">
+          <div>
+            <dt class="text-faint">文章</dt>
+            <dd>{allPosts.length}</dd>
+          </div>
+          {
+            recentDate && (
+              <div>
+                <dt class="text-faint">最近更新</dt>
+                <dd><FormattedDate date={recentDate} /></dd>
+              </div>
+            )
+          }
+        </dl>
+      </div>
     </aside>
 
     <section class="home__main">
@@ -59,17 +114,15 @@ const posts = (await getCollection('blog'))
               style={`--reveal-delay: ${i * 70}`}
             >
               <a href={`/blog/${post.id}/`} class="post-list__link">
-                <div class="post-list__main">
-                  <span class="post-list__title">{post.data.title}</span>
-                  {post.data.description && (
-                    <span class="post-list__desc text-soft">
-                      {post.data.description}
-                    </span>
-                  )}
-                </div>
                 <span class="post-list__date text-faint">
                   <FormattedDate date={post.data.pubDate} />
                 </span>
+                <span class="post-list__title">{post.data.title}</span>
+                {post.data.description && (
+                  <span class="post-list__desc text-soft">
+                    {post.data.description}
+                  </span>
+                )}
               </a>
             </li>
           ))
@@ -86,11 +139,62 @@ const posts = (await getCollection('blog'))
 <style>
   .home {
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: var(--space-5);
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-4);
     padding-top: var(--space-4);
     padding-bottom: var(--space-3);
     align-items: start;
+  }
+
+  .home__main {
+    border-left: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-left: var(--space-4);
+  }
+
+  /* 时间轴：以日期为锚点。竖线(主轴) + 横线(连接) 同淡橙，
+     节点是空心环叠在轴上，hover 填充实心橙。 */
+  .home__main .post-list__date {
+    position: relative;
+  }
+
+  /* 节点：空心圆环，居中到日期垂直中线，竖线穿过环心 */
+  .home__main .post-list__date::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--space-4));
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
+    transform: translate(-50%, -50%);
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+    z-index: 1;
+  }
+
+  /* 横线：从节点淡出向日期，缩短留气口，渐隐过渡到文字 */
+  .home__main .post-list__date::after {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--space-4));
+    top: 50%;
+    width: calc(var(--space-4) - 0.6rem);
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-accent) 35%, transparent),
+      transparent
+    );
+    transform: translateY(-50%);
+  }
+
+  /* hover：节点填充实心橙，成为焦点 */
+  .home__main .post-list__item:hover .post-list__date::before {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
   }
 
   .home__sidebar {
@@ -147,6 +251,79 @@ const posts = (await getCollection('blog'))
     color: var(--color-accent);
   }
 
+  /* 侧栏各块的小标题：统一为 sans、uppercase、faint 的 eyebrow */
+  .sidebar__heading {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-faint);
+    margin: 0 0 0.5rem;
+  }
+
+  .sidebar__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .sidebar__tag {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--color-text-soft);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .sidebar__tag:hover {
+    color: var(--color-accent);
+    border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+  }
+
+  .sidebar__tag-count {
+    font-size: 0.72rem;
+    color: var(--color-text-faint);
+  }
+
+  .sidebar__stats {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .sidebar__stats > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .sidebar__stats dt {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    margin: 0;
+  }
+
+  .sidebar__stats dd {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
   .main-head {
     display: flex;
     align-items: baseline;
@@ -175,52 +352,6 @@ const posts = (await getCollection('blog'))
     color: var(--color-accent);
   }
 
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .post-list__item {
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .post-list__link {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 0;
-    text-decoration: none;
-  }
-
-  .post-list__main {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .post-list__title {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    font-weight: 500;
-  }
-
-  .post-list__link:hover .post-list__title {
-    color: var(--color-accent);
-  }
-
-  .post-list__desc {
-    font-size: 0.9rem;
-  }
-
-  .post-list__date {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
   @media (max-width: 860px) {
     .home {
       grid-template-columns: 1fr;
@@ -229,13 +360,9 @@ const posts = (await getCollection('blog'))
     .home__sidebar {
       position: static;
     }
-  }
-
-  @media (max-width: 480px) {
-    .post-list__link {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.3rem;
+    .home__main {
+      border-left: none;
+      padding-left: 0;
     }
   }
 </style>

@@ -45,17 +45,15 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
             style={`--reveal-delay: ${i * 70}`}
           >
             <a href={`/blog/${post.id}/`} class="post-list__link">
-              <div class="post-list__main">
-                <span class="post-list__title">{post.data.title}</span>
-                {post.data.description && (
-                  <span class="post-list__desc text-soft">
-                    {post.data.description}
-                  </span>
-                )}
-              </div>
               <span class="post-list__date text-faint">
                 <FormattedDate date={post.data.pubDate} />
               </span>
+              <span class="post-list__title">{post.data.title}</span>
+              {post.data.description && (
+                <span class="post-list__desc text-soft">
+                  {post.data.description}
+                </span>
+              )}
             </a>
           </li>
         ))
@@ -69,25 +67,6 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 </BaseLayout>
 
 <style>
-  .page-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-top: var(--space-4);
-    margin-bottom: var(--space-2);
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.75rem;
-  }
-
-  .page-head__title {
-    margin: 0;
-  }
-
-  .page-head__count {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-  }
-
   .tags {
     display: flex;
     flex-wrap: wrap;
@@ -126,59 +105,5 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 
   .tags__all-link:hover {
     color: var(--color-accent);
-  }
-
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .post-list__item {
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .post-list__link {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 0;
-    text-decoration: none;
-  }
-
-  .post-list__main {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .post-list__title {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    font-weight: 500;
-  }
-
-  .post-list__link:hover .post-list__title {
-    color: var(--color-accent);
-  }
-
-  .post-list__desc {
-    font-size: 0.9rem;
-  }
-
-  .post-list__date {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 480px) {
-    .post-list__link {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.3rem;
-    }
   }
 </style>

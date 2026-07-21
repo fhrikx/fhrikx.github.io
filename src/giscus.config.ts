@@ -13,11 +13,11 @@
  */
 export const GISCUS_CONFIG = {
   // 格式: "用户名/仓库名"，例如 "octocat/blog"
-  repo: '' as string,
-  repoId: '' as string,
+  repo: 'fhrikx/fhrikx.github.io' as string,
+  repoId: 'R_kgDOPf2anA' as string,
   // Discussion 分类，推荐 "Announcements" 或 "General"
   category: 'Announcements',
-  categoryId: '' as string,
+  categoryId: 'DIC_kwDOPf2anM4DBl6M' as string,
   // mapping 决定如何把页面映射到 discussion
   mapping: 'pathname' as const,
   reactionsEnabled: '1',

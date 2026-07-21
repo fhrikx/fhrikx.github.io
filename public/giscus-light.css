@@ -1,0 +1,178 @@
+/*
+ * giscus 主题（亮色）—— 对齐博客 light 主题配色。
+ * 配色取自 src/styles/global.css 的 :root。
+ */
+
+:root {
+  --color-bg: #faf8f3;
+  --color-bg-soft: #f3f0e8;
+  --color-bg-emphasis: #f3f0e8;
+
+  --color-border: #e3ddd2;
+  --color-border-muted: #e3ddd2;
+  --color-border-strong: #1a1814;
+
+  --color-text: #1a1814;
+  --color-text-soft: #55504a;
+  --color-text-faint: #8a847c;
+
+  --color-accent: #ff5e00;
+  --color-accent-emphasis: #ff5e00;
+  --color-accent-muted: #ff7a33;
+
+  --color-btn-bg: #f3f0e8;
+  --color-btn-bg-hover: #e3ddd2;
+  --color-btn-border: #e3ddd2;
+  --color-btn-primary-bg: #ff5e00;
+  --color-btn-primary-bg-hover: #e54f00;
+  --color-btn-primary-border: #ff5e00;
+  --color-btn-primary-text: #ffffff;
+
+  --color-reaction-bg: rgba(255, 94, 0, 0.08);
+  --color-reaction-hover-bg: rgba(255, 94, 0, 0.16);
+
+  --font-body: 'Source Serif 4', 'Source Han Serif SC', 'Noto Serif CJK SC',
+    'Songti SC', Georgia, serif;
+  --font-ui: 'Inter', 'Source Han Sans SC', 'Noto Sans CJK SC',
+    'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+}
+
+.giscus,
+.giscus-frame {
+  background: transparent !important;
+  color: var(--color-text) !important;
+  font-family: var(--font-body) !important;
+}
+
+.giscus .giscus-emoji-button,
+.giscus .giscus-comment-header,
+.giscus .giscus-comment-meta,
+.giscus .giscus-editor,
+.giscus .giscus-editor-toolbar,
+.giscus .giscus-input,
+.giscus .giscus-textarea,
+.giscus .giscus-button,
+.giscus .giscus-reactions,
+.giscus .giscus-pagination,
+.giscus .giscus-opinion,
+.giscus .giscus-reply,
+.giscus .giscus-sort,
+.giscus .giscus-count {
+  font-family: var(--font-ui) !important;
+}
+
+.giscus .giscus-comment-content {
+  font-family: var(--font-body) !important;
+  color: var(--color-text) !important;
+}
+
+.giscus a {
+  color: var(--color-accent) !important;
+  text-decoration-color: var(--color-accent) !important;
+}
+
+.giscus a:hover {
+  color: var(--color-accent-emphasis) !important;
+}
+
+.giscus .giscus-comment,
+.giscus .giscus-comment-header {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.giscus .giscus-editor,
+.giscus .giscus-input,
+.giscus .giscus-textarea {
+  background: var(--color-bg-soft) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+
+.giscus .giscus-editor:focus-within,
+.giscus .giscus-input:focus,
+.giscus .giscus-textarea:focus {
+  border-color: var(--color-accent) !important;
+}
+
+.giscus .giscus-button {
+  background: var(--color-btn-bg) !important;
+  border-color: var(--color-btn-border) !important;
+  color: var(--color-text) !important;
+}
+
+.giscus .giscus-button:hover {
+  background: var(--color-btn-bg-hover) !important;
+  border-color: var(--color-border-strong) !important;
+}
+
+.giscus .giscus-button--primary,
+.giscus .giscus-button-primary {
+  background: var(--color-btn-primary-bg) !important;
+  border-color: var(--color-btn-primary-border) !important;
+  color: var(--color-btn-primary-text) !important;
+}
+
+.giscus .giscus-button--primary:hover,
+.giscus .giscus-button-primary:hover {
+  background: var(--color-btn-primary-bg-hover) !important;
+  border-color: var(--color-btn-primary-border) !important;
+}
+
+.giscus .giscus-reaction {
+  background: transparent !important;
+  border-color: var(--color-border) !important;
+}
+
+.giscus .giscus-reaction:hover {
+  background: var(--color-reaction-hover-bg) !important;
+  border-color: var(--color-accent) !important;
+}
+
+.giscus .giscus-reaction--active,
+.giscus .giscus-reaction[aria-pressed='true'] {
+  background: var(--color-reaction-bg) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+.giscus hr,
+.giscus .giscus-divider {
+  border-color: var(--color-border) !important;
+}
+
+.giscus code,
+.giscus pre {
+  font-family: var(--font-mono) !important;
+  background: var(--color-bg-soft) !important;
+  border-color: var(--color-border) !important;
+}
+
+.giscus blockquote {
+  border-left-color: var(--color-accent) !important;
+  color: var(--color-text-soft) !important;
+}
+
+.giscus .giscus-count,
+.giscus .giscus-meta,
+.giscus .giscus-sort,
+.giscus .giscus-pagination {
+  color: var(--color-text-faint) !important;
+}
+
+.giscus .giscus-comment-author,
+.giscus .giscus-comment-author:hover {
+  color: var(--color-text) !important;
+  text-decoration-color: var(--color-accent) !important;
+}
+
+.giscus .giscus-comment-meta,
+.giscus .giscus-comment-time {
+  color: var(--color-text-faint) !important;
+}
+
+.giscus .giscus-footer a {
+  color: var(--color-text-faint) !important;
+}
