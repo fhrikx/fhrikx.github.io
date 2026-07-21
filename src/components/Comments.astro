@@ -61,31 +61,33 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
     const currentTheme = () =>
       root.getAttribute('data-theme') === 'dark' ? DARK : LIGHT;
 
+    // 保存原始 giscus <script> 标签的 outerHTML，用于切主题时重建。
+    const originalScript = host.querySelector('script').outerHTML;
+
     // 首次加载用静态 URL（带 ?v=N），让 CDN 缓存生效。
     const slot = host.querySelector('script');
     if (slot) {
       slot.setAttribute('data-theme', currentTheme());
     }
 
-    // giscus 已知问题: setConfig 传 URL theme 不会真正重新加载 CSS，
-    // 输入框背景等 CSS 变量驱动的样式不会切换。
-    // 解决：切主题时直接改 iframe src 的 theme= 参数，强制 iframe 重新加载。
-    const reloadWithTheme = (theme) => {
-      const iframe = host.querySelector('iframe.giscus-frame');
-      if (!iframe) return;
-      try {
-        const url = new URL(iframe.src);
-        url.searchParams.set('theme', theme);
-        iframe.src = url.toString();
-      } catch (e) {
-        /* noop */
+    // giscus setConfig 传 URL theme 不会真正重新加载 CSS（已知问题），
+    // iframe.src 重写也不可靠。最稳的方案：清空容器 + 重新插入 script 标签，
+    // 让 giscus client.js 重新跑一遍，用新 theme 创建新 iframe。
+    const rebuild = (theme) => {
+      host.innerHTML = originalScript;
+      const newScript = host.querySelector('script');
+      newScript.setAttribute('data-theme', theme);
+      // 重新插入 script 节点触发执行（直接 innerHTML 插入的 script 不会执行）
+      const clone = document.createElement('script');
+      for (const attr of newScript.attributes) {
+        clone.setAttribute(attr.name, attr.value);
       }
+      clone.textContent = newScript.textContent;
+      newScript.replaceWith(clone);
     };
 
-    // 首次 iframe ready 不需要做事——data-theme 已经设对，iframe 首次加载就用对主题。
-    // 切主题时强制重载 iframe。
     window.addEventListener('themechange', (e) => {
-      reloadWithTheme(e.detail === 'dark' ? DARK : LIGHT);
+      rebuild(e.detail === 'dark' ? DARK : LIGHT);
     });
   })();
 </script>
