@@ -67,35 +67,25 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
       slot.setAttribute('data-theme', currentTheme());
     }
 
-    let iframeReady = false;
-
-    // giscus 已知问题 (#1316): setConfig 传 URL theme 不会触发 CSS 重新加载。
-    // 解决：每次切换时给 URL 加时间戳 cache-bust，强制 giscus 当成新 URL 处理。
-    const bust = (url) => `${url}&t=${Date.now()}`;
-
-    const sendTheme = (theme) => {
+    // giscus 已知问题: setConfig 传 URL theme 不会真正重新加载 CSS，
+    // 输入框背景等 CSS 变量驱动的样式不会切换。
+    // 解决：切主题时直接改 iframe src 的 theme= 参数，强制 iframe 重新加载。
+    const reloadWithTheme = (theme) => {
       const iframe = host.querySelector('iframe.giscus-frame');
-      if (!iframe || !iframe.contentWindow) return;
-      iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme } } },
-        'https://giscus.app',
-      );
+      if (!iframe) return;
+      try {
+        const url = new URL(iframe.src);
+        url.searchParams.set('theme', theme);
+        iframe.src = url.toString();
+      } catch (e) {
+        /* noop */
+      }
     };
 
-    window.addEventListener('message', (e) => {
-      if (e.origin !== 'https://giscus.app') return;
-      if (e.data?.giscus?.ready) {
-        iframeReady = true;
-        // ready 后同步一次当前主题（用原始 URL，首次加载无需 bust）
-        sendTheme(currentTheme());
-      }
-    });
-
-    // 切主题时：用带时间戳的 URL 强制 giscus 重新加载 CSS
+    // 首次 iframe ready 不需要做事——data-theme 已经设对，iframe 首次加载就用对主题。
+    // 切主题时强制重载 iframe。
     window.addEventListener('themechange', (e) => {
-      if (!iframeReady) return;
-      const next = e.detail === 'dark' ? DARK : LIGHT;
-      sendTheme(bust(next));
+      reloadWithTheme(e.detail === 'dark' ? DARK : LIGHT);
     });
   })();
 </script>
