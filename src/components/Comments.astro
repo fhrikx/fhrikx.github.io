@@ -8,8 +8,9 @@ import { GISCUS_CONFIG, GISCUS_ENABLED } from '../giscus.config';
 const themeBase = Astro.site
   ? new URL('/giscus-', Astro.site).toString()
   : '/giscus-';
-const GISCUS_LIGHT_THEME = `${themeBase}light.css`;
-const GISCUS_DARK_THEME = `${themeBase}dark.css`;
+// 加版本 query 触发 giscus CDN 重新拉 CSS，避免缓存旧主题
+const GISCUS_LIGHT_THEME = `${themeBase}light.css?v=2`;
+const GISCUS_DARK_THEME = `${themeBase}dark.css?v=2`;
 ---
 
 <section class="comments" aria-label="评论">

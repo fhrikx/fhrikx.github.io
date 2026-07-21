@@ -86,10 +86,9 @@
 .giscus .giscus-editor,
 .giscus .giscus-input,
 .giscus .giscus-textarea {
-  background: transparent !important;
-  border: none !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  border-radius: 0 !important;
+  background: var(--color-bg-soft) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
   color: var(--color-text) !important;
   font-family: var(--font-body) !important;
 }
@@ -97,12 +96,7 @@
 .giscus .giscus-editor:focus-within,
 .giscus .giscus-input:focus,
 .giscus .giscus-textarea:focus {
-  border-bottom-color: var(--color-accent) !important;
-}
-
-/* 编辑器外层卡片去边框去背景，只留一条底线 */
-.giscus .giscus-editor {
-  padding: 0 0 0.5rem !important;
+  border-color: var(--color-accent) !important;
 }
 
 /* markdown 工具栏：默认淡显，hover 时才清晰 */
