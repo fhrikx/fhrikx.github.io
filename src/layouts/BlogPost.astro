@@ -5,12 +5,20 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Comments from '../components/Comments.astro';
 import Typewriter from '../components/Typewriter.astro';
 
-interface Props {
-  entry: CollectionEntry<'blog'>;
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
 }
 
-const { entry } = Astro.props;
+interface Props {
+  entry: CollectionEntry<'blog'>;
+  headings?: Heading[];
+}
+
+const { entry, headings = [] } = Astro.props;
 const { title, description, pubDate, updatedDate, tags } = entry.data;
+const tocItems = headings.filter((h) => h.depth === 2);
 ---
 
 <BaseLayout title={title} description={description}>
@@ -56,8 +64,28 @@ const { title, description, pubDate, updatedDate, tags } = entry.data;
     </header>
 
     <div class="post__body">
-      <slot />
+      <div class="post__content">
+        <slot />
+      </div>
     </div>
+
+    {
+      tocItems.length >= 3 && (
+        <aside class="post__toc" aria-label="目录">
+          <span class="post__toc-tab" aria-hidden="true">☰ 目录</span>
+          <nav class="post__toc-panel">
+            <p class="post__toc-title">目录</p>
+            <ul>
+              {tocItems.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )
+    }
 
     <Comments />
   </article>
@@ -73,7 +101,6 @@ const { title, description, pubDate, updatedDate, tags } = entry.data;
     margin-bottom: var(--space-4);
   }
 
-  /* 标题用 Typewriter 渲染（display:inline），沿用 h1 排版 */
   .post__title {
     font-family: var(--font-sans);
     font-size: 1.9rem;
@@ -136,9 +163,117 @@ const { title, description, pubDate, updatedDate, tags } = entry.data;
     margin-top: var(--space-4);
   }
 
+  .post__body {
+    display: block;
+  }
+
+  .post__content {
+    min-width: 0;
+  }
+
+  /* 目录：右侧浮动抽屉。默认只露竖排标签，悬停滑出面板 */
+  .post__toc {
+    position: fixed;
+    right: 0;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 20;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+  }
+
+  .post__toc-tab {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    padding: 0.65rem 0.4rem;
+    color: var(--color-text-soft);
+    cursor: pointer;
+    user-select: none;
+    letter-spacing: 0.04em;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .post__toc:hover .post__toc-tab,
+  .post__toc:focus-within .post__toc-tab {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .post__toc-panel {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 0 8px 8px 8px;
+    padding: 0;
+    max-height: 60vh;
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      width 0.25s ease,
+      opacity 0.2s ease,
+      padding 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .post__toc:hover .post__toc-panel,
+  .post__toc:focus-within .post__toc-panel {
+    width: 220px;
+    opacity: 1;
+    padding: var(--space-2);
+    overflow-y: auto;
+  }
+
+  .post__toc-title {
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-faint);
+    margin: 0 0 0.5rem;
+  }
+
+  .post__toc-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .post__toc-panel a {
+    color: var(--color-text-soft);
+    text-decoration: none;
+    display: block;
+    padding-left: 0.5rem;
+    border-left: 1px solid var(--color-border);
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .post__toc-panel a:hover {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+  }
+
   @media (max-width: 640px) {
     .post__title {
       font-size: 1.6rem;
+    }
+    .post__toc:hover .post__toc-panel,
+    .post__toc:focus-within .post__toc-panel {
+      width: 180px;
     }
   }
 </style>

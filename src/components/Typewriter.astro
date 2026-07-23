@@ -101,7 +101,7 @@ const dataAttrs = {
 </style>
 
 <script>
-  (function () {
+  function setupTypewriter() {
     const els = document.querySelectorAll('[data-typewriter]');
     if (!els.length) return;
 
@@ -110,6 +110,10 @@ const dataAttrs = {
     ).matches;
 
     function init(el) {
+      // 已初始化过（View Transitions 复用 DOM 时跳过）
+      if (el.dataset.initialized) return;
+      el.dataset.initialized = '1';
+
       const phrases = JSON.parse(el.dataset.phrases || '[""]');
       const typeSpeed = Number(el.dataset.typeSpeed || 70);
       const deleteSpeed = Number(el.dataset.deleteSpeed || 35);
@@ -177,5 +181,8 @@ const dataAttrs = {
     }
 
     els.forEach(init);
-  })();
+  }
+
+  setupTypewriter();
+  document.addEventListener('astro:page-load', setupTypewriter);
 </script>

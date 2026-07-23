@@ -45,11 +45,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <script is:inline>
   (function () {
     try {
-      document.documentElement.classList.add('js');
+      const html = document.documentElement;
+      html.classList.add('js');
       const saved = localStorage.getItem('theme');
       const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = saved || (sysDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
+      html.setAttribute('data-theme', saved || (sysDark ? 'dark' : 'light'));
     } catch (e) {
       /* noop */
     }

@@ -31,7 +31,7 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
         data-input-position={GISCUS_CONFIG.inputPosition}
         data-lang={GISCUS_CONFIG.lang}
       >
-        {/* giscus <script> 由下方 inline script 在滚到视口时插入，
+        {/* giscus 脚本由下方逻辑在滚到视口时动态注入，
             避免一进页面就加载 iframe 和发起 GitHub API 请求 */}
         <noscript>
           <p class="comments__hint text-soft">
@@ -50,36 +50,38 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
   }
 </section>
 
-<script is:inline>
-  (function () {
+<script>
+  function buildGiscusScript(host, theme) {
+    const cfg = host.dataset;
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.setAttribute('data-repo', cfg.repo);
+    s.setAttribute('data-repo-id', cfg.repoId);
+    s.setAttribute('data-category', cfg.category);
+    s.setAttribute('data-category-id', cfg.categoryId);
+    s.setAttribute('data-mapping', cfg.mapping);
+    s.setAttribute('data-strict', '0');
+    s.setAttribute('data-reactions-enabled', cfg.reactionsEnabled);
+    s.setAttribute('data-emit-metadata', cfg.emitMetadata);
+    s.setAttribute('data-input-position', cfg.inputPosition);
+    s.setAttribute('data-theme', theme);
+    s.setAttribute('data-lang', cfg.lang);
+    s.crossOrigin = 'anonymous';
+    s.async = true;
+    return s;
+  }
+
+  function setupComments() {
     const root = document.documentElement;
     const host = document.querySelector('[data-giscus]');
     if (!host) return;
+    if (host.dataset.bound) return;
+    host.dataset.bound = '1';
+
     const LIGHT = host.getAttribute('data-light-theme');
     const DARK = host.getAttribute('data-dark-theme');
     const currentTheme = () =>
       root.getAttribute('data-theme') === 'dark' ? DARK : LIGHT;
-
-    // 从 host 的 data-* 属性读 giscus 配置，拼成 <script> 标签
-    const cfg = host.dataset;
-    const buildScript = (theme) => {
-      const s = document.createElement('script');
-      s.src = 'https://giscus.app/client.js';
-      s.setAttribute('data-repo', cfg.repo);
-      s.setAttribute('data-repo-id', cfg.repoId);
-      s.setAttribute('data-category', cfg.category);
-      s.setAttribute('data-category-id', cfg.categoryId);
-      s.setAttribute('data-mapping', cfg.mapping);
-      s.setAttribute('data-strict', '0');
-      s.setAttribute('data-reactions-enabled', cfg.reactionsEnabled);
-      s.setAttribute('data-emit-metadata', cfg.emitMetadata);
-      s.setAttribute('data-input-position', cfg.inputPosition);
-      s.setAttribute('data-theme', theme);
-      s.setAttribute('data-lang', cfg.lang);
-      s.crossOrigin = 'anonymous';
-      s.async = true;
-      return s;
-    };
 
     let loaded = false;
     const load = (theme) => {
@@ -87,10 +89,9 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
       loaded = true;
       const placeholder = host.querySelector('.comments__placeholder');
       if (placeholder) placeholder.remove();
-      host.appendChild(buildScript(theme));
+      host.appendChild(buildGiscusScript(host, theme));
     };
 
-    // 懒加载：滚到视口附近才插入 giscus script，避免一进页面就发请求
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(
         (entries) => {
@@ -110,15 +111,27 @@ const GISCUS_DARK_THEME = `${themeBase}dark.css?v=4`;
     }
 
     // 切主题时重建（首次加载后才有意义）
-    const rebuild = (theme) => {
+    host._rebuildGiscus = (theme) => {
+      if (!loaded) return;
       host.innerHTML = '';
-      host.appendChild(buildScript(theme));
+      host.appendChild(buildGiscusScript(host, theme));
     };
+  }
 
+  // 全局 themechange 监听器：只绑一次，转发给当前 host
+  if (!window.__giscusThemeBound) {
+    window.__giscusThemeBound = true;
     window.addEventListener('themechange', (e) => {
-      if (loaded) rebuild(e.detail === 'dark' ? DARK : LIGHT);
+      const host = document.querySelector('[data-giscus]');
+      if (!host || !host._rebuildGiscus) return;
+      const LIGHT = host.getAttribute('data-light-theme');
+      const DARK = host.getAttribute('data-dark-theme');
+      host._rebuildGiscus(e.detail === 'dark' ? DARK : LIGHT);
     });
-  })();
+  }
+
+  setupComments();
+  document.addEventListener('astro:page-load', setupComments);
 </script>
 
 <style>

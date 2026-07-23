@@ -13,6 +13,6 @@ export const NAV_LINKS = [
 
 /** 侧边栏外部链接，留空数组则不渲染整块 */
 export const SOCIAL_LINKS: { label: string; href: string }[] = [
-  // { label: 'GitHub', href: 'https://github.com/your-name' },
-  // { label: 'Email', href: 'mailto:you@example.com' },
+  { label: 'GitHub', href: 'https://github.com/fhrikx' },
+  { label: 'Email', href: 'mailto:fhrikx@hrfeng.uno' },
 ];

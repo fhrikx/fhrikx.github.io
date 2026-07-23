@@ -11,11 +11,13 @@
   <span class="theme-toggle__icon theme-toggle__icon--moon">☾</span>
 </button>
 
-<script is:inline>
-  (function () {
+<script>
+  function setupThemeToggle() {
     const root = document.documentElement;
     const btn = document.querySelector('.theme-toggle');
     if (!btn) return;
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = '1';
 
     const syncIcon = () => {
       const isDark = root.getAttribute('data-theme') === 'dark';
@@ -34,20 +36,29 @@
         /* noop */
       }
       syncIcon();
-      // 通知 Comments 组件去同步 giscus 主题（由 Comments 自己发 setConfig URL）
+      // 通知 Comments 组件去同步 giscus 主题
       window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
     });
+  }
 
-    // 跟随系统变化（仅当用户未手动设置时）
+  setupThemeToggle();
+  document.addEventListener('astro:page-load', setupThemeToggle);
+
+  // 跟随系统变化（仅当用户未手动设置时）。全局只绑一次。
+  if (!window.__themeToggleSysBound) {
+    window.__themeToggleSysBound = true;
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', (e) => {
         if (localStorage.getItem('theme')) return;
         const next = e.matches ? 'dark' : 'light';
-        root.setAttribute('data-theme', next);
-        syncIcon();
+        document.documentElement.setAttribute('data-theme', next);
+        const btn = document.querySelector('.theme-toggle');
+        if (btn) {
+          btn.setAttribute('data-is-dark', next === 'dark' ? '1' : '0');
+        }
       });
-  })();
+  }
 </script>
 
 <style>
