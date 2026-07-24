@@ -72,8 +72,15 @@ const tocItems = headings.filter((h) => h.depth === 2);
     {
       tocItems.length >= 3 && (
         <aside class="post__toc" aria-label="目录">
-          <span class="post__toc-tab" aria-hidden="true">☰ 目录</span>
-          <nav class="post__toc-panel">
+          <button
+            class="post__toc-tab"
+            type="button"
+            aria-expanded="false"
+            aria-controls="post-toc-panel"
+          >
+            ☰ 目录
+          </button>
+          <nav class="post__toc-panel" id="post-toc-panel">
             <p class="post__toc-title">目录</p>
             <ul>
               {tocItems.map((h) => (
@@ -90,6 +97,33 @@ const tocItems = headings.filter((h) => h.depth === 2);
     <Comments />
   </article>
 </BaseLayout>
+
+<script>
+  function setupToc() {
+    const toc = document.querySelector('.post__toc');
+    if (!toc || toc.dataset.bound) return;
+    toc.dataset.bound = '1';
+
+    const tab = toc.querySelector('.post__toc-tab');
+    if (tab) {
+      tab.addEventListener('click', () => {
+        const open = toc.classList.toggle('is-open');
+        tab.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+
+    // 点击目录内链接跳转后自动收起（移动端）
+    toc.querySelectorAll('.post__toc-panel a').forEach((a) => {
+      a.addEventListener('click', () => {
+        toc.classList.remove('is-open');
+        if (tab) tab.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  setupToc();
+  document.addEventListener('astro:page-load', setupToc);
+</script>
 
 <style>
   .post {
@@ -163,6 +197,20 @@ const tocItems = headings.filter((h) => h.depth === 2);
     margin-top: var(--space-4);
   }
 
+  /* 原文下载链接：放在"原文"标题下、PDF 查看器之上，小字柔和 */
+  .post__body :global(.pdf-download) {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    text-decoration: none;
+    color: var(--color-text-soft);
+    display: inline-block;
+    margin: -0.5rem 0 var(--space-2);
+  }
+
+  .post__body :global(.pdf-download):hover {
+    color: var(--color-accent);
+  }
+
   .post__body {
     display: block;
   }
@@ -197,6 +245,7 @@ const tocItems = headings.filter((h) => h.depth === 2);
     cursor: pointer;
     user-select: none;
     letter-spacing: 0.04em;
+    font: inherit;
     transition:
       color 0.15s ease,
       border-color 0.15s ease,
@@ -204,7 +253,8 @@ const tocItems = headings.filter((h) => h.depth === 2);
   }
 
   .post__toc:hover .post__toc-tab,
-  .post__toc:focus-within .post__toc-tab {
+  .post__toc:focus-within .post__toc-tab,
+  .post__toc-tab[aria-expanded='true'] {
     color: var(--color-accent);
     border-color: var(--color-accent);
   }
@@ -226,7 +276,8 @@ const tocItems = headings.filter((h) => h.depth === 2);
   }
 
   .post__toc:hover .post__toc-panel,
-  .post__toc:focus-within .post__toc-panel {
+  .post__toc:focus-within .post__toc-panel,
+  .post__toc.is-open .post__toc-panel {
     width: 220px;
     opacity: 1;
     padding: var(--space-2);

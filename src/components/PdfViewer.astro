@@ -1,0 +1,166 @@
+---
+/**
+ * PDF 嵌入：用浏览器原生查看器渲染，配合下载/新标签回退。
+ *
+ * 设计取舍：
+ *  - 不引 PDF.js / 第三方查看器。桌面端 Chrome/Edge/Firefox/Safari 原生查看器
+ *    已支持选中、搜索、缩放、打印，对论文/讲义足够；零依赖、零额外体积。
+ *  - 移动端（尤其 iOS Safari）内嵌渲染不可靠，<object> 的回退内容会兜底，
+ *    给出"下载"和"新标签打开"两条出路——iOS 原生全屏查看器其实体验很好。
+ *  - 懒加载：loading="lazy"，滚到视口附近才请求 PDF，不拖累首屏。
+ *  - PDF 保持原貌，不随站点深色主题反色（论文图表本就该保持原样）。
+ *
+ * 用法（MDX 文章里）：
+ *   import PdfViewer from '../../components/PdfViewer.astro';
+ *   <PdfViewer src="/papers/example.pdf" title="论文标题" />
+ *
+ * 约定：PDF 放在 public/papers/，引用时用 /papers/xxx.pdf 的绝对路径。
+ */
+interface Props {
+  /** PDF 的 URL，建议用绝对路径如 /papers/foo.pdf */
+  src: string;
+  /** 用于无障碍标题与回退文案，必填 */
+  title: string;
+  /**
+   * 默认显示高度按视口的页数倍数估算：1 ≈ 视口的 72vh（约 2/3 屏，便于阅读又不占满）。
+   * 注意：浏览器原生 PDF 查看器的内部缩放由它自己控制，CSS 无法精确对齐"一页论文"，
+   * 故这里只给一个够用的默认高度；要精确控制请用 height。
+   */
+  pages?: number;
+  /** 显式高度，覆盖默认。如 '600px' / '90vh' */
+  height?: string;
+  /** 是否显示下载链接，默认 true */
+  download?: boolean;
+}
+
+const {
+  src,
+  title,
+  pages = 1,
+  height,
+  download = true,
+} = Astro.props;
+
+/*
+  高度策略：给一个够用的默认高度（约 2/3 视口）。
+  - 浏览器原生 PDF 查看器的内部缩放（100% / 适合页面）由查看器自己控制，
+    CSS 无法精确对齐"一页论文"，所以不追求自适应，直接给 vh。
+  - height 显式传入时直接用，覆盖默认。
+*/
+const aspectStyle = height
+  ? `height: ${height}`
+  : `height: ${pages === 1 ? '150vh' : `${150 * pages}vh`}`;
+---
+
+<figure class="pdf-viewer">
+  <object
+    class="pdf-viewer__object"
+    data={src}
+    type="application/pdf"
+    title={title}
+    loading="lazy"
+    style={aspectStyle}
+  >
+    {/* 浏览器不支持内嵌 PDF（或 iOS Safari 不内嵌）时的回退 */}
+    <div class="pdf-viewer__fallback">
+      <p class="pdf-viewer__fallback-title">{title}</p>
+      <p class="pdf-viewer__fallback-text text-soft">
+        此浏览器无法内嵌预览 PDF。
+      </p>
+      <p class="pdf-viewer__fallback-actions">
+        <a href={src} target="_blank" rel="noopener">在新标签页打开 ↗</a>
+        {download && (
+          <>
+            <span class="pdf-viewer__sep" aria-hidden="true">·</span>
+            <a href={src} download>下载 PDF ↓</a>
+          </>
+        )}
+      </p>
+    </div>
+  </object>
+  {download && (
+    <figcaption class="pdf-viewer__caption">
+      <a href={src} download>↓ 下载《{title}》</a>
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .pdf-viewer {
+    margin: var(--space-3) 0;
+  }
+
+  /*
+    查看器外壳：刻意做"轻"——硬边框改成极淡边 + 柔和投影 + 较大圆角，
+    让 PDF 像浮在纸上而不是被框住，存在感弱、视线集中在论文内容。
+    背景用接近页面底色的中性色，避免米色软底与白底 PDF 之间的强烈色差。
+  */
+  .pdf-viewer__object {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
+
+  /* 深色主题：边框与背景压得更暗，投影改用深色微光，与暗背景融合 */
+  :global([data-theme='dark']) .pdf-viewer__object {
+    border-color: var(--color-border);
+    background: #0e0e10;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 6px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  /* 回退卡片：仅在不内嵌时可见 */
+  .pdf-viewer__fallback {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .pdf-viewer__fallback-title {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .pdf-viewer__fallback-text {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .pdf-viewer__fallback-actions {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .pdf-viewer__sep {
+    color: var(--color-text-faint);
+  }
+
+  .pdf-viewer__caption {
+    margin: var(--space-1) 0 0;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+  }
+
+  .pdf-viewer__caption a {
+    text-decoration: none;
+    color: var(--color-text-soft);
+  }
+
+  .pdf-viewer__caption a:hover {
+    color: var(--color-accent);
+  }
+</style>

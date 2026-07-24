@@ -19,8 +19,9 @@ const { title, description } = Astro.props;
     <ClientRouter />
   </head>
   <body>
+    <a href="#main" class="skip-link">跳到正文</a>
     <Header />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <Footer />
@@ -72,7 +73,9 @@ const { title, description } = Astro.props;
           btn.textContent = '复制';
           btn.setAttribute('aria-label', '复制代码');
           btn.addEventListener('click', async () => {
-            const text = pre.innerText;
+            // 用 <code> 的文本，避免把复制按钮自己的"复制"两字一并取走
+            const code = pre.querySelector('code');
+            const text = code ? code.innerText : pre.innerText;
             try {
               await navigator.clipboard.writeText(text);
             } catch {
