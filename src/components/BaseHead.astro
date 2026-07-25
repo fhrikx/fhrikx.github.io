@@ -8,12 +8,19 @@ interface Props {
   description?: string;
   /** 文章 slug，用于引用该文章专属的 OG 图（/og/{slug}.png） */
   ogImageSlug?: string;
+  /** 传入后该页标记为 article，输出 og:type=article + 文章时间 + JSON-LD */
+  article?: {
+    publishedTime?: Date;
+    modifiedTime?: Date;
+    tags?: string[];
+  };
 }
 
 const {
   title,
   description = SITE_DESCRIPTION,
   ogImageSlug,
+  article,
 } = Astro.props;
 
 const fullTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
@@ -21,6 +28,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = ogImageSlug
   ? new URL(`/og/${ogImageSlug}.png`, Astro.site).toString()
   : new URL('/og-image.png', Astro.site).toString();
+
+// JSON-LD 结构化数据：文章页用 BlogPosting，其余页用 WebSite
+const jsonLd = article
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      datePublished: article.publishedTime?.toISOString(),
+      dateModified: (article.modifiedTime ?? article.publishedTime)?.toISOString(),
+      author: { '@type': 'Person', name: SITE_TITLE },
+      publisher: { '@type': 'Person', name: SITE_TITLE },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL.toString() },
+      url: canonicalURL.toString(),
+      keywords: article.tags?.join(', '),
+      image: ogImage,
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_TITLE,
+      description,
+      url: canonicalURL.toString(),
+    };
+---
 ---
 
 <meta charset="utf-8" />
@@ -39,28 +71,48 @@ const ogImage = ogImageSlug
 />
 
 {/* 字体：思源黑体/宋体(Noto Sans/Serif SC)、Source Serif 4、Inter、JetBrains Mono
-    preconnect 提前建连；display=swap 让文字先用回退字体显示、字体到了再换 */}
+    preconnect 提前建连；display=swap 让文字先用回退字体显示、字体到了再换。
+    异步加载（media=print → onload 切 all）避免字体 CSS 阻塞首屏渲染；
+    字重精简到实际用到的（Inter 补齐 600/700，去掉 JetBrains Mono 500）。 */}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@500&family=Noto+Serif+SC:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@500&family=Noto+Serif+SC:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&display=swap"
+  media="print"
+  onload="this.media='all'"
 />
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@500&family=Noto+Serif+SC:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&display=swap"
+  />
+</noscript>
 
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={article ? 'article' : 'website'} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:alt" content={SITE_TITLE} />
+{article?.publishedTime && (
+  <meta property="article:published_time" content={article.publishedTime.toISOString()} />
+)}
+{article?.modifiedTime && (
+  <meta property="article:modified_time" content={article.modifiedTime.toISOString()} />
+)}
+{article?.tags && article.tags.length > 0 && article.tags.map((tag) => (
+  <meta property="article:tag" content={tag} />
+))}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 <script is:inline>
   (function () {

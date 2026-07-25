@@ -23,8 +23,6 @@
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', 'Source Code Pro',
     monospace;
 
-  --max-width: 720px;
-  --max-width-wide: 1040px;
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -409,6 +407,11 @@ th {
 
 :root[data-theme='light'] {
   color-scheme: light;
+}
+
+/* 深色下选中色用深色文字 + 橙底，对比度优于白字（白字仅 2.34:1，未达 WCAG 1.4.13 的 3:1） */
+:root[data-theme='dark'] ::selection {
+  color: #1a1814;
 }
 
 /* KaTeX 在深色下不变色（公式本就是黑色），

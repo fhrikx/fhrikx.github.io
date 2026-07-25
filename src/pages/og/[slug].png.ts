@@ -14,15 +14,23 @@ export async function getStaticPaths() {
 // 加载 Noto Sans SC（含中文 + 拉丁）构建时从 jsDelivr 拉一次完整 TTF。
 // GitHub Actions 构建环境有外网；本地构建也能拉到。拉取失败回退系统默认，
 // 不阻断构建（仅 OG 图可能缺中文字形，但站点仍可上线）。
+// 模块级缓存：所有文章端点共用一次下载，避免每篇各拉 1.5MB。
+let _fontCache: Buffer | null | undefined;
 async function loadFont(): Promise<Buffer | null> {
+  if (_fontCache !== undefined) return _fontCache;
   try {
     const res = await fetch(
       'https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-sc@latest/chinese-simplified-700-normal.ttf',
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+      _fontCache = null;
+      return null;
+    }
     const ab = await res.arrayBuffer();
-    return Buffer.from(ab);
+    _fontCache = Buffer.from(ab);
+    return _fontCache;
   } catch {
+    _fontCache = null;
     return null;
   }
 }

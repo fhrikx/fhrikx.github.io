@@ -9,15 +9,25 @@ interface Props {
   title?: string;
   description?: string;
   ogImageSlug?: string;
+  article?: {
+    publishedTime?: Date;
+    modifiedTime?: Date;
+    tags?: string[];
+  };
 }
 
-const { title, description, ogImageSlug } = Astro.props;
+const { title, description, ogImageSlug, article } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <BaseHead title={title} description={description} ogImageSlug={ogImageSlug} />
+    <BaseHead
+      title={title}
+      description={description}
+      ogImageSlug={ogImageSlug}
+      article={article}
+    />
     <ClientRouter />
   </head>
   <body>

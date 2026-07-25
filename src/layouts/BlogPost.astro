@@ -30,7 +30,12 @@ const tocItems = headings.filter((h) => h.depth === 2);
 const readMin = formatReadingTime(entry.body ?? '');
 ---
 
-<BaseLayout title={title} description={description} ogImageSlug={entry.id}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImageSlug={entry.id}
+  article={{ publishedTime: pubDate, modifiedTime: updatedDate, tags }}
+>
   <article class="post container">
     <header class="post__header">
       <Typewriter
