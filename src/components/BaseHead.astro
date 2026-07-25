@@ -6,23 +6,37 @@ import 'katex/dist/katex.min.css';
 interface Props {
   title?: string;
   description?: string;
+  /** 文章 slug，用于引用该文章专属的 OG 图（/og/{slug}.png） */
+  ogImageSlug?: string;
 }
 
 const {
   title,
   description = SITE_DESCRIPTION,
+  ogImageSlug,
 } = Astro.props;
 
 const fullTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og-image.png', Astro.site).toString();
+const ogImage = ogImageSlug
+  ? new URL(`/og/${ogImageSlug}.png`, Astro.site).toString()
+  : new URL('/og-image.png', Astro.site).toString();
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="canonical" href={canonicalURL} />
 <link rel="sitemap" href="/sitemap-index.xml" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={SITE_TITLE}
+  href={new URL('/rss.xml', Astro.site).toString()}
+/>
 
 {/* 字体：思源黑体/宋体(Noto Sans/Serif SC)、Source Serif 4、Inter、JetBrains Mono
     preconnect 提前建连；display=swap 让文字先用回退字体显示、字体到了再换 */}

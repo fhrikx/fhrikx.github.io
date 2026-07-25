@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Typewriter from '../components/Typewriter.astro';
+import { formatReadingTime } from '../utils/reading';
 import {
   SITE_TITLE,
   SITE_DESCRIPTION,
@@ -116,6 +117,8 @@ const recentDate = allPosts[0]?.data.pubDate;
               <a href={`/blog/${post.id}/`} class="post-list__link">
                 <span class="post-list__date text-faint">
                   <FormattedDate date={post.data.pubDate} />
+                  <span class="post-list__sep">·</span>
+                  {formatReadingTime(post.body ?? '')}
                 </span>
                 <span class="post-list__title">{post.data.title}</span>
                 {post.data.description && (

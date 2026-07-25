@@ -3,17 +3,33 @@ import { getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  // 只为非草稿文章生成页面，避免草稿被公开发布
+  const all = await getCollection('blog');
+  const posts = all
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return posts.map((post, i) => ({
     params: { slug: post.id },
-    props: { post },
+    props: {
+      post,
+      // 按 pubDate 倒序排列：上一篇是更新的（i-1），下一篇是更旧的（i+1）
+      prev:
+        i > 0
+          ? { slug: posts[i - 1].id, title: posts[i - 1].data.title }
+          : null,
+      next:
+        i < posts.length - 1
+          ? { slug: posts[i + 1].id, title: posts[i + 1].data.title }
+          : null,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<BlogPost entry={post} headings={headings}>
+<BlogPost entry={post} headings={headings} prev={prev} next={next}>
   <Content />
 </BlogPost>

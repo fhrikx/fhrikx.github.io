@@ -3,19 +3,21 @@ import { ClientRouter } from 'astro:transitions';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { CF_ANALYTICS_ENABLED, CF_ANALYTICS_TOKEN } from '../analytics.config';
 
 interface Props {
   title?: string;
   description?: string;
+  ogImageSlug?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImageSlug } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} ogImageSlug={ogImageSlug} />
     <ClientRouter />
   </head>
   <body>
@@ -67,6 +69,17 @@ const { title, description } = Astro.props;
         const blocks = document.querySelectorAll('pre.astro-code');
         blocks.forEach((pre) => {
           if (pre.querySelector('.astro-code__copy')) return;
+
+          // 语言标签：Shiki 把语言写进 class="astro-code language-xx"
+          const lang = pre.className.match(/language-([a-z0-9+-]+)/i)?.[1];
+          if (lang) {
+            const label = document.createElement('span');
+            label.className = 'astro-code__lang';
+            label.textContent = lang;
+            label.setAttribute('aria-hidden', 'true');
+            pre.appendChild(label);
+          }
+
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'astro-code__copy';
@@ -101,5 +114,15 @@ const { title, description } = Astro.props;
       onReady();
       document.addEventListener('astro:page-load', onReady);
     </script>
+
+    {
+      CF_ANALYTICS_ENABLED && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
+        />
+      )
+    }
   </body>
 </html>

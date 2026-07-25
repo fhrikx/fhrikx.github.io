@@ -369,6 +369,11 @@ th {
   letter-spacing: 0.01em;
 }
 
+.post-list__sep {
+  margin: 0 0.35rem;
+  opacity: 0.6;
+}
+
 .post-list__title {
   font-family: var(--font-sans);
   font-size: 1.05rem;
@@ -430,6 +435,20 @@ th {
 /* 代码块复制按钮：hover 才显，点击短暂变 "已复制" */
 pre.astro-code {
   position: relative;
+}
+/* 代码块语言标签：左上角小字 */
+.astro-code__lang {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--color-text-faint);
+  user-select: none;
+  pointer-events: none;
 }
 .astro-code__copy {
   position: absolute;
