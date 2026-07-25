@@ -38,6 +38,8 @@ html {
   font-size: 18px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* 禁止顶部过度滚动回弹：否则滚动到顶时会露出 body 的网格背景（表现为导航条上方"三道虚线"） */
+  overscroll-behavior-y: none;
 }
 
 body {
