@@ -40,6 +40,8 @@ html {
   -webkit-text-size-adjust: 100%;
   /* 禁止顶部过度滚动回弹：否则滚动到顶时会露出 body 的网格背景（表现为导航条上方"三道虚线"） */
   overscroll-behavior-y: none;
+  /* 兜底：过度滚动区域显示纯色而非 body 网格（不同浏览器对 overscroll-behavior 支持不一） */
+  background-color: var(--color-bg);
 }
 
 body {
