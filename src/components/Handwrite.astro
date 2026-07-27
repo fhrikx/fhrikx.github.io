@@ -14,31 +14,29 @@ const { delay = 400, class: className } = Astro.props;
   aria-label="FHR's Blog"
   role="img"
 >
-  <defs>
-    <style>
-      .hw-path {
-        fill: none;
-        stroke: var(--color-text, #1a1814);
-        stroke-width: 2.4;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-dasharray: 700;
-        stroke-dashoffset: 700;
-        animation-fill-mode: forwards;
-      }
-      .hw-fill {
-        opacity: 0;
-        animation-fill-mode: forwards;
-      }
-      @keyframes hw-draw { to { stroke-dashoffset: 0; } }
-      @keyframes hw-fade { to { opacity: 1; } }
+  <style is:global>
+    .hw-path {
+      fill: none;
+      stroke: var(--color-text, #1a1814);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 700;
+      stroke-dashoffset: 700;
+      animation-fill-mode: forwards;
+    }
+    .hw-fill {
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+    @keyframes hw-draw { to { stroke-dashoffset: 0; } }
+    @keyframes hw-fade { to { opacity: 1; } }
 
-      @media (prefers-reduced-motion: reduce) {
-        .hw-path { animation: none; stroke-dashoffset: 0; display: none; }
-        .hw-fill { opacity: 1; animation: none; }
-      }
-    </style>
-  </defs>
+    @media (prefers-reduced-motion: reduce) {
+      .hw-path { animation: none; stroke-dashoffset: 0; display: none; }
+      .hw-fill { opacity: 1; animation: none; }
+    }
+  </style>
 
   <!-- 填充层：stroke 画完后淡入 -->
   <text x="4" y="62" class="hw-fill"
