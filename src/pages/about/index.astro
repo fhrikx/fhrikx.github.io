@@ -9,7 +9,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </header>
 
     <div class="prose">
-      <p>
+      <p class="prose__lede">
         这是一个用于记录的个人空间。主要内容是物理文献的阅读总结，
         以及一些零散的想法。
       </p>
@@ -20,11 +20,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </p>
 
       <h2>配色与排版</h2>
-      <ul>
-        <li>主色：暖纸底 + 黑墨文字，橙色作为强调</li>
-        <li>正文：衬线字体，优先阅读体验</li>
-        <li>界面：无衬线字体，保持清爽</li>
-        <li>支持深色模式（跟随系统）</li>
+      <ul class="notebook-list">
+        <li><span class="notebook-list__mark">—</span>主色：暖纸底 + 黑墨文字，橙色作为强调</li>
+        <li><span class="notebook-list__mark">—</span>正文：衬线字体，优先阅读体验</li>
+        <li><span class="notebook-list__mark">—</span>界面：无衬线字体，保持清爽</li>
+        <li><span class="notebook-list__mark">—</span>支持深色模式（跟随系统）</li>
       </ul>
 
       <h2>技术</h2>
@@ -39,5 +39,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <style>
   .prose {
     padding-bottom: var(--space-5);
+  }
+
+  /* 首段导语：更像手稿的引言 */
+  .prose__lede {
+    font-size: 1.05rem;
+    color: var(--color-text-soft);
+    border-left: 2px solid var(--color-accent);
+    padding-left: var(--space-2);
+    margin-left: -0.25rem;
+  }
+
+  /* 实验记录本式清单：短横标记代替圆点 */
+  .notebook-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .notebook-list li {
+    margin: 0.35rem 0;
+  }
+
+  .notebook-list__mark {
+    display: inline-block;
+    width: 1.2rem;
+    color: var(--color-text-faint);
+    font-family: var(--font-sans);
   }
 </style>

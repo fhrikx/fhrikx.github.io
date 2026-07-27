@@ -52,6 +52,10 @@ const posts = (await getCollection('blog'))
     font-weight: 600;
     margin: 0 0 0.5rem;
     color: var(--color-text-faint);
+    /* 手绘大数字：像笔记本上随手划的页码 */
+    opacity: 0.35;
+    letter-spacing: 0.06em;
+    user-select: none;
   }
 
   .not-found__recent {

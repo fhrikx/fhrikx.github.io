@@ -109,4 +109,22 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
   .tags__all-link:hover {
     color: var(--color-accent);
   }
+
+  /* 笔记本左侧页边距竖线 */
+  .container {
+    position: relative;
+  }
+
+  @media (min-width: 641px) {
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-left: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
+      pointer-events: none;
+    }
+  }
 </style>

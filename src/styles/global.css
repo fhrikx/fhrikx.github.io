@@ -167,10 +167,18 @@ li {
 
 blockquote {
   margin: var(--space-2) 0;
-  padding: 0 var(--space-2);
-  border-left: 3px solid var(--color-accent);
+  padding: var(--space-2);
+  border-left: none;
   color: var(--color-text-soft);
   font-style: italic;
+  /* 从别的本子上撕下来夹进去的引用条 */
+  background: color-mix(in srgb, var(--color-bg-soft) 50%, transparent);
+  border-radius: 2px;
+  transform: rotate(0.08deg);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+  position: relative;
 }
 
 code {
@@ -183,13 +191,39 @@ code {
 
 pre {
   font-family: var(--font-mono);
-  background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  padding: var(--space-2);
-  overflow-x: auto;
   font-size: 0.85rem;
   line-height: 1.55;
+  overflow-x: auto;
+
+  /* 贴纸片：像从别的本子上撕下来夹进实验记录里的代码片段 */
+  background: color-mix(in srgb, var(--color-bg) 88%, var(--color-accent));
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: var(--space-2);
+  /* 纸片浮起：不是 CSS 的硬阴影，而是纸纤维之间的微弱空气层 */
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.03);
+  transform: rotate(0.15deg);
+  /* 微转的角度不影响复制按钮和语言标签的可读性 */
+  position: relative;
+}
+
+/* 小纸片的胶带——左上角一小条半透米色方块，仅大屏可见 */
+@media (min-width: 641px) {
+  pre::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 1rem;
+    width: 2.2rem;
+    height: 0.7rem;
+    background: color-mix(in srgb, var(--color-bg-soft) 60%, transparent);
+    border-radius: 1px;
+    transform: rotate(-2deg);
+    z-index: 1;
+    pointer-events: none;
+  }
 }
 
 pre code {
@@ -201,7 +235,15 @@ pre code {
 
 hr {
   border: none;
-  border-top: 1px solid var(--color-border);
+  height: 1px;
+  /* 手绘横线：两端渐隐的钢笔笔画，不是机械边框 */
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border) 12%,
+    var(--color-border) 88%,
+    transparent
+  );
   margin: var(--space-4) 0;
 }
 
@@ -210,6 +252,21 @@ img {
   height: auto;
   display: block;
   margin: var(--space-2) auto;
+
+  /* 像从别的纸上剪下来贴进实验记录里的照片：边缘微翘、纸片浮起 */
+  border-radius: 2px;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+  transform: rotate(-0.1deg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+img:hover {
+  transform: rotate(0deg);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 table {
@@ -218,6 +275,8 @@ table {
   margin: var(--space-2) 0;
   font-family: var(--font-sans);
   font-size: 0.92rem;
+  /* 实验记录本里的手绘表格：微转 */
+  transform: rotate(0.08deg);
 }
 
 th,
@@ -424,19 +483,19 @@ th {
   color: var(--color-text);
 }
 
-/* 代码块在深色下用更明显的边框，避免与正文混淆 */
+/* 代码块在深色下用更明显的边框和阴影，像暗室里的笔记纸片 */
 :root[data-theme='dark'] pre {
   background: #121214;
   border-color: var(--color-border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 :root[data-theme='dark'] code {
   background: #1a1a1d;
 }
 
-/* 行内引用的左侧条在深色下稍微调亮 */
 :root[data-theme='dark'] blockquote {
-  border-left-color: var(--color-text-soft);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 /* 代码块复制按钮：hover 才显，点击短暂变 "已复制" */

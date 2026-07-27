@@ -129,6 +129,14 @@ const readMin = formatReadingTime(entry.body ?? '');
       )
     }
 
+    <!-- 橡皮章：归档标记，像实验记录整理完盖上去的 -->
+    <div class="post__stamp" aria-hidden="true">
+      <span class="post__stamp-ring">归档</span>
+      <span class="post__stamp-date">
+        <FormattedDate date={pubDate} />
+      </span>
+    </div>
+
     <Comments />
   </article>
 </BaseLayout>
@@ -275,6 +283,44 @@ const readMin = formatReadingTime(entry.body ?? '');
 
   a.post__nav-link:hover .post__nav-title {
     color: var(--color-accent);
+  }
+
+  /* 橡皮章："归档"标记，像实验记录整理完用橡皮章盖上去的 */
+  .post__stamp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: var(--space-4) auto 0;
+    padding: var(--space-3) 0;
+    border-top: 1px dashed color-mix(in srgb, var(--color-border) 60%, transparent);
+    opacity: 0.5;
+    user-select: none;
+  }
+
+  .post__stamp-ring {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.4rem;
+    height: 3.4rem;
+    border: 1.5px solid var(--color-text-faint);
+    border-radius: 50%;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-text-faint);
+    text-transform: uppercase;
+    transform: rotate(-8deg);
+  }
+
+  .post__stamp-date {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-faint);
+    transform: rotate(-3deg);
   }
 
   /* 原文下载链接：放在"原文"标题下、PDF 查看器之上，小字柔和 */

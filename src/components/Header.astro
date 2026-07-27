@@ -37,6 +37,22 @@ const isActive = (href: string) =>
     z-index: 10;
   }
 
+  /* 墨迹洇开：header 下方极淡的阴影扩散，像墨水在纸纤维里微微渗透 */
+  .site-header::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-text-soft) 4%, transparent),
+      transparent
+    );
+    pointer-events: none;
+  }
+
   .site-header__inner {
     display: flex;
     align-items: center;
