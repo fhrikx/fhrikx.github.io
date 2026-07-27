@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import Handwrite from '../components/Handwrite.astro';
 import Typewriter from '../components/Typewriter.astro';
 import { formatReadingTime } from '../utils/reading';
 import {
@@ -36,10 +37,9 @@ const recentDate = allPosts[0]?.data.pubDate;
   <div class="home container-wide">
     <aside class="home__sidebar">
       <div class="sidebar-brand">
-        <Typewriter
-            phrases={[SITE_TITLE]}
-            typeSpeed={150}
-            startDelay={400}
+        <Handwrite
+            text={SITE_TITLE}
+            delay={400}
             as="h1"
             class="sidebar__title"
           />

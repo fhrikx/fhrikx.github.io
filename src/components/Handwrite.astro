@@ -1,0 +1,118 @@
+---
+export interface Props {
+  text: string;
+  class?: string;
+  delay?: number;
+  as?: 'span' | 'h1' | 'h2' | 'p';
+}
+
+const { text, class: className, delay = 300, as: Tag = 'span' } = Astro.props;
+---
+
+<Tag
+  class:list={['handwrite', className]}
+  style={`--hw-delay: ${delay}ms`}
+  aria-label={text}
+>
+  <span class="handwrite__text">{text}</span>
+  <!-- 笔尖：墨迹前锋的洇开点 -->
+  <span class="handwrite__nib" aria-hidden="true"></span>
+</Tag>
+
+<style>
+  .handwrite {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    /* 墨迹洇开：在书写边缘有微弱扩散 */
+  }
+
+  .handwrite__text {
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-weight: 500;
+    color: var(--color-text);
+    /* clip-path 做书写揭示：从左到右划开 */
+    clip-path: inset(0 100% 0 0);
+    animation: hw-reveal 1.8s ease-in-out forwards;
+    animation-delay: var(--hw-delay, 300ms);
+  }
+
+  .handwrite__nib {
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    width: 4px;
+    height: 1.2em;
+    transform: translateY(-55%);
+    /* 笔尖墨迹洇开：中心浓，四周淡 */
+    background: radial-gradient(
+      ellipse at center,
+      var(--color-text-soft) 0%,
+      color-mix(in srgb, var(--color-accent) 18%, transparent) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0.75;
+    animation: hw-nib-move 1.8s ease-in-out forwards;
+    animation-delay: var(--hw-delay, 300ms);
+  }
+
+  /* 书写结束时笔尖墨迹收干 */
+  .handwrite__nib::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 60%,
+      color-mix(in srgb, var(--color-accent) 10%, transparent) 100%
+    );
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  @keyframes hw-reveal {
+    0% {
+      clip-path: inset(0 100% 0 0);
+    }
+    60% {
+      clip-path: inset(0 55% 0 0);
+    }
+    85% {
+      clip-path: inset(0 12% 0 0);
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes hw-nib-move {
+    0% {
+      left: -2px;
+      opacity: 0.75;
+    }
+    60% {
+      left: 45%;
+      opacity: 0.7;
+    }
+    85% {
+      left: 88%;
+      opacity: 0.55;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .handwrite__text {
+      clip-path: none;
+      animation: none;
+    }
+    .handwrite__nib {
+      display: none;
+    }
+  }
+</style>
