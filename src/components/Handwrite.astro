@@ -7,46 +7,15 @@ export interface Props {
 }
 
 const { text, class: className, delay = 400, as: Tag = 'span' } = Astro.props;
-
-const narrow = new Set(['i','l','t','f','r','j','\'','.',',',' ','I','L','T','F','J']);
-const wide = new Set(['m','w','M','W']);
-let dashLen = 0;
-for (const ch of text) {
-  if (wide.has(ch)) dashLen += 65;
-  else if (narrow.has(ch)) dashLen += 35;
-  else dashLen += 50;
-}
-const vw = Math.max(120, text.length * 30 + 16);
+const id = `hw-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <Tag
   class:list={['handwrite', className]}
-  style={`--hw-dash: ${dashLen}; --hw-delay: ${delay}ms`}
   aria-label={text}
 >
-  <svg
-    viewBox={`0 0 ${vw} 66`}
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    class="handwrite__svg"
-  >
-    <!-- 描边层：stroke-dashoffset 动画模拟笔顺 -->
-    <text
-      x="2"
-      y="52"
-      class="handwrite__ink"
-      stroke-dasharray={dashLen}
-      stroke-dashoffset={dashLen}
-    >{text}</text>
-    <!-- 填充层：描边完成后淡入，盖掉描边的轮廓感 -->
-    <text
-      x="2"
-      y="52"
-      class="handwrite__fill"
-    >{text}</text>
-  </svg>
-  <!-- 笔尖 -->
-  <span class="handwrite__nib" aria-hidden="true"></span>
+  <canvas class="handwrite__canvas" id={id} aria-hidden="true"></canvas>
+  <span class="handwrite__fallback">{text}</span>
 </Tag>
 
 <style>
@@ -54,95 +23,192 @@ const vw = Math.max(120, text.length * 30 + 16);
     display: block;
     position: relative;
     line-height: 1.2;
+    min-height: 1.2em;
   }
-
-  .handwrite__svg {
+  .handwrite__canvas {
     display: block;
     width: 100%;
-    max-width: 320px;
+    max-width: 380px;
     height: auto;
-    overflow: visible;
   }
-
-  .handwrite__ink {
+  .handwrite__fallback {
     font-family: 'Caveat', 'Segoe Script', cursive;
-    font-size: 48px;
+    font-size: 2.2rem;
     font-weight: 500;
-    letter-spacing: 1px;
-    fill: none;
-    stroke: var(--color-text);
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    animation: hw-draw 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: var(--hw-delay, 400ms);
+    color: var(--color-text);
   }
+  .js .handwrite__fallback { display: none; }
+  .no-js .handwrite__canvas { display: none; }
 
-  .handwrite__fill {
-    font-family: 'Caveat', 'Segoe Script', cursive;
-    font-size: 48px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    fill: var(--color-text);
-    opacity: 0;
-    animation: hw-fill 0.3s ease forwards;
-    animation-delay: calc(var(--hw-delay, 400ms) + 2s + 100ms);
-  }
-
-  .handwrite__nib {
-    position: absolute;
-    top: 50%;
-    width: 6px;
-    height: 1.3em;
-    transform: translateY(-55%) translateX(-50%);
+  /* 笔尖：JS 动态创建，跟随书写进度移动 */
+  :global(.handwrite__nib) {
+    position: fixed;
+    width: 5px;
+    height: 18px;
+    margin-left: -2px;
+    margin-top: -9px;
     pointer-events: none;
-    opacity: 0;
-    animation: hw-nib-travel 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: var(--hw-delay, 400ms);
-  }
-
-  .handwrite__nib::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
+    z-index: 100;
+    opacity: 0.8;
+    border-radius: 50%;
     background: radial-gradient(
-      ellipse 3px 60% at 50% 50%,
-      var(--color-text) 0%,
-      color-mix(in srgb, var(--color-accent) 20%, transparent) 35%,
+      ellipse 2px 60% at 50% 50%,
+      var(--color-accent) 0%,
+      color-mix(in srgb, var(--color-accent) 30%, transparent) 40%,
       transparent 70%
     );
-    border-radius: 50%;
-  }
-
-  @keyframes hw-draw {
-    to { stroke-dashoffset: 0; }
-  }
-
-  @keyframes hw-fill {
-    to { opacity: 1; }
-  }
-
-  @keyframes hw-nib-travel {
-    0%   { left: 0%;   opacity: 0.8; }
-    7%   { left: 7%;   opacity: 0.75; }
-    15%  { left: 15%;  opacity: 0.8; }
-    22%  { left: 22%;  opacity: 0.7; }
-    30%  { left: 30%;  opacity: 0.75; }
-    38%  { left: 38%;  opacity: 0.7; }
-    46%  { left: 46%;  opacity: 0.75; }
-    54%  { left: 54%;  opacity: 0.7; }
-    62%  { left: 62%;  opacity: 0.7; }
-    70%  { left: 70%;  opacity: 0.65; }
-    78%  { left: 78%;  opacity: 0.6; }
-    86%  { left: 86%;  opacity: 0.5; }
-    94%  { left: 94%;  opacity: 0.4; }
-    100% { left: 100%; opacity: 0; }
+    box-shadow: 0 0 4px color-mix(in srgb, var(--color-accent) 25%, transparent);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .handwrite__ink { display: none; }
-    .handwrite__fill { opacity: 1; animation: none; }
-    .handwrite__nib { display: none; }
+    .handwrite__canvas { display: none; }
+    .handwrite__fallback { display: block !important; }
+    :global(.handwrite__nib) { display: none !important; }
   }
 </style>
+
+<script>
+  function setupHandwrite() {
+    document.querySelectorAll('.handwrite__canvas').forEach((c) => init(c as HTMLCanvasElement));
+  }
+
+  function init(canvas: HTMLCanvasElement) {
+    const label = canvas.closest('.handwrite')?.getAttribute('aria-label') ?? '';
+    if (!label) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ((canvas as any).__hwDone) return;
+    (canvas as any).__hwDone = true;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const W = 640;
+    const H = 110;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = '100%';
+    canvas.style.height = 'auto';
+
+    const ctx = canvas.getContext('2d')!;
+    ctx.scale(dpr, dpr);
+
+    const style = getComputedStyle(document.documentElement);
+    const ink = style.getPropertyValue('--color-text').trim() || '#1a1814';
+    const accent = style.getPropertyValue('--color-accent').trim() || '#ff5e00';
+
+    // 离屏：完整文字
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const octx = off.getContext('2d')!;
+    octx.font = "500 52px 'Caveat', 'Segoe Script', cursive";
+    octx.fillStyle = ink;
+    octx.textBaseline = 'alphabetic';
+    octx.fillText(label, 4, 66);
+
+    ctx.font = "500 52px 'Caveat', 'Segoe Script', cursive";
+    ctx.fillStyle = ink;
+    ctx.textBaseline = 'alphabetic';
+
+    // 预计算每列像素的高度信息
+    const imgData = octx.getImageData(0, 0, W, H);
+    const cols: { top: number; bot: number }[] = [];
+    for (let x = 0; x < W; x++) {
+      let top = H, bot = 0;
+      for (let y = 0; y < H; y++) {
+        const a = imgData.data[(y * W + x) * 4 + 3];
+        if (a > 20) { if (y < top) top = y; if (y > bot) bot = y; }
+      }
+      cols.push({ top, bot: bot > top ? bot : top + 1 });
+    }
+
+    let col = 0;
+    const startTime = performance.now();
+    const DELAY = 400;
+    const DURATION = 2400;
+
+    // 笔尖：canvas 外的 DOM 元素
+    const nib = document.createElement('span');
+    nib.className = 'handwrite__nib';
+    nib.setAttribute('aria-hidden', 'true');
+    canvas.parentElement!.appendChild(nib);
+
+    const canvasRect = () => canvas.getBoundingClientRect();
+
+    function draw(now: number) {
+      const elapsed = now - startTime;
+      if (elapsed < DELAY) { requestAnimationFrame(draw); return; }
+
+      const t = Math.min((elapsed - DELAY) / DURATION, 1);
+      // 书写节奏：起笔蓄墨慢 → 中间匀速 → 快写完时微提笔加速
+      const eased = t < 0.06 ? t * 0.4 :
+                     t < 0.88 ? 0.024 + (t - 0.06) * 1.02 :
+                     0.86 + (t - 0.88) * 1.8;
+      const target = Math.min(Math.floor(W * eased), W - 1);
+      if (target <= col) { requestAnimationFrame(draw); return; }
+
+      // 逐列增量画出像素
+      for (let x = col + 1; x <= target; x++) {
+        const c = cols[x];
+        if (c.bot <= c.top) continue;
+        // 复制这一列的像素
+        const sliceW = 1;
+        ctx.drawImage(off, x, c.top, sliceW, c.bot - c.top, x, c.top, sliceW, c.bot - c.top);
+      }
+
+      // 最后一笔：墨迹微洇——复制笔尖附近几列时加轻微模糊
+      if (target - col > 3 && target < W - 2) {
+        // 刚画完的最后一列加微弱 blur（通过半透明重绘模拟墨洇）
+        ctx.save();
+        ctx.globalAlpha = 0.15;
+        ctx.filter = 'blur(2px)';
+        const bx = Math.max(0, target - 3);
+        ctx.drawImage(off, bx, 0, 6, H, bx, 0, 6, H);
+        ctx.filter = 'none';
+        ctx.restore();
+        // 重新画回清晰像素（只在洇开区域）
+        for (let x = Math.max(0, target - 3); x <= target; x++) {
+          const c = cols[x];
+          if (c.bot <= c.top) continue;
+          ctx.drawImage(off, x, c.top, 1, c.bot - c.top, x, c.top, 1, c.bot - c.top);
+        }
+      }
+
+      col = target;
+
+      // 更新笔尖位置
+      const rect = canvasRect();
+      const frac = col / W;
+      const px = rect.left + rect.width * frac;
+      const colData = cols[col];
+      const midY = (colData.top + colData.bot) / 2;
+      const py = rect.top + (midY / H) * rect.height;
+      nib.style.left = px + 'px';
+      nib.style.top = py + 'px';
+
+      if (col >= W - 1) {
+        // 写完，最终 fillText 保证干净
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillText(label, 4, 66);
+        nib.style.opacity = '0';
+        nib.style.transition = 'opacity 0.3s ease';
+        return;
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  if (document.fonts) {
+    document.fonts.ready.then(() => setupHandwrite());
+  } else {
+    setTimeout(setupHandwrite, 600);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    if (document.fonts) {
+      document.fonts.ready.then(() => setupHandwrite());
+    } else {
+      setTimeout(setupHandwrite, 600);
+    }
+  });
+</script>
