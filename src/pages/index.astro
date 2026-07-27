@@ -36,7 +36,13 @@ const recentDate = allPosts[0]?.data.pubDate;
   <div class="home container-wide">
     <aside class="home__sidebar">
       <div class="sidebar-brand">
-        <h1 class="sidebar__title">{SITE_TITLE}</h1>
+        <Typewriter
+            phrases={[SITE_TITLE]}
+            typeSpeed={150}
+            startDelay={400}
+            as="h1"
+            class="sidebar__title"
+          />
         <p class="sidebar__tagline">
           <Typewriter
             phrases={[SITE_DESCRIPTION]}
@@ -211,16 +217,27 @@ const recentDate = allPosts[0]?.data.pubDate;
     padding-bottom: var(--space-2);
   }
 
-  .sidebar__title {
-    font-family: var(--font-sans);
-    font-size: 1.65rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+  :global(.sidebar__title) {
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
     margin: 0 0 0.4rem;
     line-height: 1.2;
   }
 
-  .sidebar__title::after {
+  :global(.sidebar__title) :global(.typewriter__text) {
+    font-family: inherit;
+  }
+
+  :global(.sidebar__title) :global(.typewriter__cursor) {
+    font-family: var(--font-sans);
+    font-size: 1.6rem;
+    color: var(--color-accent);
+    margin-left: 2px;
+  }
+
+  :global(.sidebar__title)::after {
     content: '';
     display: block;
     width: 2rem;
@@ -416,10 +433,10 @@ const recentDate = allPosts[0]?.data.pubDate;
       border-left: none;
       padding-left: 0;
     }
-    .sidebar__title {
-      font-size: 1.35rem;
+    :global(.sidebar__title) {
+      font-size: 1.8rem;
     }
-    .sidebar__title::after {
+    :global(.sidebar__title)::after {
       margin-top: 0.5rem;
     }
   }
