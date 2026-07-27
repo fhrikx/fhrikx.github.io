@@ -9,92 +9,63 @@ const { delay = 400, class: className } = Astro.props;
 
 <svg
   class:list={['handwrite', className]}
-  viewBox="0 0 460 82"
+  viewBox="0 0 440 76"
   xmlns="http://www.w3.org/2000/svg"
   aria-label="FHR's Blog"
   role="img"
+  style={`--hw-delay: ${delay}ms`}
 >
-  <style is:global>
-    .hw-path {
-      fill: none;
-      stroke: var(--color-text, #1a1814);
-      stroke-width: 2.4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 700;
-      stroke-dashoffset: 700;
-      animation-fill-mode: forwards;
-    }
-    .hw-fill {
-      opacity: 0;
-      animation-fill-mode: forwards;
-    }
-    @keyframes hw-draw { to { stroke-dashoffset: 0; } }
-    @keyframes hw-fade { to { opacity: 1; } }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hw-path { animation: none; stroke-dashoffset: 0; display: none; }
-      .hw-fill { opacity: 1; animation: none; }
-    }
-  </style>
-
-  <!-- 填充层：stroke 画完后淡入 -->
-  <text x="4" y="62" class="hw-fill"
-    style="font-family:'Caveat','Segoe Script',cursive;font-size:54px;font-weight:500;fill:var(--color-text,#1a1814);animation:hw-fade 0.4s ease 6.5s forwards">
-    FHR's Blog
-  </text>
-
-  <!-- 描边层：逐笔画出 -->
-  <!-- F -->
-  <path class="hw-path" d="M 12,68 C 11,58 10,48 11,38 L 11,14 C 12,10 13,8 15,7"
-    style="animation: hw-draw 0.65s cubic-bezier(0.33,0,0.2,1) 0.4s forwards"/>
-  <path class="hw-path" d="M 16,8 L 42,9"
-    style="animation: hw-draw 0.25s cubic-bezier(0.33,0,0.2,1) 1.0s forwards"/>
-  <path class="hw-path" d="M 14,38 L 34,38"
-    style="animation: hw-draw 0.2s cubic-bezier(0.33,0,0.2,1) 1.2s forwards"/>
-
-  <!-- H -->
-  <path class="hw-path" d="M 58,68 L 58,12"
-    style="animation: hw-draw 0.55s cubic-bezier(0.33,0,0.2,1) 1.4s forwards"/>
-  <path class="hw-path" d="M 58,40 L 89,40"
-    style="animation: hw-draw 0.3s cubic-bezier(0.33,0,0.2,1) 1.85s forwards"/>
-  <path class="hw-path" d="M 90,68 L 90,12"
-    style="animation: hw-draw 0.55s cubic-bezier(0.33,0,0.2,1) 2.0s forwards"/>
-
-  <!-- R -->
-  <path class="hw-path" d="M 108,68 L 108,14 C 108,8 110,6 114,5"
-    style="animation: hw-draw 0.55s cubic-bezier(0.33,0,0.2,1) 2.4s forwards"/>
-  <path class="hw-path" d="M 114,5 L 126,5 C 138,5 140,20 132,28 L 124,33"
-    style="animation: hw-draw 0.55s cubic-bezier(0.33,0,0.2,1) 2.75s forwards"/>
-  <path class="hw-path" d="M 128,44 L 142,68"
-    style="animation: hw-draw 0.4s cubic-bezier(0.33,0,0.2,1) 3.1s forwards"/>
-
-  <!-- ' -->
-  <path class="hw-path" d="M 148,8 C 146,12 147,16 150,18"
-    style="animation: hw-draw 0.2s cubic-bezier(0.33,0,0.2,1) 3.3s forwards"/>
-
-  <!-- s (cursive) -->
-  <path class="hw-path" d="M 178,58 C 176,52 174,56 172,60 C 168,70 160,54 164,50 C 168,46 178,46 182,48 C 190,50 188,58 178,58"
-    style="animation: hw-draw 0.65s cubic-bezier(0.33,0,0.2,1) 3.5s forwards"/>
-
-  <!-- B -->
-  <path class="hw-path" d="M 196,68 L 196,12"
-    style="animation: hw-draw 0.55s cubic-bezier(0.33,0,0.2,1) 4.0s forwards"/>
-  <path class="hw-path" d="M 196,12 C 196,6 202,5 208,5 L 220,5 C 234,5 236,22 226,27 C 236,32 236,50 222,52 L 204,52 C 200,54 197,56 196,62 L 196,68"
-    style="animation: hw-draw 0.7s cubic-bezier(0.33,0,0.2,1) 4.3s forwards"/>
-
-  <!-- l -->
-  <path class="hw-path" d="M 238,68 C 238,48 237,32 238,20 C 240,10 246,6 250,8"
-    style="animation: hw-draw 0.45s cubic-bezier(0.33,0,0.2,1) 4.8s forwards"/>
-
-  <!-- o -->
-  <path class="hw-path" d="M 272,58 C 272,70 282,68 288,62 C 296,54 296,42 288,38 C 280,34 272,42 272,58 Z"
-    style="animation: hw-draw 0.55s cubic-bezier(0.33,0,0.2,1) 5.1s forwards"/>
-
-  <!-- g -->
-  <path class="hw-path" d="M 314,38 C 322,32 334,38 328,48 C 324,56 314,46 306,46 C 296,46 292,54 294,64 C 296,74 304,80 310,74 C 316,68 312,58 310,58"
-    style="animation: hw-draw 0.7s cubic-bezier(0.33,0,0.2,1) 5.4s forwards"/>
+  <!-- 描边：stroke-dashoffset 沿真实字形轮廓画出 -->
+  <text
+    x="4" y="63"
+    class="hw-stroke"
+    stroke-dasharray="800"
+    stroke-dashoffset="800"
+  >FHR's Blog</text>
+  <!-- 填充：描边结束后淡入 -->
+  <text
+    x="4" y="63"
+    class="hw-fill"
+  >FHR's Blog</text>
 </svg>
+
+<style is:global>
+  .hw-stroke {
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 58px;
+    font-weight: 500;
+    fill: none;
+    stroke: var(--color-text, #1a1814);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: hw-draw 3s cubic-bezier(0.3,0,0.3,1) forwards;
+    animation-delay: var(--hw-delay, 400ms);
+  }
+
+  .hw-fill {
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 58px;
+    font-weight: 500;
+    fill: var(--color-text, #1a1814);
+    opacity: 0;
+    animation: hw-fade 0.5s ease forwards;
+    animation-delay: calc(var(--hw-delay, 400ms) + 3.5s);
+  }
+
+  @keyframes hw-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes hw-fade {
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hw-stroke { display: none; }
+    .hw-fill { opacity: 1; animation: none; }
+  }
+</style>
 
 <style>
   .handwrite {
@@ -106,6 +77,8 @@ const { delay = 400, class: className } = Astro.props;
   }
 
   @media (max-width: 640px) {
-    .handwrite { max-width: 280px; }
+    .handwrite {
+      max-width: 280px;
+    }
   }
 </style>
