@@ -9,111 +9,76 @@ const { delay = 400, class: className } = Astro.props;
 
 <svg
   class:list={['handwrite', className]}
-  viewBox="0 0 460 80"
+  viewBox="0 0 460 82"
   xmlns="http://www.w3.org/2000/svg"
   aria-label="FHR's Blog"
   role="img"
+  style="--hw-delay: ${delay}ms"
 >
-  <text x="4" y="64" class="hw-viz">FHR's Blog</text>
+  <text x="4" y="65" class="hw-stroke" stroke-dasharray="1000" stroke-dashoffset="1000">
+    FHR's Blog
+  </text>
+  <text x="4" y="65" class="hw-fill">FHR's Blog</text>
 </svg>
 
 <style is:global>
-  .hw-viz {
+  .hw-stroke {
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 58px;
+    font-weight: 500;
+    fill: none;
+    stroke: var(--color-text, #1a1814);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: hw-draw 2s cubic-bezier(0.3,0,0.25,1) forwards,
+               hw-drop 0.1s 2s forwards;
+    animation-delay: var(--hw-delay, 400ms), calc(var(--hw-delay, 400ms) + 2s);
+  }
+
+  .hw-fill {
     font-family: 'Caveat', 'Segoe Script', cursive;
     font-size: 58px;
     font-weight: 500;
     fill: var(--color-text, #1a1814);
+    opacity: 0;
+    animation: hw-land 0.1s 2s forwards;
+    animation-delay: calc(var(--hw-delay, 400ms) + 2s);
+  }
+
+  @keyframes hw-draw   { to { stroke-dashoffset: 0; } }
+  @keyframes hw-drop   { to { stroke: transparent; } }
+  @keyframes hw-land   { to { opacity: 1; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hw-stroke { display: none; }
+    .hw-fill   { opacity: 1; animation: none; }
   }
 </style>
 
 <style>
   .handwrite {
-    display: block;
-    width: 100%;
-    max-width: 370px;
-    height: auto;
-    overflow: visible;
+    display: block; width: 100%; max-width: 370px;
+    height: auto; overflow: visible;
   }
   @media (max-width: 640px) { .handwrite { max-width: 280px; } }
 </style>
 
 <script>
-  function startHandwrite(svg: SVGSVGElement) {
-    if ((svg as any).__hwDone) return;
-    (svg as any).__hwDone = true;
-
-    const ns = 'http://www.w3.org/2000/svg';
-
-    // 1. 测量真实轮廓长度
-    const probe = document.createElementNS(ns, 'svg');
-    probe.setAttribute('width', '1000'); probe.setAttribute('height', '100');
-    probe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;pointer-events:none';
-    document.body.appendChild(probe);
-
-    const textEl = document.createElementNS(ns, 'text') as SVGTextElement;
-    textEl.setAttribute('x', '0'); textEl.setAttribute('y', '64');
-    textEl.style.cssText = "font:500 58px 'Caveat','Segoe Script',cursive";
-    textEl.textContent = "FHR's Blog";
-    probe.appendChild(textEl);
-
-    const textWidth = textEl.getComputedTextLength();
-    document.body.removeChild(probe);
-
-    // 草书字体轮廓周长约为文字宽度的 2.8-3.5x
-    const estLen = Math.ceil(textWidth * 2.8);
-    if (estLen <= 0) return;
-
-    // 2. 隐藏初始 text，切换为 stroke + fill 双层
-    const base = svg.querySelector('.hw-viz') as SVGTextElement;
-    if (!base) return;
-    base.style.visibility = 'hidden';
-
-    const strokeText = base.cloneNode(true) as SVGTextElement;
-    strokeText.setAttribute('stroke-dasharray', String(estLen));
-    strokeText.setAttribute('stroke-dashoffset', String(estLen));
-    strokeText.style.cssText = "font:500 58px 'Caveat','Segoe Script',cursive;fill:none;stroke:var(--color-text,#1a1814);stroke-width:2;stroke-linecap:round;stroke-linejoin:round";
-    svg.insertBefore(strokeText, base);
-
-    const fillText = base.cloneNode(true) as SVGTextElement;
-    fillText.classList.add('hw-viz');
-    fillText.style.opacity = '0';
-    svg.insertBefore(fillText, base);
-
-    // 3. Web Animations API 精确控制
-    const DURATION = 2400; // ms
-    const d = 400; // delay
-
-    strokeText.animate(
-      { strokeDashoffset: [estLen, 0] },
-      { duration: DURATION, delay: d, easing: 'cubic-bezier(0.3,0,0.3,1)', fill: 'forwards' }
-    );
-    strokeText.animate(
-      { opacity: [1, 0] },
-      { duration: 100, delay: d + DURATION, fill: 'forwards' }
-    );
-    fillText.animate(
-      { opacity: [0, 1] },
-      { duration: 100, delay: d + DURATION, fill: 'forwards' }
-    );
+  function measure(svg: SVGSVGElement) {
+    const text = svg.querySelector('.hw-stroke') as SVGTextElement;
+    if (!text) return;
+    const len = Math.ceil(text.getComputedTextLength() * 2.8);
+    text.setAttribute('stroke-dasharray', String(len));
+    text.setAttribute('stroke-dashoffset', String(len));
   }
-
-  function setup() {
-    document.querySelectorAll('.handwrite').forEach((el) => {
-      const svg = el.querySelector('svg') as SVGSVGElement | null;
-      if (svg) startHandwrite(svg);
-    });
+  function run() {
+    document.querySelectorAll('.handwrite svg').forEach((s) => measure(s as SVGSVGElement));
   }
-
-  if (document.fonts) {
-    document.fonts.ready.then(setup);
-  } else {
-    setTimeout(setup, 800);
-  }
+  if (document.fonts) { document.fonts.ready.then(run); }
+  else { setTimeout(run, 600); }
   document.addEventListener('astro:page-load', () => {
-    if (document.fonts) {
-      document.fonts.ready.then(setup);
-    } else {
-      setTimeout(setup, 800);
-    }
+    if (document.fonts) { document.fonts.ready.then(run); }
+    else { setTimeout(run, 600); }
   });
 </script>
