@@ -7,140 +7,258 @@ export interface Props {
 }
 
 const { text, class: className, delay = 400, as: Tag = 'span' } = Astro.props;
-
-// 每个字母的手写时长（ms）：基于复杂度
-const speeds: Record<string, number> = {
-  i: 140, l: 140, t: 150, f: 170, r: 160, j: 150,
-  a: 190, c: 180, e: 200, n: 200, o: 210, s: 180, u: 190, v: 180, x: 210, z: 190,
-  b: 220, d: 230, g: 240, h: 220, k: 210, p: 240, q: 240, y: 220,
-  m: 280, w: 280,
-  "'": 90, '.': 80, ' ': 100,
-  'B': 260, 'F': 260, 'H': 270, 'R': 260, 'S': 250,
-};
-const chars = [...text];
-let acc = 0;
-const timing = chars.map((ch) => {
-  const dur = speeds[ch] ?? 200;
-  const s = acc;
-  acc += dur;
-  return { ch, dur, start: s };
-});
-const total = acc;
+const id = `hw-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <Tag
   class:list={['handwrite', className]}
   aria-label={text}
 >
-  <span class="handwrite__word" aria-hidden="true" style={`--hw-delay: ${delay}ms; --hw-total: ${total}ms`}>
-    {chars.map((ch, i) => (
-      <span
-        class="handwrite__letter"
-        style={`--l-delay: ${timing[i].start}ms; --l-dur: ${timing[i].dur}ms`}
-        data-char={ch}
-      >
-        <span class="handwrite__ink">{ch}</span>
-        {/* 笔尖 */}
-        <span class="handwrite__dot" aria-hidden="true"></span>
-      </span>
-    ))}
-  </span>
+  <canvas class="handwrite__canvas" id={id} aria-hidden="true"></canvas>
   <span class="handwrite__fallback">{text}</span>
 </Tag>
 
 <style>
-  .handwrite {
-    display: block;
-    position: relative;
-    line-height: 1.3;
-    min-height: 1.2em;
-  }
-
-  .handwrite__word {
-    display: inline-flex;
-    font-family: 'Caveat', 'Segoe Script', cursive;
-    font-size: 2.2rem;
-    font-weight: 500;
-    color: var(--color-text);
-  }
-
+  .handwrite { display: block; position: relative; line-height: 1.2; }
+  .handwrite__canvas { display: block; width: 100%; max-width: 430px; height: auto; }
   .handwrite__fallback {
     font-family: 'Caveat', 'Segoe Script', cursive;
     font-size: 2.2rem; font-weight: 500; color: var(--color-text);
   }
   .js .handwrite__fallback { display: none; }
-  .no-js .handwrite__word { display: none; }
+  .no-js .handwrite__canvas { display: none; }
 
-  /* 每个字母 */
-  .handwrite__letter {
-    position: relative;
-    display: inline-block;
-    white-space: pre;
-  }
-
-  /* 墨迹层：clip-path 对角线揭示，模拟钢笔 45° 斜角写出字形 */
-  .handwrite__ink {
-    display: inline-block;
-    /* 从右下角 45° 斜线切到左上角 — 模拟右撇子钢笔写出时起笔,收笔方向 */
-    clip-path: polygon(100% 100%, 100% 100%, 0% 100%, 0% 100%);
-    animation: hw-write var(--l-dur, 200ms) cubic-bezier(0.33, 0, 0.2, 1) forwards;
-    animation-delay: calc(var(--hw-delay, 400ms) + var(--l-delay, 0ms));
-    /* 书写时墨迹洇开 */
-    filter: blur(0.6px);
-    animation-fill-mode: forwards;
-  }
-
-  /* 写完的字母去洇开 */
-  @keyframes hw-write {
-    0% {
-      clip-path: polygon(100% 100%, 100% 100%, 0% 100%, 0% 100%);
-      filter: blur(1.2px);
-      opacity: 0.5;
-    }
-    30% {
-      clip-path: polygon(100% 100%, 100% 60%, 40% 100%, 0% 100%);
-      filter: blur(0.8px);
-      opacity: 0.7;
-    }
-    70% {
-      clip-path: polygon(100% 100%, 100% 20%, 80% 0%, 20% 100%, 0% 80%, 0% 0%);
-      filter: blur(0.3px);
-      opacity: 0.9;
-    }
-    100% {
-      clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%);
-      filter: blur(0);
-      opacity: 1;
-    }
-  }
-
-  /* 笔尖：每个字母写完后的收笔小点 */
-  .handwrite__dot {
-    position: absolute;
-    top: 50%;
-    right: -1px;
-    width: 5px; height: 5px;
-    margin-top: -2px;
+  :global(.handwrite__nib) {
+    position: fixed; pointer-events: none; z-index: 100;
+    width: 10px; height: 10px; margin-left: -5px; margin-top: -5px;
     border-radius: 50%;
     background: radial-gradient(circle,
       var(--color-accent) 0%,
-      color-mix(in srgb, var(--color-accent) 30%, transparent) 60%,
-      transparent 80%
+      color-mix(in srgb, var(--color-accent) 30%, transparent) 50%,
+      transparent 75%
     );
-    opacity: 0;
-    animation: hw-dot-pulse 300ms ease-out forwards;
-    animation-delay: calc(var(--hw-delay, 400ms) + var(--l-delay, 0ms) + var(--l-dur, 200ms) - 50ms);
-    pointer-events: none;
-  }
-
-  @keyframes hw-dot-pulse {
-    0%   { opacity: 0.9; transform: scale(1.6); }
-    100% { opacity: 0;   transform: scale(0.3); }
+    box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 25%, transparent);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .handwrite__word { display: none; }
+    .handwrite__canvas { display: none; }
     .handwrite__fallback { display: block !important; }
-    .handwrite__dot { display: none; }
+    :global(.handwrite__nib) { display: none !important; }
   }
 </style>
+
+<script>
+  interface LetterMeta {
+    char: string; startX: number; endX: number;
+    pixels: { x: number; y: number; idx: number }[];
+    top: number; bot: number;
+  }
+
+  async function init(canvas: HTMLCanvasElement) {
+    const label = canvas.closest('.handwrite')?.getAttribute('aria-label') ?? '';
+    if (!label || (canvas as any).__hwInit) return;
+    (canvas as any).__hwInit = true;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const W = 720, H = 130;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.maxWidth = '430px';
+
+    const ctx = canvas.getContext('2d')!;
+    ctx.scale(dpr, dpr);
+    const style = getComputedStyle(document.documentElement);
+    const ink = style.getPropertyValue('--color-text').trim() || '#1a1814';
+
+    // Render full text to measure letter positions
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const octx = off.getContext('2d')!;
+    octx.font = "500 56px 'Caveat', 'Segoe Script', cursive";
+    octx.fillStyle = '#000';
+    octx.textBaseline = 'alphabetic';
+
+    // Measure each letter's X bounds
+    const letters: LetterMeta[] = [];
+    let xCursor = 4;
+    for (const ch of label) {
+      const advance = octx.measureText(ch).width;
+      letters.push({
+        char: ch,
+        startX: Math.round(xCursor),
+        endX: Math.round(xCursor + advance) + 1,
+        pixels: [],
+        top: H, bot: 0,
+      });
+      xCursor += advance;
+    }
+
+    // Render full text to get pixel data
+    octx.fillText(label, 4, 70);
+    const img = octx.getImageData(0, 0, W, H);
+
+    // Assign pixels to letters based on X position
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const a = img.data[(y * W + x) * 4 + 3];
+        if (a < 40) continue;
+        // Find which letter this pixel belongs to
+        for (const L of letters) {
+          if (x >= L.startX && x < L.endX) {
+            L.pixels.push({ x, y, idx: y * W + x });
+            if (y < L.top) L.top = y;
+            if (y > L.bot) L.bot = y;
+            break;
+          }
+        }
+      }
+    }
+
+    // For each letter, order pixels by BFS from bottom-left entry point
+    const allPixels: { x: number; y: number }[] = [];
+    const spaceGap = 4; // pixels to skip between letters (pen lift)
+
+    for (const L of letters) {
+      if (L.pixels.length === 0) {
+        // Space or invisible char: add a pause
+        for (let i = 0; i < spaceGap; i++) allPixels.push({ x: -1, y: -1 });
+        continue;
+      }
+
+      // Entry point: bottom-leftmost pixel of this letter (where pen connects from previous)
+      let entryX = L.startX;
+      let entryY = L.bot;
+      let found = false;
+      for (let x = L.startX; x < L.endX && !found; x++) {
+        for (let y = L.bot; y >= L.top; y--) {
+          const a = img.data[(y * W + x) * 4 + 3];
+          if (a >= 40) { entryX = x; entryY = y; found = true; break; }
+        }
+      }
+
+      // BFS from entry point
+      const pixelSet = new Set(L.pixels.map(p => p.idx));
+      const order = new Map<number, number>();
+      const queue: number[] = [entryY * W + entryX];
+      order.set(queue[0], 0);
+
+      const dirs = [[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1]];
+      let seq = 0;
+
+      while (queue.length > 0) {
+        const idx = queue.shift()!;
+        seq++;
+        const cx = idx % W, cy = Math.floor(idx / W);
+        for (const [dx, dy] of dirs) {
+          const nidx = (cy + dy) * W + (cx + dx);
+          if (pixelSet.has(nidx) && !order.has(nidx)) {
+            order.set(nidx, seq);
+            queue.push(nidx);
+          }
+        }
+      }
+
+      // Sort pixels by BFS order
+      const sorted = L.pixels
+        .filter(p => order.has(p.idx))
+        .sort((a, b) => (order.get(a.idx) ?? 99999) - (order.get(b.idx) ?? 99999));
+
+      allPixels.push(...sorted);
+      // Pen lift between letters
+      for (let i = 0; i < spaceGap; i++) {
+        if (sorted.length > 0) {
+          const last = sorted[sorted.length - 1];
+          allPixels.push({ x: last.x + i, y: last.y });
+        }
+      }
+    }
+
+    // Animation
+    ctx.fillStyle = ink;
+    const totalPx = allPixels.length;
+    const DURATION = 2500;
+    const durPerPx = DURATION / totalPx;
+    let drawn = 0;
+    let rafId = 0;
+
+    const nib = document.createElement('span');
+    nib.className = 'handwrite__nib';
+    nib.setAttribute('aria-hidden', 'true');
+    canvas.parentElement!.appendChild(nib);
+
+    function canvasPixelToScreen(x: number, y: number) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        sx: rect.left + (x / W) * rect.width,
+        sy: rect.top + (y / H) * rect.height,
+      };
+    }
+
+    let prevTime = 0;
+    const startDelay = 400;
+    let started = false;
+
+    function frame(now: number) {
+      if (!started) {
+        prevTime = now;
+        started = true;
+        rafId = requestAnimationFrame(frame);
+        return;
+      }
+      const elapsed = now - prevTime;
+      if (elapsed < startDelay) { rafId = requestAnimationFrame(frame); return; }
+
+      const active = elapsed - startDelay;
+      const target = Math.floor(active / durPerPx);
+
+      if (target > drawn && target <= totalPx) {
+        // Draw 20 pixels at once for performance
+        const batch = Math.min(target - drawn, 20);
+        for (let i = drawn; i < drawn + batch && i < totalPx; i++) {
+          const p = allPixels[i];
+          if (p.x < 0) continue; // pen lift
+          // Pixel with slight ink bleed (draw a 2x2 rect)
+          ctx.fillRect(p.x, p.y, 1.2, 1.2);
+        }
+        drawn += batch;
+      }
+
+      // Update nib position
+      if (drawn > 0 && drawn < totalPx) {
+        const p = allPixels[drawn];
+        if (p.x >= 0) {
+          const { sx, sy } = canvasPixelToScreen(p.x, p.y);
+          nib.style.left = sx + 'px';
+          nib.style.top = sy + 'px';
+        }
+      }
+
+      if (drawn >= totalPx) {
+        ctx.clearRect(0, 0, W, H);
+        octx.font = "500 56px 'Caveat', 'Segoe Script', cursive";
+        octx.fillStyle = ink;
+        octx.fillText(label, 4, 70);
+        ctx.drawImage(off, 0, 0);
+        nib.style.opacity = '0';
+        nib.style.transition = 'opacity 0.3s ease';
+        return;
+      }
+
+      rafId = requestAnimationFrame(frame);
+    }
+
+    rafId = requestAnimationFrame(frame);
+    (canvas as any).__hwRaf = rafId;
+  }
+
+  function setup() {
+    document.querySelectorAll('.handwrite__canvas').forEach((c) => init(c as HTMLCanvasElement));
+  }
+
+  if (document.fonts) document.fonts.ready.then(setup);
+  else setTimeout(setup, 800);
+  document.addEventListener('astro:page-load', () => {
+    if (document.fonts) document.fonts.ready.then(setup);
+    else setTimeout(setup, 800);
+  });
+</script>
