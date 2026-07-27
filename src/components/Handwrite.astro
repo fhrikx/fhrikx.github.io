@@ -1,181 +1,162 @@
 ---
+// 手写 SVG 路径 — FHR's Blog
+// 每个字母一条 SVG <path>，stroke-dashoffset 动画模拟一笔一划写出
+
 export interface Props {
-  text: string;
-  class?: string;
   delay?: number;
-  as?: 'span' | 'h1' | 'h2' | 'p';
+  class?: string;
 }
 
-const { text, class: className, delay = 400, as: Tag = 'span' } = Astro.props;
+const { delay = 400, class: className } = Astro.props;
+
+// 每个字母的 SVG 路径和时长（ms）
+interface LetterPath {
+  label: string;    // 实际显示字符
+  d: string;        // SVG path data
+  dur: number;      // 动画时长 ms
+}
+
+const letters: LetterPath[] = [
+  // F — 竖笔向下 → 提笔到顶 → 横笔向右
+  {
+    label: 'F',
+    d: 'M 12,68 C 11,60 11,52 11,42 L 11,12 M 11,12 C 13,8 14,7 16,6 M 16,6 L 42,8 M 11,38 L 34,38',
+    dur: 520,
+  },
+  // H — 左竖 → 横 → 右竖
+  {
+    label: 'H',
+    d: 'M 8,68 L 8,12 M 8,38 L 42,38 M 42,68 L 42,12',
+    dur: 480,
+  },
+  // R — 竖 → 顶部弧 → 斜腿
+  {
+    label: 'R',
+    d: 'M 8,68 L 8,14 C 8,8 10,6 14,6 L 32,6 C 43,6 44,24 36,30 L 28,34 M 34,42 L 46,68',
+    dur: 560,
+  },
+  // ' — 撇号
+  {
+    label: "'",
+    d: 'M 10,6 C 9,10 10,14 12,16',
+    dur: 180,
+  },
+  // s — 草书 s：从基线起笔 → 弧线向左下 → 转右上
+  {
+    label: 's',
+    d: 'M 36,58 C 34,54 32,58 30,62 C 27,70 25,66 24,62 C 22,56 28,50 38,48 C 48,46 46,40 36,42 C 28,44 24,52 24,56',
+    dur: 500,
+  },
+  // 空格
+  {
+    label: ' ',
+    d: '',
+    dur: 200,
+  },
+  // B — 竖 → 上弧 → 下弧
+  {
+    label: 'B',
+    d: 'M 8,68 L 8,12 M 8,12 C 8,6 12,6 16,6 L 28,6 C 42,6 44,24 32,28 C 44,32 46,50 32,52 L 12,54 C 9,56 8,58 8,64 L 8,68',
+    dur: 580,
+  },
+  // l — 竖向上弧
+  {
+    label: 'l',
+    d: 'M 8,68 C 8,50 8,34 8,20 C 9,8 14,4 20,6',
+    dur: 300,
+  },
+  // o — 椭圆
+  {
+    label: 'o',
+    d: 'M 24,56 C 24,66 30,68 36,62 C 44,56 44,44 36,40 C 28,36 24,44 24,56 Z',
+    dur: 400,
+  },
+  // g — 圆 → 下勾
+  {
+    label: 'g',
+    d: 'M 36,38 C 44,34 52,40 48,48 C 44,56 36,46 28,46 C 18,46 14,54 16,64 C 18,72 24,78 30,74 C 36,70 34,62 34,60',
+    dur: 560,
+  },
+];
+
+// 累计时长
+let acc = 0;
+const timing = letters.map((l) => {
+  const s = acc;
+  acc += l.dur;
+  return { ...l, start: s };
+});
+const totalDur = acc;
+
+// viewBox
+const vbW = 420;
+const vbH = 96;
 ---
 
-<Tag class:list={['handwrite', className]} aria-label={text}>
-  <canvas class="handwrite__canvas" aria-hidden="true"></canvas>
-  <span class="handwrite__fallback">{text}</span>
-</Tag>
+<svg
+  class:list={['handwrite', className]}
+  viewBox={`0 0 ${vbW} ${vbH}`}
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="FHR's Blog"
+  role="img"
+  style={`--hw-delay: ${delay}ms; --hw-total: ${totalDur}ms`}
+>
+  <defs>
+    {/* 笔触效果：stroke 渐变，模拟钢笔墨迹 */}
+    <style>
+      .hw-path {
+        fill: none;
+        stroke: var(--color-text, #1a1814);
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+        animation:
+          hw-draw var(--hw-dur) cubic-bezier(0.35, 0, 0.25, 1) forwards,
+          hw-ink 0.3s ease forwards;
+        animation-delay: var(--hw-start), var(--hw-start);
+      }
+      @keyframes hw-draw {
+        to { stroke-dashoffset: 0; }
+      }
+      /* 写完的字母：淡入填充盖掉 stroke，变成实心字 */
+      @keyframes hw-ink {
+        0%, 95% { fill: transparent; }
+        100% { fill: var(--color-text, #1a1814); stroke: none; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hw-path {
+          animation: none;
+          stroke-dashoffset: 0;
+          fill: var(--color-text, #1a1814);
+          stroke: none;
+        }
+      }
+    </style>
+  </defs>
+
+  {letters.map((l, i) => {
+    if (!l.d) return null;
+    const dur = (l.dur / 1000).toFixed(2) + 's';
+    const start = ((delay + timing[i].start) / 1000).toFixed(2) + 's';
+    return (
+      <path
+        class="hw-path"
+        d={l.d}
+        style={`--hw-dur: ${dur}; --hw-start: ${start}`}
+      />
+    );
+  })}
+</svg>
 
 <style>
-  .handwrite { display: block; position: relative; line-height: 1.2; }
-  .handwrite__canvas { display: block; width: 100%; max-width: 440px; height: auto; }
-  .handwrite__fallback {
-    font-family: 'Caveat', 'Segoe Script', cursive;
-    font-size: 2.2rem; font-weight: 500; color: var(--color-text);
-  }
-  .js .handwrite__fallback { display: none; }
-  .no-js .handwrite__canvas { display: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .handwrite__canvas { display: none; }
-    .handwrite__fallback { display: block !important; }
+  .handwrite {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    overflow: visible;
   }
 </style>
-
-<script>
-  // ── 手写动画引擎 ──────────────────────────────────
-  // 策略：每个字母从它的连笔入口点（基线左侧）开始，
-  // 像素按离入口的欧氏距离排序揭示，自然沿字形蔓延。
-
-  interface Glyph {
-    ch: string;
-    x0: number; x1: number;
-    entry: { x: number; y: number }; // 连笔入口
-    pixels: { x: number; y: number; dist: number }[];
-  }
-
-  function init(canvas: HTMLCanvasElement) {
-    const label = canvas.closest('.handwrite')?.getAttribute('aria-label') ?? '';
-    if (!label || (canvas as any).__hwInit) return;
-    (canvas as any).__hwInit = true;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    const W = 720, H = 130;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    canvas.style.maxWidth = '440px';
-
-    const ctx = canvas.getContext('2d')!;
-    ctx.scale(dpr, dpr);
-    const style = getComputedStyle(document.documentElement);
-    const ink = style.getPropertyValue('--color-text').trim() || '#1a1814';
-
-    const FONT = "500 56px 'Caveat', 'Segoe Script', cursive";
-    ctx.font = FONT;
-    ctx.textBaseline = 'alphabetic';
-
-    // ── 步骤 1: 测量每个字母的 X 范围 ──
-    const chars = [...label];
-    const xStart: number[] = [4];
-    for (const ch of chars) xStart.push(xStart[xStart.length - 1] + ctx.measureText(ch).width);
-
-    // ── 步骤 2: 渲染完整文字到离屏 canvas,提取像素 ──
-    const off = document.createElement('canvas');
-    off.width = W; off.height = H;
-    const octx = off.getContext('2d')!;
-    octx.font = FONT;
-    octx.textBaseline = 'alphabetic';
-    octx.fillStyle = '#000';
-    octx.fillText(label, 4, 72);
-    const img = octx.getImageData(0, 0, W, H);
-
-    // 扫描所有墨迹像素
-    const inkSet = new Set<number>();
-    for (let y = 0; y < H; y++)
-      for (let x = 0; x < W; x++)
-        if (img.data[(y * W + x) * 4 + 3] > 50)
-          inkSet.add(y * W + x);
-
-    // ── 步骤 3: 为每个字母构建字形数据 ──
-    const glyphs: Glyph[] = [];
-    let globalPixels: { x: number; y: number }[] = [];
-
-    for (let i = 0; i < chars.length; i++) {
-      const x0 = Math.floor(xStart[i]);
-      const x1 = Math.ceil(xStart[i + 1]) + 1;
-
-      // 找该字母的墨迹像素
-      const pixels: { x: number; y: number }[] = [];
-      for (let x = x0; x <= x1; x++)
-        for (let y = 0; y < H; y++)
-          if (inkSet.has(y * W + x))
-            pixels.push({ x, y });
-
-      if (pixels.length === 0) continue;
-
-      // 连笔入口：基线附近最左的墨迹像素
-      const baselineY = 70;
-      let entry = pixels[0];
-      let bestDist = Infinity;
-      for (const p of pixels) {
-        const d = Math.abs(p.y - baselineY) * 1.2 + (p.x - x0);
-        if (d < bestDist) { bestDist = d; entry = p; }
-      }
-
-      // 计算每个像素到入口的欧氏距离
-      const withDist = pixels.map(p => ({
-        ...p,
-        dist: Math.hypot(p.x - entry.x, (p.y - entry.y) * 1.3) // Y 方向稍加权重模拟书写方向
-      }));
-
-      // 按距离排序：入口最近的先出现
-      withDist.sort((a, b) => a.dist - b.dist);
-
-      glyphs.push({ ch: chars[i], x0, x1, entry, pixels: withDist });
-
-      // 添加到全局序列，字母间留缝隙（提笔）
-      for (const p of withDist) globalPixels.push({ x: p.x, y: p.y });
-      // 提笔过渡：加几个重复像素，让笔尖停在原地短暂停留
-      if (withDist.length > 0) {
-        const last = withDist[withDist.length - 1];
-        for (let k = 0; k < 3; k++) globalPixels.push({ x: last.x, y: last.y });
-      }
-    }
-
-    if (globalPixels.length === 0) return;
-
-    // ── 步骤 4: 动画 ──
-    const DURATION = 2600;
-    const PX_PER_MS = globalPixels.length / DURATION;
-    const START_DELAY = 400;
-
-    ctx.fillStyle = ink;
-    let drawn = 0;
-    let startT = 0;
-    let started = false;
-
-    function frame(now: number) {
-      if (!started) { startT = now; started = true; requestAnimationFrame(frame); return; }
-      const elapsed = now - startT;
-      if (elapsed < START_DELAY) { requestAnimationFrame(frame); return; }
-
-      const target = Math.floor((elapsed - START_DELAY) * PX_PER_MS);
-
-      if (target > drawn) {
-        const batch = Math.min(target - drawn, 30);
-        for (let i = drawn; i < drawn + batch && i < globalPixels.length; i++) {
-          ctx.fillRect(globalPixels[i].x, globalPixels[i].y, 1.3, 1.3);
-        }
-        drawn += batch;
-      }
-
-      if (drawn >= globalPixels.length) {
-        // 最终干净重绘
-        ctx.clearRect(0, 0, W, H);
-        ctx.fillText(label, 4, 72);
-        return;
-      }
-
-      requestAnimationFrame(frame);
-    }
-
-    requestAnimationFrame(frame);
-  }
-
-  function setup() {
-    document.querySelectorAll('.handwrite__canvas').forEach((c) => init(c as HTMLCanvasElement));
-  }
-  if (document.fonts) document.fonts.ready.then(setup);
-  else setTimeout(setup, 800);
-  document.addEventListener('astro:page-load', () => {
-    if (document.fonts) document.fonts.ready.then(setup);
-    else setTimeout(setup, 800);
-  });
-</script>

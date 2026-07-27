@@ -37,12 +37,7 @@ const recentDate = allPosts[0]?.data.pubDate;
   <div class="home container-wide">
     <aside class="home__sidebar">
       <div class="sidebar-brand">
-        <Handwrite
-            text={SITE_TITLE}
-            delay={400}
-            as="h1"
-            class="sidebar__title"
-          />
+        <Handwrite delay={400} class="sidebar__title" />
         <p class="sidebar__tagline">
           <Typewriter
             phrases={[SITE_DESCRIPTION]}
