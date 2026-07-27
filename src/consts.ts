@@ -1,4 +1,4 @@
-export const SITE_TITLE = 'FHR\'s Blog';
+export const SITE_TITLE = '时空日志';
 export const SITE_DESCRIPTION =
   '物理文献的总结与个人想法的记录';
 

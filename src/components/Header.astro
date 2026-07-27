@@ -1,6 +1,7 @@
 ---
-import { SITE_TITLE, NAV_LINKS } from '../consts';
+import { NAV_LINKS } from '../consts';
 import ThemeToggle from './ThemeToggle.astro';
+import Handwrite from './Handwrite.astro';
 
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
@@ -9,7 +10,7 @@ const isActive = (href: string) =>
 
 <header class="site-header">
   <div class="container-wide site-header__inner">
-    <a href="/" class="site-header__brand">{SITE_TITLE}</a>
+    <a href="/" class="site-header__brand"><Handwrite /></a>
     <div class="site-header__right">
       <nav class="site-header__nav">
         {
@@ -62,15 +63,19 @@ const isActive = (href: string) =>
   }
 
   .site-header__brand {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 1.05rem;
-    letter-spacing: -0.01em;
+    display: inline-block;
+    width: 180px;
     text-decoration: none;
   }
 
-  .site-header__brand:hover {
-    color: var(--color-accent);
+  .site-header__brand :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .site-header__brand:hover :global(.hw-fill) {
+    fill: var(--color-accent);
   }
 
   .site-header__right {

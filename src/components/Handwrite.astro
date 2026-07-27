@@ -13,7 +13,6 @@ const { delay = 400, class: className } = Astro.props;
   xmlns="http://www.w3.org/2000/svg"
   aria-label="FHR's Blog"
   role="img"
-  style="--hw-delay: ${delay}ms"
 >
   <text x="4" y="65" class="hw-stroke" stroke-dasharray="1000" stroke-dashoffset="1000">
     FHR's Blog
@@ -31,9 +30,8 @@ const { delay = 400, class: className } = Astro.props;
     stroke-width: 2.2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    animation: hw-draw 2s cubic-bezier(0.3,0,0.25,1) forwards,
-               hw-drop 0.1s 2s forwards;
-    animation-delay: var(--hw-delay, 400ms), calc(var(--hw-delay, 400ms) + 2s);
+    animation: hw-draw 1.4s 0.4s ease-in forwards,
+               hw-drop 0s 1.8s forwards;
   }
 
   .hw-fill {
@@ -42,8 +40,7 @@ const { delay = 400, class: className } = Astro.props;
     font-weight: 500;
     fill: var(--color-text, #1a1814);
     opacity: 0;
-    animation: hw-land 0.1s 2s forwards;
-    animation-delay: calc(var(--hw-delay, 400ms) + 2s);
+    animation: hw-land 0s 1.8s forwards;
   }
 
   @keyframes hw-draw   { to { stroke-dashoffset: 0; } }

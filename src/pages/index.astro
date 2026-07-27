@@ -2,11 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Handwrite from '../components/Handwrite.astro';
 import Typewriter from '../components/Typewriter.astro';
 import { formatReadingTime } from '../utils/reading';
 import {
-  SITE_TITLE,
   SITE_DESCRIPTION,
   SOCIAL_LINKS,
 } from '../consts';
@@ -37,7 +35,6 @@ const recentDate = allPosts[0]?.data.pubDate;
   <div class="home container-wide">
     <aside class="home__sidebar">
       <div class="sidebar-brand">
-        <Handwrite delay={400} class="sidebar__title" />
         <p class="sidebar__tagline">
           <Typewriter
             phrases={[SITE_DESCRIPTION]}
@@ -207,28 +204,9 @@ const recentDate = allPosts[0]?.data.pubDate;
     padding-top: 0.5rem;
   }
 
-  /* 品牌区：大标题 + 标语 */
+  <!-- 品牌区 -->
   .sidebar-brand {
     padding-bottom: var(--space-2);
-  }
-
-  :global(.sidebar__title) {
-    font-family: 'Caveat', 'Segoe Script', cursive;
-    font-size: 2.2rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    margin: 0 0 0.4rem;
-    line-height: 1.2;
-  }
-
-  :global(.sidebar__title)::after {
-    content: '';
-    display: block;
-    width: 2rem;
-    height: 3px;
-    background: var(--color-accent);
-    margin-top: 0.65rem;
-    border-radius: 2px;
   }
 
   .sidebar__tagline {
@@ -417,11 +395,5 @@ const recentDate = allPosts[0]?.data.pubDate;
       border-left: none;
       padding-left: 0;
     }
-    :global(.sidebar__title) {
-      font-size: 1.8rem;
     }
-    :global(.sidebar__title)::after {
-      margin-top: 0.5rem;
-    }
-  }
 </style>
