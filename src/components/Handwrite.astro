@@ -7,14 +7,44 @@ export interface Props {
 }
 
 const { text, class: className, delay = 400, as: Tag = 'span' } = Astro.props;
-const id = `hw-${Math.random().toString(36).slice(2, 8)}`;
+
+// 每个字母的手写时长（ms）：基于复杂度
+const speeds: Record<string, number> = {
+  i: 140, l: 140, t: 150, f: 170, r: 160, j: 150,
+  a: 190, c: 180, e: 200, n: 200, o: 210, s: 180, u: 190, v: 180, x: 210, z: 190,
+  b: 220, d: 230, g: 240, h: 220, k: 210, p: 240, q: 240, y: 220,
+  m: 280, w: 280,
+  "'": 90, '.': 80, ' ': 100,
+  'B': 260, 'F': 260, 'H': 270, 'R': 260, 'S': 250,
+};
+const chars = [...text];
+let acc = 0;
+const timing = chars.map((ch) => {
+  const dur = speeds[ch] ?? 200;
+  const s = acc;
+  acc += dur;
+  return { ch, dur, start: s };
+});
+const total = acc;
 ---
 
 <Tag
   class:list={['handwrite', className]}
   aria-label={text}
 >
-  <canvas class="handwrite__canvas" id={id} aria-hidden="true"></canvas>
+  <span class="handwrite__word" aria-hidden="true" style={`--hw-delay: ${delay}ms; --hw-total: ${total}ms`}>
+    {chars.map((ch, i) => (
+      <span
+        class="handwrite__letter"
+        style={`--l-delay: ${timing[i].start}ms; --l-dur: ${timing[i].dur}ms`}
+        data-char={ch}
+      >
+        <span class="handwrite__ink">{ch}</span>
+        {/* 笔尖 */}
+        <span class="handwrite__dot" aria-hidden="true"></span>
+      </span>
+    ))}
+  </span>
   <span class="handwrite__fallback">{text}</span>
 </Tag>
 
@@ -22,193 +52,95 @@ const id = `hw-${Math.random().toString(36).slice(2, 8)}`;
   .handwrite {
     display: block;
     position: relative;
-    line-height: 1.2;
+    line-height: 1.3;
     min-height: 1.2em;
   }
-  .handwrite__canvas {
-    display: block;
-    width: 100%;
-    max-width: 380px;
-    height: auto;
-  }
-  .handwrite__fallback {
+
+  .handwrite__word {
+    display: inline-flex;
     font-family: 'Caveat', 'Segoe Script', cursive;
     font-size: 2.2rem;
     font-weight: 500;
     color: var(--color-text);
   }
-  .js .handwrite__fallback { display: none; }
-  .no-js .handwrite__canvas { display: none; }
 
-  /* 笔尖：JS 动态创建，跟随书写进度移动 */
-  :global(.handwrite__nib) {
-    position: fixed;
-    width: 5px;
-    height: 18px;
-    margin-left: -2px;
-    margin-top: -9px;
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0.8;
+  .handwrite__fallback {
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 2.2rem; font-weight: 500; color: var(--color-text);
+  }
+  .js .handwrite__fallback { display: none; }
+  .no-js .handwrite__word { display: none; }
+
+  /* 每个字母 */
+  .handwrite__letter {
+    position: relative;
+    display: inline-block;
+    white-space: pre;
+  }
+
+  /* 墨迹层：clip-path 对角线揭示，模拟钢笔 45° 斜角写出字形 */
+  .handwrite__ink {
+    display: inline-block;
+    /* 从右下角 45° 斜线切到左上角 — 模拟右撇子钢笔写出时起笔,收笔方向 */
+    clip-path: polygon(100% 100%, 100% 100%, 0% 100%, 0% 100%);
+    animation: hw-write var(--l-dur, 200ms) cubic-bezier(0.33, 0, 0.2, 1) forwards;
+    animation-delay: calc(var(--hw-delay, 400ms) + var(--l-delay, 0ms));
+    /* 书写时墨迹洇开 */
+    filter: blur(0.6px);
+    animation-fill-mode: forwards;
+  }
+
+  /* 写完的字母去洇开 */
+  @keyframes hw-write {
+    0% {
+      clip-path: polygon(100% 100%, 100% 100%, 0% 100%, 0% 100%);
+      filter: blur(1.2px);
+      opacity: 0.5;
+    }
+    30% {
+      clip-path: polygon(100% 100%, 100% 60%, 40% 100%, 0% 100%);
+      filter: blur(0.8px);
+      opacity: 0.7;
+    }
+    70% {
+      clip-path: polygon(100% 100%, 100% 20%, 80% 0%, 20% 100%, 0% 80%, 0% 0%);
+      filter: blur(0.3px);
+      opacity: 0.9;
+    }
+    100% {
+      clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%);
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+  /* 笔尖：每个字母写完后的收笔小点 */
+  .handwrite__dot {
+    position: absolute;
+    top: 50%;
+    right: -1px;
+    width: 5px; height: 5px;
+    margin-top: -2px;
     border-radius: 50%;
-    background: radial-gradient(
-      ellipse 2px 60% at 50% 50%,
+    background: radial-gradient(circle,
       var(--color-accent) 0%,
-      color-mix(in srgb, var(--color-accent) 30%, transparent) 40%,
-      transparent 70%
+      color-mix(in srgb, var(--color-accent) 30%, transparent) 60%,
+      transparent 80%
     );
-    box-shadow: 0 0 4px color-mix(in srgb, var(--color-accent) 25%, transparent);
+    opacity: 0;
+    animation: hw-dot-pulse 300ms ease-out forwards;
+    animation-delay: calc(var(--hw-delay, 400ms) + var(--l-delay, 0ms) + var(--l-dur, 200ms) - 50ms);
+    pointer-events: none;
+  }
+
+  @keyframes hw-dot-pulse {
+    0%   { opacity: 0.9; transform: scale(1.6); }
+    100% { opacity: 0;   transform: scale(0.3); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .handwrite__canvas { display: none; }
+    .handwrite__word { display: none; }
     .handwrite__fallback { display: block !important; }
-    :global(.handwrite__nib) { display: none !important; }
+    .handwrite__dot { display: none; }
   }
 </style>
-
-<script>
-  function setupHandwrite() {
-    document.querySelectorAll('.handwrite__canvas').forEach((c) => init(c as HTMLCanvasElement));
-  }
-
-  function init(canvas: HTMLCanvasElement) {
-    const label = canvas.closest('.handwrite')?.getAttribute('aria-label') ?? '';
-    if (!label) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if ((canvas as any).__hwDone) return;
-    (canvas as any).__hwDone = true;
-
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const W = 640;
-    const H = 110;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    canvas.style.width = '100%';
-    canvas.style.height = 'auto';
-
-    const ctx = canvas.getContext('2d')!;
-    ctx.scale(dpr, dpr);
-
-    const style = getComputedStyle(document.documentElement);
-    const ink = style.getPropertyValue('--color-text').trim() || '#1a1814';
-    const accent = style.getPropertyValue('--color-accent').trim() || '#ff5e00';
-
-    // 离屏：完整文字
-    const off = document.createElement('canvas');
-    off.width = W; off.height = H;
-    const octx = off.getContext('2d')!;
-    octx.font = "500 52px 'Caveat', 'Segoe Script', cursive";
-    octx.fillStyle = ink;
-    octx.textBaseline = 'alphabetic';
-    octx.fillText(label, 4, 66);
-
-    ctx.font = "500 52px 'Caveat', 'Segoe Script', cursive";
-    ctx.fillStyle = ink;
-    ctx.textBaseline = 'alphabetic';
-
-    // 预计算每列像素的高度信息
-    const imgData = octx.getImageData(0, 0, W, H);
-    const cols: { top: number; bot: number }[] = [];
-    for (let x = 0; x < W; x++) {
-      let top = H, bot = 0;
-      for (let y = 0; y < H; y++) {
-        const a = imgData.data[(y * W + x) * 4 + 3];
-        if (a > 20) { if (y < top) top = y; if (y > bot) bot = y; }
-      }
-      cols.push({ top, bot: bot > top ? bot : top + 1 });
-    }
-
-    let col = 0;
-    const startTime = performance.now();
-    const DELAY = 400;
-    const DURATION = 2400;
-
-    // 笔尖：canvas 外的 DOM 元素
-    const nib = document.createElement('span');
-    nib.className = 'handwrite__nib';
-    nib.setAttribute('aria-hidden', 'true');
-    canvas.parentElement!.appendChild(nib);
-
-    const canvasRect = () => canvas.getBoundingClientRect();
-
-    function draw(now: number) {
-      const elapsed = now - startTime;
-      if (elapsed < DELAY) { requestAnimationFrame(draw); return; }
-
-      const t = Math.min((elapsed - DELAY) / DURATION, 1);
-      // 书写节奏：起笔蓄墨慢 → 中间匀速 → 快写完时微提笔加速
-      const eased = t < 0.06 ? t * 0.4 :
-                     t < 0.88 ? 0.024 + (t - 0.06) * 1.02 :
-                     0.86 + (t - 0.88) * 1.8;
-      const target = Math.min(Math.floor(W * eased), W - 1);
-      if (target <= col) { requestAnimationFrame(draw); return; }
-
-      // 逐列增量画出像素
-      for (let x = col + 1; x <= target; x++) {
-        const c = cols[x];
-        if (c.bot <= c.top) continue;
-        // 复制这一列的像素
-        const sliceW = 1;
-        ctx.drawImage(off, x, c.top, sliceW, c.bot - c.top, x, c.top, sliceW, c.bot - c.top);
-      }
-
-      // 最后一笔：墨迹微洇——复制笔尖附近几列时加轻微模糊
-      if (target - col > 3 && target < W - 2) {
-        // 刚画完的最后一列加微弱 blur（通过半透明重绘模拟墨洇）
-        ctx.save();
-        ctx.globalAlpha = 0.15;
-        ctx.filter = 'blur(2px)';
-        const bx = Math.max(0, target - 3);
-        ctx.drawImage(off, bx, 0, 6, H, bx, 0, 6, H);
-        ctx.filter = 'none';
-        ctx.restore();
-        // 重新画回清晰像素（只在洇开区域）
-        for (let x = Math.max(0, target - 3); x <= target; x++) {
-          const c = cols[x];
-          if (c.bot <= c.top) continue;
-          ctx.drawImage(off, x, c.top, 1, c.bot - c.top, x, c.top, 1, c.bot - c.top);
-        }
-      }
-
-      col = target;
-
-      // 更新笔尖位置
-      const rect = canvasRect();
-      const frac = col / W;
-      const px = rect.left + rect.width * frac;
-      const colData = cols[col];
-      const midY = (colData.top + colData.bot) / 2;
-      const py = rect.top + (midY / H) * rect.height;
-      nib.style.left = px + 'px';
-      nib.style.top = py + 'px';
-
-      if (col >= W - 1) {
-        // 写完，最终 fillText 保证干净
-        ctx.clearRect(0, 0, W, H);
-        ctx.fillText(label, 4, 66);
-        nib.style.opacity = '0';
-        nib.style.transition = 'opacity 0.3s ease';
-        return;
-      }
-
-      requestAnimationFrame(draw);
-    }
-
-    requestAnimationFrame(draw);
-  }
-
-  if (document.fonts) {
-    document.fonts.ready.then(() => setupHandwrite());
-  } else {
-    setTimeout(setupHandwrite, 600);
-  }
-
-  document.addEventListener('astro:page-load', () => {
-    if (document.fonts) {
-      document.fonts.ready.then(() => setupHandwrite());
-    } else {
-      setTimeout(setupHandwrite, 600);
-    }
-  });
-</script>
